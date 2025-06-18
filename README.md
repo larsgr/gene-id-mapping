@@ -4,7 +4,7 @@
 
 This project aims to develop a bioinformatics workflow for mapping gene annotations across genome assemblies. The primary goal is to convert gene IDs from one assembly to another (e.g., from an older to a newer assembly) with accompanying metadata on mapping confidence and annotation similarity.
 
-This workflow will ultimately be used to generate mapping tables for **Salmobase**, but this repository also serves as a lab notebook documenting tool evaluation, experiments, and methodology.
+This workflow will ultimately be used to generate mapping tables for [**Salmobase**](https://salmobase.org), but this repository also serves as a lab notebook documenting tool evaluation, experiments, and methodology.
 
 ---
 
@@ -84,7 +84,7 @@ We will begin by experimenting with **LiftoffTools**, given its relevance and ca
 
 The both copies of the HoxC A cluster from two versions of Atlantic salmon reference genome (Ssal_v3.1 and ICSASG_v2) and Rainbow trout (Omyk) was extracted as a small dataset to use for testing.
 
-The corresponding gff for these regions must be extracted. The scripts to do this must be created. under pregress... See [docs/creating-toy-dataset.md](docs/creating-toy-dataset.md) for more details and progress.
+The corresponding gff for these regions must be extracted. The scripts to do this must be created. In progress... See [docs/creating-toy-dataset.md](docs/creating-toy-dataset.md) for more details and progress.
 
 
 
@@ -126,6 +126,6 @@ To begin experimenting:
 
 ## License
 
-*To be determined.* The final license will align with Salmobase’s policies and the licenses of integrated third-party tools.
+*To be determined.* ... probably MIT
 
 ---
