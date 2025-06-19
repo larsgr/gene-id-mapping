@@ -1,5 +1,3 @@
-temp/Salmo_salar.Ssal_v3.1.106.gff3.gz already exists, skipping download.
-Extracting subset of GFF...
 13:41179690-41398770	ensembl	CDS	518	529	.	-	0	ID=CDS:ENSSSAP00000144847;Parent=transcript:ENSSSAT00000221615;protein_id=ENSSSAP00000144847
 13:41179690-41398770	ensembl	exon	518	598	.	-	.	Parent=transcript:ENSSSAT00000221615;Name=ENSSSAE00000577670;constitutive=0;ensembl_end_phase=0;ensembl_phase=-1;exon_id=ENSSSAE00000577670;rank=2;version=2
 13:41179690-41398770	ensembl	five_prime_UTR	530	598	.	-	.	Parent=transcript:ENSSSAT00000221615
@@ -369,4 +367,3 @@ Extracting subset of GFF...
 15:92946040-93192783	ensembl	CDS	243343	244006	.	-	0	ID=CDS:ENSSSAP00000076971;Parent=transcript:ENSSSAT00000110464;protein_id=ENSSSAP00000076971
 15:92946040-93192783	ensembl	exon	243343	244347	.	-	.	Parent=transcript:ENSSSAT00000110464;Name=ENSSSAE00000412483;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412483;rank=1;version=2
 15:92946040-93192783	ensembl	five_prime_UTR	244007	244347	.	-	.	Parent=transcript:ENSSSAT00000110464
-Done
