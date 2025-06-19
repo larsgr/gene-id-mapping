@@ -3,7 +3,7 @@ Task: create a small "toy" dataset for testing
 # roadmap:
 
 1. (done) Extract sequences manually using JBrowse2 at salmobase
-2. (partially done without alias handling) Make scripts to extract gff subset 
+2. (done) Make scripts to extract gff subset 
 
 ## Extracting HOXC cluster as a toy-assembly
 
@@ -41,8 +41,8 @@ Now that we have the genomic sequence for the toy dataset we need to extract the
 How to organize the script(s) for this?
 
 * data/toy-assemblies/get_gff_subset.sh - Main script that does all the above steps. Takes a path/URL of .gff and the subset fasta file and returns a subset gff file. (Alias handling not yet implemented.)
-* data/toy-assemblies/get_all_gff_subsets.sh - Just calls the main script for each assembly/annotatoin pair
-* convert_seqname_alias.py - Converts the sequence IDs in a tabular file (e.g. gff) using an alias table (TODO)
+* data/toy-assemblies/convert_seqname_alias.py - Converts the sequence IDs in a tabular file (e.g. gff) using an alias table 
+* data/toy-assemblies/get_all_gff_subsets.sh - Calls the main script for each assembly/annotation pair. Also applies the alias convertion for the NCBI annotations.
 
 TODO: Note that there might be features in the gff file that are partially inside the extracted region (e.g. an exon from a gene that stretches outside the region). We might need to "repair" the gff to not contain such partial genes.
 

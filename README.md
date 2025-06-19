@@ -53,7 +53,7 @@ We will begin by experimenting with **LiftoffTools**, given its relevance and ca
 ## Roadmap
 
 1. ✅ Research candidate tools.
-2. 🟡 Create toy dataset for initial testing.
+2. ✅ Create toy dataset for initial testing.
 3. 🟡 Experiment with LiftoffTools and document findings.
 4. ⬜ Evaluate other tools as needed.
 5. ⬜ Develop and test mapping workflow (e.g., Snakemake or Nextflow).
@@ -68,8 +68,7 @@ We will begin by experimenting with **LiftoffTools**, given its relevance and ca
 ```
 .
 ├── README.md              # Project overview and progress log
-├── docs/                  # Notes, tool reviews, and design discussions
-│   └── tool-survey.md     # Evaluation of existing tools
+├── docs/                  # Notes, tool reviews, and design existing tools
 ├── experiments/           # Scripts and notebooks for exploratory testing
 │   └── liftoff_test/      # Liftoff experiment scripts and results
 ├── data/                  # Toy datasets and annotation files
@@ -82,12 +81,9 @@ We will begin by experimenting with **LiftoffTools**, given its relevance and ca
 
 ## The toy-assembly dataset (data/toy-assemblies)
 
-The both copies of the HoxC A cluster from two versions of Atlantic salmon reference genome (Ssal_v3.1 and ICSASG_v2) and Rainbow trout (Omyk) was extracted as a small dataset to use for testing.
+The both copies of the HoxC A cluster from two versions of Atlantic salmon reference genome (Ssal_v3.1 and ICSASG_v2) and Rainbow trout (Omyk) was extracted as a small dataset to use for testing. This includes th corresponding gene annotations (gff) from Ensembl and NCBI for these regions.
 
-The corresponding gff for these regions must be extracted. The scripts to do this must be created. In progress... See [docs/creating-toy-dataset.md](docs/creating-toy-dataset.md) for more details and progress.
-
-
-
+ The gff extraction scripts are in `data/toy-assemblies`. See [docs/creating-toy-dataset.md](docs/creating-toy-dataset.md) for more details.
 
 ## Getting Started
 

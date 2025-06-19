@@ -21,7 +21,7 @@ import sys
 import argparse
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Convert seqname in tab-separated file using alias file.")
+    parser = argparse.ArgumentParser(description="Convert seqname in tab-separated file (from stdin) using alias file.")
     parser.add_argument('alias_file', help='Tab-separated alias file')
     parser.add_argument('-a', '--alias-col', type=int, default=0, help='Column in alias file to convert to (0-based, default: 0)')
     parser.add_argument('-i', '--input-col', type=int, default=0, help='Column in input file with seqname (0-based, default: 0)')
@@ -41,7 +41,7 @@ def build_alias_map(alias_file, alias_col):
 
 def convert_seqnames(alias_map, input_col):
     for line in sys.stdin:
-        if not line.strip():
+        if not line.strip() or line.startswith('#'):
             print(line, end='')
             continue
         cols = line.rstrip('\n').split('\t')
