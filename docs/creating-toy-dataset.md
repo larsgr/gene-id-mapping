@@ -44,5 +44,19 @@ How to organize the script(s) for this?
 * data/toy-assemblies/convert_seqname_alias.py - Converts the sequence IDs in a tabular file (e.g. gff) using an alias table 
 * data/toy-assemblies/get_all_gff_subsets.sh - Calls the main script for each assembly/annotation pair. Also applies the alias convertion for the NCBI annotations.
 
-TODO: Note that there might be features in the gff file that are partially inside the extracted region (e.g. an exon from a gene that stretches outside the region). We might need to "repair" the gff to not contain such partial genes.
+## Fixing extracted gff
+
+> Note that there might be features in the gff file that are partially inside the extracted region (e.g. an exon from a gene that stretches outside the region). We might need to "repair" the gff to not contain such partial genes.
+
+```shell
+# get all geneID
+grep "\tgene\t" $INPUT_GFF | awk -F'\t' '{print $9}' | \
+    sed 's/.*ID=//' | cut -d';' -f1 > $INPUT_GFF.genes.txt
+agat_sp_filter_feature_from_keep_list.pl \
+  --gff $INPUT_GFF \
+  --keep_list $INPUT_GFF.genes.txt \
+  -o $INPUT_GFF.fixed
+```
+
+This seems to work, but it will remove some features that are not "gene" (ncRNA_gene or biological_region). It also adds IDs to every feature (some don't have IDs).
 

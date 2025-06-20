@@ -1,2 +1,5 @@
 .DS_Store
 temp/
+*.fai
+*.mmi
+*.gff_db
