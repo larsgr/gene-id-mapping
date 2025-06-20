@@ -54,7 +54,7 @@ We will begin by experimenting with **LiftoffTools**, given its relevance and ca
 
 1. ✅ Research candidate tools.
 2. ✅ Create toy dataset for initial testing.
-3. 🟡 Experiment with LiftoffTools and document findings.
+3. ✅ Experiment with LiftoffTools and document findings.
 4. ⬜ Evaluate other tools as needed.
 5. ⬜ Develop and test mapping workflow (e.g., Snakemake or Nextflow).
 6. ⬜ Integrate with Salmobase outputs.
