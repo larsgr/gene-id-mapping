@@ -46,7 +46,7 @@ Existing relevant tools identified:
 | **ParsEval** | Compares alternative annotations. |
 | **GeneOverlapAnnotator** | Part of SVAnnotator, returns gene/transcript overlap stats. |
 
-We will begin by experimenting with **LiftoffTools**, given its relevance and capabilities.
+Initial **Liftoff** experiments are complete (see [testing notes](docs/experiments.md#liftoff)). Next up is evaluating **GffCompare** on the Liftoff results.
 
 ---
 
@@ -54,11 +54,12 @@ We will begin by experimenting with **LiftoffTools**, given its relevance and ca
 
 1. ✅ Research candidate tools.
 2. ✅ Create toy dataset for initial testing.
-3. ✅ Experiment with LiftoffTools and document findings.
-4. ⬜ Evaluate other tools as needed.
-5. ⬜ Develop and test mapping workflow (e.g., Snakemake or Nextflow).
-6. ⬜ Integrate with Salmobase outputs.
-7. ⬜ Generate final documentation and publish results.
+3. ✅ Experiment with LiftoffTools and document findings ([notes](docs/experiments.md#liftoff)).
+4. ⬜ Test GffCompare on the Liftoff results.
+5. ⬜ Evaluate other tools as needed.
+6. ⬜ Develop and test mapping workflow (e.g., Snakemake or Nextflow).
+7. ⬜ Integrate with Salmobase outputs.
+8. ⬜ Generate final documentation and publish results.
 
 ---
 
