@@ -69,12 +69,10 @@ Initial **Liftoff** experiments are complete (see [testing notes](docs/experimen
 ```
 .
 ├── README.md              # Project overview and progress log
-├── docs/                  # Notes, tool reviews, and design existing tools
-├── experiments/           # Scripts and notebooks for exploratory testing
-│   └── liftoff_test/      # Liftoff experiment scripts and results
+├── docs/                  # Notes, tool reviews and experiment logs and other documentation
+├── experiments/           # Scripts and results for exploratory testing (one directory per experiment)
 ├── data/                  # Toy datasets and annotation files
 ├── workflow/              # Pipeline (e.g., Snakemake or Nextflow) for production use
-├── results/               # Outputs from experiments and final mapping results
 └── .gitignore             # Excludes large or temporary files from version control
 ```
 
