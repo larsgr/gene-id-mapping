@@ -46,16 +46,16 @@ Existing relevant tools identified:
 | **ParsEval** | Compares alternative annotations. |
 | **GeneOverlapAnnotator** | Part of SVAnnotator, returns gene/transcript overlap stats. |
 
-Initial **Liftoff** experiments are complete (see [testing notes](docs/experiments.md#liftoff)). Next up is evaluating **GffCompare** on the Liftoff results.
+Initial **Liftoff** experiments are complete (see [testing notes](docs/experiments.md#liftoff)). The **GffCompare** evaluation on the Liftoff results is now in progress (see [GffCompare experiment](docs/experiments.md#gffcompare)).
 
 ---
 
 ## Roadmap
 
-1. ✅ Research candidate tools.
-2. ✅ Create toy dataset for initial testing.
-3. ✅ Experiment with LiftoffTools and document findings ([notes](docs/experiments.md#liftoff)).
-4. ⬜ Test GffCompare on the Liftoff results.
+1. ✅ Research candidate tools ([tool survey](docs/tool-survey.md)).
+2. ✅ Create toy dataset for initial testing ([creating toy dataset](docs/creating-toy-dataset.md)).
+3. ✅ Experiment with Liftoff/LiftoffTools and document findings ([experiments: Liftoff](docs/experiments.md#liftoff)).
+4. 🔄 Test GffCompare on the Liftoff results ([experiments: GffCompare](docs/experiments.md#gffcompare)).
 5. ⬜ Evaluate other tools as needed.
 6. ⬜ Develop and test mapping workflow (e.g., Snakemake or Nextflow).
 7. ⬜ Integrate with Salmobase outputs.
@@ -69,12 +69,18 @@ Initial **Liftoff** experiments are complete (see [testing notes](docs/experimen
 ```
 .
 ├── README.md              # Project overview and progress log
-├── docs/                  # Notes, tool reviews and experiment logs and other documentation
-├── experiments/           # Scripts and results for exploratory testing (one directory per experiment)
+├── environment.yml        # Conda env (gffcompare, gffread, agat, bedtools)
+├── docs/                  # Notes, tool reviews, experiments
+│   ├── AI-usage.md              # How AI assistants are used here
+│   ├── tool-survey.md           # Survey of candidate tools and selection notes
+│   ├── creating-toy-dataset.md  # Build steps for the HoxC A toy dataset
+│   └── experiments.md           # Running log of experiments and findings
+├── experiments/           # Scripts and results for exploratory testing (per-experiment dirs)
 ├── data/                  # Toy datasets and annotation files
-├── workflow/              # Pipeline (e.g., Snakemake or Nextflow) for production use
-└── .gitignore             # Excludes large or temporary files from version control
+└── workflow/              # Pipeline (e.g., Snakemake or Nextflow) for production use
 ```
+
+ 
 
 ---
 
