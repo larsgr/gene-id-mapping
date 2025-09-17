@@ -96,3 +96,14 @@ What it did:
 * compared the lists with `comm`
 
 Reflection: It first failed to extract genes from gff because it was expecting well formatted GTF, but then corrected itself. Other than that it was a clever and effective solution. (also learned a new command/pattern)
+
+### (codex) gffcompare without reference
+
+Query to codex agent (high) in vscode:
+
+```
+In the initial test of gffcompare you used one genome as reference. From the documentation it seems like reference is optional and you can supply multiple queries instead. Try doing that in the next experiment. What is the difference?
+Document the experiment and findings in (docs/experiments.md)
+```
+
+Reflection: This worked as expected
