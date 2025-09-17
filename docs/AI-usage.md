@@ -62,3 +62,37 @@ move them into the code block comments
 
 Reflection: My original prompt was not clear. I did not specify to write descriptions and I whould have known that links doesn't work in code blocks. It is hard to know exactly what needs to be specified and what you can expect the AI to implicitly understand based on context.
 
+### Inpecting results with codex
+
+prompt to codex agent (low):
+
+```
+Now I want to inspect the results the gffcompare results in detail. Using the results and in the input gff files, describe similarities/differences in the cbx5 gene
+```
+
+What it did:
+
+* grep for "cbx5" in both input gff files to identify gene/transcript IDs
+* grep the tmap file using the gene IDs
+* grep the original gff files (both ref and query) using gene and transcript IDs to get compare exon structure
+* Then it "read" the entire reference gff file (not sure why it needs this after it had read the relevant lines already)
+* Then it greps the query gff the entire reference gff file (not sure why it needs this after it had read the relevant lines already)
+* Then it "read" the entire query gff file 
+
+It then gives a detailed report on each gene/transcript based on the gff files (including the gff line numbers) and then a report based on the gffcompare results. Lastly it gives a short summary.
+
+Reflection: I am impressed that it figured out exactly what to do to extract the relevant data (e.g. gene/transcript IDs) using grep. I think this reflects that it has a good understanding of common bioinformatic formats and can deal with them using standard tools. However it did some redundant searches, which indicates that it might have been a bit lucky. 
+
+prompt to codex agent (low):
+
+```
+list the genes that are missing in the .refmap file
+```
+
+What it did:
+
+* Extract sorted list of all genes from gff
+* Extract sorted list of all genes from .refmap file
+* compared the lists with `comm`
+
+Reflection: It first failed to extract genes from gff because it was expecting well formatted GTF, but then corrected itself. Other than that it was a clever and effective solution. (also learned a new command/pattern)

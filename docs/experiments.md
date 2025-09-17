@@ -174,7 +174,7 @@ As suspected there was no results as none of the IDs mapped. Even got a warning:
 
 This does not seem to be the tool I need. I believe the purpose of this tool is to check the quality of an annotation that has been lifted over. This can be useful for comparing different assemblies but is not so useful for comparing different existing annotations!
 
-The lifted-over annotations can be useful though, as they can be directly compared with tools that work within an assembly. In that case, it would be necessary take into account differences between the orinal and lifted over annotations.
+The lifted-over annotations can be useful though, as they can be directly compared with tools that work within an assembly. In that case, it would be necessary take into account differences between the original and lifted over annotations.
 
 Example: we want to compare **ref** with **target** but have to lift over **ref** before comparing. It could be that the assembly introduces differences but **ref_lifted** is identical to **target**. In that case `liftofftools variants` could be used to find differences caused by assembly differences. 
 
@@ -247,6 +247,10 @@ Class-code breakdown from `gffc.qry_liftover.gtf.tmap`:
 - `c`: 2 (query fully contained in reference)
 - `k`: 1 (query contains reference)
 
+For reference, here is an overview of all the codes from the [gffcompare documentation](https://ccb.jhu.edu/software/stringtie/gffcompare.shtml):
+
+![](https://ccb.jhu.edu/software/stringtie/gffcompare_codes.png)
+
 ### observations
 
 - Over half of the transcripts (16/28) are exact matches after liftover, indicating very good agreement for many models.
@@ -262,8 +266,56 @@ Directly from `gffc.stats` and `.tmap` we can report:
 - Per-transcript class codes (`=`, `j`, `c`, `k`, etc.) and their counts
 - Lists of exact matches vs partial matches for further inspection
 
-Follow-ups:
+### Manual inspection in genome browser
 
-- Extract non-`=` transcripts from `.tmap` for targeted review of differences.
-- Cross-reference `.annotated.gtf` to view query models with embedded class codes in a genome browser.
+#### Closer look at cbx5 on chromosome 15
+To get a better idea how to use the gffcompare results I will focus on a single gene:
 
+![jbrowse screenshot of cbx5 on chromosomes 15](cbx5_chr15_compare.png)
+
+>Note: The gene features are gone in the gff to gtf conversion, although it keeps track of the gene_id as an attribute. Also noticed that the transcript ID is the ID attribute of the transcript.
+
+I asked the codex agent to describe the similarities/differences in the cbx5 gene
+
+"Region 15 cbx5: One liftover transcript is an exact match to Ensembl (perfect agreement), while two additional liftover isoforms differ slightly (shared junctions) with one lacking a start codon. This suggests the liftover carries additional isoform diversity relative to the Ensembl Ssal_v3.1 model at this locus."
+
+One of the outputs from gffcompare is the .tmap file that shows the mapping between query and ref transcripts (here is the gene in question):
+| ref_gene_id            | ref_id                        | class_code | qry_gene_id            | qry_id                        | num_exons | FPKM     | TPM      | cov      | len | major_iso_id                  | ref_match_len |
+|------------------------|-------------------------------|------------|------------------------|-------------------------------|-----------|----------|----------|----------|-----|-------------------------------|---------------|
+| gene:ENSSSAG00000110153 | transcript:ENSSSAT00000247659 | =          | gene:ENSSSAG00000065738 | transcript:ENSSSAT00000110316 | 5         | 0.000000 | 0.000000 | 0.000000 | 801 | transcript:ENSSSAT00000110316 | 3895          |
+| gene:ENSSSAG00000110153 | transcript:ENSSSAT00000247659 | j          | gene:ENSSSAG00000065738 | transcript:ENSSSAT00000110324 | 6         | 0.000000 | 0.000000 | 0.000000 | 726 | transcript:ENSSSAT00000110316 | 3895          |
+| gene:ENSSSAG00000110153 | transcript:ENSSSAT00000247659 | j          | gene:ENSSSAG00000065738 | transcript:ENSSSAT00000110349 | 6         | 0.000000 | 0.000000 | 0.000000 | 630 | transcript:ENSSSAT00000110316 | 3895          |
+
+> note that the FPKM/TPM is only applicable when an expression tracking file (.t_data.ctab from Cufflinks/StringTie) is provided.
+
+> note that the "lacking a start codon" is not available in the gff compare but comes from the liftover, which added it to the gff attribute
+
+Other than the ID mapping, gff_compare classifies the match with a code. 
+
+It looks like it is only doing a junction comparison, i.e. it has no concept of how this affects the protein sequence.
+
+Another output is the .refmap file which seems to be just a subset of the .tmap file that just includes the good matches (code `=` and `c`)
+
+| ref_gene_id            | ref_id                        | class_code | qry_id_list                                               |
+|------------------------|-------------------------------|------------|----------------------------------------------------------|
+| gene:ENSSSAG00000110153 | transcript:ENSSSAT00000247659 | =          | gene:ENSSSAG00000065738\|transcript:ENSSSAT00000110316   |
+
+#### Genes with no good match:
+
+This one got code `j` because the intron junction is off by 6bp (not visible in the image):
+
+![alt text](hoxc8ab.png)
+
+This one got code `j` because the query had an extra exon in the 5' UTR:
+
+![alt text](cbx5_chr13.png)
+
+Genes with no overlap will not be listed in the gffcompare output.
+
+### Conclusion from the first gffcompare experiment
+
+GFFcompare seems to be a good tool for generating a list of overlapping transcripts between annotations. However, the classification is purely based on intron matching and and not on the effects it have on the coding sequence. This could serve as a first step and coding sequence based comparison could be added later.
+
+Also noted that liftoff adds some potential useful annotation to the transcripts. e.g., the mRNA record for ENSSSAT00000110349 has 'valid_ORF=False;missing_start_codon=True'.
+
+The test I ran was reference based, which is not optimal if there is no clear "reference". After looking at the documentation it seems like there might be a way to run gffcompare without a reference. I should try this.
