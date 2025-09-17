@@ -1,0 +1,15 @@
+# gffcompare v0.12.10 | Command line was:
+#gffcompare -o experiments/gffcompare_multi/gffc_multi experiments/gffcompare_test/ref.gtf experiments/gffcompare_test/qry_liftover.gtf
+#
+
+#= Summary for dataset: experiments/gffcompare_test/ref.gtf 
+#     Query mRNAs :      28 in      21 loci  (28 multi-exon transcripts)
+#            (4 multi-transcript loci, ~1.3 transcripts per locus)
+
+#= Summary for dataset: experiments/gffcompare_test/qry_liftover.gtf 
+#     Query mRNAs :      28 in      21 loci  (28 multi-exon transcripts)
+#            (5 multi-transcript loci, ~1.3 transcripts per locus)
+
+ Total union super-loci across all input datasets: 20 
+  (11 multi-transcript, ~2.0 transcripts per locus)
+40 out of 40 consensus transcripts written in experiments/gffcompare_multi/gffc_multi.combined.gtf (0 discarded as redundant)

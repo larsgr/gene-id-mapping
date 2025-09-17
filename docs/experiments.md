@@ -319,3 +319,48 @@ GFFcompare seems to be a good tool for generating a list of overlapping transcri
 Also noted that liftoff adds some potential useful annotation to the transcripts. e.g., the mRNA record for ENSSSAT00000110349 has 'valid_ORF=False;missing_start_codon=True'.
 
 The test I ran was reference based, which is not optimal if there is no clear "reference". After looking at the documentation it seems like there might be a way to run gffcompare without a reference. I should try this.
+
+### Multi-query gffcompare run (no explicit reference)
+
+Goal: compare Ensembl vs Liftoff annotations symmetrically by providing both as queries (no `-r`). This produces a consensus and tracking across datasets, instead of reference-relative class codes.
+
+Inputs (GTFs converted earlier with gffread):
+
+- q1: `experiments/gffcompare_test/ref.gtf` (Ensembl Ssal_v3.1 HoxC A)
+- q2: `experiments/gffcompare_test/qry_liftover.gtf` (Liftoff from ICSASG_v2 to Ssal_v3.1)
+
+Command:
+
+```bash
+out=experiments/gffcompare_multi
+mkdir -p "$out"
+gffcompare -o "$out/gffc_multi" \
+  experiments/gffcompare_test/ref.gtf \
+  experiments/gffcompare_test/qry_liftover.gtf
+```
+
+Key outputs:
+
+- `gffc_multi.combined.gtf` – combined/consensus annotation across both queries
+- `gffc_multi.tracking` – maps each consensus transcript (TCONS_*) to contributing q1/q2 transcripts within XLOC_ loci
+- `gffc_multi.loci`, `gffc_multi.stats` – union loci and per-query summaries
+
+Summary (`gffc_multi.stats`):
+
+- q1: 28 mRNAs in 21 loci
+- q2: 28 mRNAs in 21 loci
+- Union super-loci: 20
+- Consensus transcripts written: 40 (to `gffc_multi.combined.gtf`)
+
+Differences vs using `-r`:
+
+- No `.tmap` with class codes relative to a chosen reference; instead, use `tracking` to see how each consensus model relates to each query.
+- No sensitivity/precision; stats summarize each query and the union.
+- Better for neutral exploration of relationships (e.g., extra UTR exon or isoforms) without privileging either annotation.
+
+Examples (from `gffc_multi.tracking`):
+
+- cbx5 chr13: Ensembl (`q1:...ENSSSAT00000177260`) and Liftoff (`q2:...ENSSSAT00000143756`) appear under the same locus group but map to different TCONS due to the extra 5′ UTR exon in q2 (previously labeled `k` in reference-based run).
+- cbx5 chr15: `q1` transcript aligns with multiple `q2` isoforms (`…110316`, `…110324`, `…110349`) in the same/related XLOC groups, making isoform multiplicity explicit.
+
+Conclusion: reference-free multi-query mode emphasizes consensus and cross-mapping. Use it to explore structural relationships; use `-r` when you want class codes and sensitivity/precision metrics against a designated reference.
