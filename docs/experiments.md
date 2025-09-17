@@ -364,3 +364,97 @@ Examples (from `gffc_multi.tracking`):
 - cbx5 chr15: `q1` transcript aligns with multiple `q2` isoforms (`…110316`, `…110324`, `…110349`) in the same/related XLOC groups, making isoform multiplicity explicit.
 
 Conclusion: reference-free multi-query mode emphasizes consensus and cross-mapping. Use it to explore structural relationships; use `-r` when you want class codes and sensitivity/precision metrics against a designated reference.
+
+## ParsEval (AEGeAn)
+
+### installation
+
+Attempted conda install on macOS arm64, but no package is available on bioconda/conda-forge for this platform. Therefore, use the BioContainers image (works like Liftoff/LiftoffTools):
+
+```bash
+docker pull quay.io/biocontainers/aegean:<tag>
+
+docker run -it \
+  -v "$(pwd)":/workdir -w /workdir \
+  quay.io/biocontainers/aegean:<tag> \
+  bash
+```
+
+Inside the container, the binary is `ParsEval`.
+
+Note: `environment.yml` includes a comment explaining that ParsEval is not available for osx‑arm64 via conda.
+
+### compare liftover vs Ensembl on Ssal_v3.1
+
+Inputs:
+
+- Reference GFF3: `data/toy-assemblies/Ssal_v3.1_hoxca_Ens.gff`
+- Query (liftover) GFF3: `experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff`
+- Genome FASTA (same assembly): `data/toy-assemblies/Ssal_v3.1_hoxca.fa`
+
+Example command (inside container):
+
+```bash
+out=experiments/parseval_test
+mkdir -p "$out"
+
+# ParsEval expects both annotations to be on the same assembly build.
+# -r: reference; -t: test; -g: genome FASTA; -w: write reports in directory
+# Note: the binary name is lowercase: `parseval`
+# Basic text report (single file):
+parseval -f text -o "$out/parseval.txt" -w \
+         data/toy-assemblies/Ssal_v3.1_hoxca_Ens.gff \
+         experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff
+```
+
+Key outputs (this run):
+
+- `experiments/parseval_test/parseval.txt` – single text report with repeated per‑locus comparison sections, each including:
+  - CDS/exon/UTR structure comparison (counts, sensitivity, specificity, F1, annotation edit distance)
+  - Nucleotide‑level metrics per category (matching coefficient, sensitivity, specificity, F1, AED)
+  - Inline dumps of the compared GFF3 features for the involved transcripts
+
+### notes vs gffcompare
+
+- ParsEval is locus‑centric and CDS‑aware: it computes per‑gene/per‑transcript statistics including CDS effects and reports whether differences affect the coding sequence (e.g., UTR‑only vs CDS‑changing). This aligns with our goal to attach confidence and similarity per gene (see README).
+- gffcompare is structure‑centric with class codes (`=`, `j`, `c`, `k`) and global sensitivity/precision; it does not assess CDS/protein impact. Useful for quick structural overlap, less so for coding changes.
+
+### expected insights on the toy data
+
+- cbx5 (chr13): liftover has an extra 5′ UTR exon but identical CDS coordinates to Ensembl; ParsEval should report UTR differences with CDS conserved.
+- cbx5 (chr15): one liftover isoform matches Ensembl exactly; additional liftover isoforms differ structurally; ParsEval should distinguish CDS‑preserving vs CDS‑altering differences per transcript within the locus report.
+
+### initial results (ParsEval text report)
+
+Report file: `experiments/parseval_test/parseval.txt`
+
+- cbx5 (chr13, locus `seqid=13:41179690-41398770`):
+  - Compared `ENSSSAT00000177260` (Ensembl) vs `ENSSSAT00000143756` (Liftoff)
+  - Results:
+    - CDS structures match perfectly (all 5 CDS segments match)
+    - Exons: 5 reference vs 6 prediction; 4 match, 1 ref and 2 pred do not match (extra 5′ UTR exon in liftoff)
+    - Start/stop codons align; overall CDS conserved, UTR differs
+
+- cbx5 (chr15, locus `seqid=15:92946040-93192783`):
+  - Pair 1: `ENSSSAT00000247659` (Ensembl) vs `ENSSSAT00000110316` (Liftoff)
+    - CDS structures match perfectly (4/4)
+    - Exons: 5 reference, 5 prediction; 3 match, 2 differ (UTR differences)
+    - Nucleotide‑level (CDS): matching coefficient 1.000, AED 0.000 (perfect)
+  - Additional liftoff isoform `ENSSSAT00000110324`:
+    - Parsed in a separate comparison within the locus; shows altered CDS segmentation relative to its paired reference transcript (non‑cbx5 within the same locus window), with 0 matching CDS segments and AED 1.000 for that pairing, indicating a CDS‑altering isoform relative to that reference.
+  - Takeaway: At this locus, liftoff contains one CDS‑identical isoform to Ensembl (good agreement) plus additional isoforms with structural and CDS differences.
+
+General observations:
+
+- ParsEval’s per‑locus sections make it straightforward to identify whether differences are confined to UTRs or affect CDS (our priority for per‑gene confidence and similarity).
+- The tool also reports nucleotide‑level metrics and AED per category (CDS/UTR), which can be aggregated per gene if needed.
+
+Notes:
+
+- The run emitted warnings about missing `##sequence-region` lines and corrected missing CDS phases in the Liftoff GFF3; neither affected the comparisons.
+
+
+### next steps
+
+- Run ParsEval container locally to generate the per‑locus reports in `experiments/parseval_test`.
+- Extract a concise per‑gene summary (CDS unchanged vs changed; exon/intron sensitivity/precision; matched isoforms) for inclusion in the README summary table.

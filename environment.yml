@@ -8,3 +8,4 @@ dependencies:
   - agat
   - gffcompare
   - gffread
+  # ParsEval (AEGeAn) is not available on osx-arm64 via conda; use Docker instead.

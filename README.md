@@ -46,7 +46,7 @@ Existing relevant tools identified:
 | **ParsEval** | Compares alternative annotations. |
 | **GeneOverlapAnnotator** | Part of SVAnnotator, returns gene/transcript overlap stats. |
 
-Initial **Liftoff** experiments are complete (see [testing notes](docs/experiments.md#liftoff)). The **GffCompare** evaluation on the Liftoff results is now in progress (see [GffCompare experiment](docs/experiments.md#gffcompare)).
+Initial **Liftoff** experiments are complete (see testing notes). **GffCompare** evaluation is complete (see experiments), and **ParsEval** is in progress.
 
 ---
 
@@ -55,8 +55,8 @@ Initial **Liftoff** experiments are complete (see [testing notes](docs/experimen
 1. ✅ Research candidate tools ([tool survey](docs/tool-survey.md)).
 2. ✅ Create toy dataset for initial testing ([creating toy dataset](docs/creating-toy-dataset.md)).
 3. ✅ Experiment with Liftoff/LiftoffTools and document findings ([experiments: Liftoff](docs/experiments.md#liftoff)).
-4. 🔄 Test GffCompare on the Liftoff results ([experiments: GffCompare](docs/experiments.md#gffcompare)).
-5. ⬜ Evaluate other tools as needed.
+4. ✅ Test GffCompare on the Liftoff results (see experiments: GffCompare).
+5. 🔄 Try ParsEval (CDS‑aware gene model comparison) on the same inputs (see experiments: ParsEval).
 6. ⬜ Develop and test mapping workflow (e.g., Snakemake or Nextflow).
 7. ⬜ Integrate with Salmobase outputs.
 8. ⬜ Generate final documentation and publish results.
@@ -119,7 +119,7 @@ To begin experimenting:
 ## Status
 
 * 🔍 **Tool Research**: Completed
-* ⚗️ **Experimental Phase**: In Progress
+* ⚗️ **Experimental Phase**: In Progress (GffCompare done; ParsEval in progress)
 * 🛠️ **Workflow Development**: Pending
 * 📊 **Integration with Salmobase**: Planned
 

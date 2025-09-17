@@ -99,7 +99,7 @@ Reflection: It first failed to extract genes from gff because it was expecting w
 
 ### (codex) gffcompare without reference
 
-Query to codex agent (high) in vscode:
+Query to codex agent (low) in vscode:
 
 ```
 In the initial test of gffcompare you used one genome as reference. From the documentation it seems like reference is optional and you can supply multiple queries instead. Try doing that in the next experiment. What is the difference?
@@ -107,3 +107,21 @@ Document the experiment and findings in (docs/experiments.md)
 ```
 
 Reflection: This worked as expected
+
+### (codex) Trying ParsEval
+
+Query to codex agent (high):
+
+```
+We are done with the gffcompare experiment. In conclusion it is useful but does not consider the effects on the CDS.
+Now try using ParsEval using the same input gff files.
+Try to install ParsEval with conda (add to the yml file) or at least into the conda environment.
+Inspect the result. Consider what kind of stats that we can get using this ParsEval, specifically how it compares to gffcompare. Remember that we are interrested in stats per gene, not genome wide. Refer to README.md to remind you of the overall goal.
+Document the experiment and findings in (docs/experiments.md) and update README.md with overall progress.
+```
+
+Conda installation failed, but it suggested using docker like I did with LiftOff. I manually pulled the image (after finding the latest tag). Then queried:
+
+```
+I have run "docker pull quay.io/biocontainers/aegean:0.16.0--h71bfec9_5" Can you use this?
+```

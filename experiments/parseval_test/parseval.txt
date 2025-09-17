@@ -1,0 +1,2209 @@
+|-------------------------------------------------
+|---- Locus: seqid=13:41179690-41398770 range=843-8735
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000096644
+|
+|  prediction genes:
+|    gene:ENSSSAG00000077510
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000177260
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143756
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	1703	8735	.	+	.	ID=transcript:ENSSSAT00000177260;Name=cbx5-201;biotype=protein_coding;transcript_id=ENSSSAT00000177260;version=1
+13:41179690-41398770	ensembl	five_prime_UTR	1703	1777	.	+	.	ID=five_prime_utr-6;Parent=transcript:ENSSSAT00000177260
+13:41179690-41398770	ensembl	exon	1703	1920	.	+	.	ID=ENSSSAE00000577628;Parent=transcript:ENSSSAT00000177260;Name=ENSSSAE00000577628;constitutive=1;ensembl_end_phase=2;ensembl_phase=-1;exon_id=ENSSSAE00000577628;rank=1;version=1
+13:41179690-41398770	.	start_codon	1778	1780	.	+	.	Parent=transcript:ENSSSAT00000177260
+13:41179690-41398770	ensembl	CDS	1778	1920	.	+	0	ID=CDS:ENSSSAP00000143330;Parent=transcript:ENSSSAT00000177260;protein_id=ENSSSAP00000143330
+13:41179690-41398770	.	intron	1921	3489	.	+	.	Parent=transcript:ENSSSAT00000177260
+13:41179690-41398770	ensembl	exon	3490	3712	.	+	.	ID=ENSSSAE00000577629;Parent=transcript:ENSSSAT00000177260;Name=ENSSSAE00000577629;constitutive=1;ensembl_end_phase=0;ensembl_phase=2;exon_id=ENSSSAE00000577629;rank=2;version=1
+13:41179690-41398770	ensembl	CDS	3490	3712	.	+	1	ID=CDS:ENSSSAP00000143330;Parent=transcript:ENSSSAT00000177260;protein_id=ENSSSAP00000143330
+13:41179690-41398770	.	intron	3713	5265	.	+	.	Parent=transcript:ENSSSAT00000177260
+13:41179690-41398770	ensembl	exon	5266	5366	.	+	.	ID=ENSSSAE00000577630;Parent=transcript:ENSSSAT00000177260;Name=ENSSSAE00000577630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000577630;rank=3;version=1
+13:41179690-41398770	ensembl	CDS	5266	5366	.	+	0	ID=CDS:ENSSSAP00000143330;Parent=transcript:ENSSSAT00000177260;protein_id=ENSSSAP00000143330
+13:41179690-41398770	.	intron	5367	5669	.	+	.	Parent=transcript:ENSSSAT00000177260
+13:41179690-41398770	ensembl	exon	5670	5807	.	+	.	ID=ENSSSAE00000577631;Parent=transcript:ENSSSAT00000177260;Name=ENSSSAE00000577631;constitutive=1;ensembl_end_phase=2;ensembl_phase=2;exon_id=ENSSSAE00000577631;rank=4;version=1
+13:41179690-41398770	ensembl	CDS	5670	5807	.	+	1	ID=CDS:ENSSSAP00000143330;Parent=transcript:ENSSSAT00000177260;protein_id=ENSSSAP00000143330
+13:41179690-41398770	.	intron	5808	6182	.	+	.	Parent=transcript:ENSSSAT00000177260
+13:41179690-41398770	ensembl	CDS	6183	6273	.	+	1	ID=CDS:ENSSSAP00000143330;Parent=transcript:ENSSSAT00000177260;protein_id=ENSSSAP00000143330
+13:41179690-41398770	ensembl	exon	6183	8735	.	+	.	ID=ENSSSAE00000992004;Parent=transcript:ENSSSAT00000177260;Name=ENSSSAE00000992004;constitutive=1;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00000992004;rank=5;version=1
+13:41179690-41398770	.	stop_codon	6271	6273	.	+	.	Parent=transcript:ENSSSAT00000177260
+13:41179690-41398770	ensembl	three_prime_UTR	6274	8735	.	+	.	ID=three_prime_utr-1;Parent=transcript:ENSSSAT00000177260
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	843	6273	.	+	.	ID=transcript:ENSSSAT00000143756;Name=cbx5-201;biotype=protein_coding;transcript_id=ENSSSAT00000143756;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	843	1120	.	+	.	ID=exon_33;Parent=transcript:ENSSSAT00000143756;Name=ENSSSAE00000577627;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000577627;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	five_prime_UTR	843	1120	.	+	.	ID=five_prime_UTR_15;Parent=transcript:ENSSSAT00000143756;extra_copy_number=0
+13:41179690-41398770	.	intron	1121	1702	.	+	.	Parent=transcript:ENSSSAT00000143756
+13:41179690-41398770	Liftoff	five_prime_UTR	1703	1777	.	+	.	ID=five_prime_UTR_14;Parent=transcript:ENSSSAT00000143756;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	1703	1920	.	+	.	ID=exon_32;Parent=transcript:ENSSSAT00000143756;Name=ENSSSAE00000577628;constitutive=1;ensembl_end_phase=2;ensembl_phase=-1;exon_id=ENSSSAE00000577628;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	1778	1780	.	+	.	Parent=transcript:ENSSSAT00000143756
+13:41179690-41398770	Liftoff	CDS	1778	1920	.	+	0	ID=CDS:ENSSSAP00000108899;Parent=transcript:ENSSSAT00000143756;protein_id=ENSSSAP00000108899;extra_copy_number=0
+13:41179690-41398770	.	intron	1921	3489	.	+	.	Parent=transcript:ENSSSAT00000143756
+13:41179690-41398770	Liftoff	exon	3490	3712	.	+	.	ID=exon_31;Parent=transcript:ENSSSAT00000143756;Name=ENSSSAE00000577629;constitutive=1;ensembl_end_phase=0;ensembl_phase=2;exon_id=ENSSSAE00000577629;rank=3;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	CDS	3490	3712	.	+	1	ID=CDS:ENSSSAP00000108899;Parent=transcript:ENSSSAT00000143756;protein_id=ENSSSAP00000108899;extra_copy_number=0
+13:41179690-41398770	.	intron	3713	5265	.	+	.	Parent=transcript:ENSSSAT00000143756
+13:41179690-41398770	Liftoff	exon	5266	5366	.	+	.	ID=exon_30;Parent=transcript:ENSSSAT00000143756;Name=ENSSSAE00000577630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000577630;rank=4;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	CDS	5266	5366	.	+	0	ID=CDS:ENSSSAP00000108899;Parent=transcript:ENSSSAT00000143756;protein_id=ENSSSAP00000108899;extra_copy_number=0
+13:41179690-41398770	.	intron	5367	5669	.	+	.	Parent=transcript:ENSSSAT00000143756
+13:41179690-41398770	Liftoff	exon	5670	5807	.	+	.	ID=exon_29;Parent=transcript:ENSSSAT00000143756;Name=ENSSSAE00000577631;constitutive=1;ensembl_end_phase=2;ensembl_phase=2;exon_id=ENSSSAE00000577631;rank=5;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	CDS	5670	5807	.	+	1	ID=CDS:ENSSSAP00000108899;Parent=transcript:ENSSSAT00000143756;protein_id=ENSSSAP00000108899;extra_copy_number=0
+13:41179690-41398770	.	intron	5808	6182	.	+	.	Parent=transcript:ENSSSAT00000143756
+13:41179690-41398770	Liftoff	exon	6183	6273	.	+	.	ID=exon_28;Parent=transcript:ENSSSAT00000143756;Name=ENSSSAE00000577632;constitutive=1;ensembl_end_phase=0;ensembl_phase=2;exon_id=ENSSSAE00000577632;rank=6;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	CDS	6183	6273	.	+	1	ID=CDS:ENSSSAP00000108899;Parent=transcript:ENSSSAT00000143756;protein_id=ENSSSAP00000108899;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	6271	6273	.	+	.	Parent=transcript:ENSSSAT00000143756
+###
+ |
+     |  CDS structure comparison
+     |    5 reference  CDS segments
+     |    5 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    5 reference exons
+     |        4 match prediction
+     |        1 don't match prediction
+     |    6 prediction exons
+     |        4 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.800     
+     |    Specificity:                   0.667     
+     |    F1 Score:                      0.727     
+     |    Annotation edit distance:      0.267     
+     |
+     |  UTR structure comparison
+     |    2 reference UTR segments
+     |        1 match prediction
+     |        1 don't match prediction
+     |    2 prediction UTR segments
+     |        1 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.500     
+     |    Annotation edit distance:      0.500     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.653      0.579
+     |    Correlation coefficient:       1.000      -0.050     --        
+     |    Sensitivity:                   1.000      0.030      --        
+     |    Specificity:                   1.000      0.212      --        
+     |    F1 Score:                      1.000      0.052      --        
+     |    Annotation edit distance:      0.000      0.879      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+|-------------------------------------------------
+|---- Locus: seqid=13:41179690-41398770 range=83052-137928
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000077504
+|    gene:ENSSSAG00000100048
+|    gene:ENSSSAG00000116092
+|
+|  prediction genes:
+|    gene:ENSSSAG00000077496
+|    gene:ENSSSAG00000077502
+|    gene:ENSSSAG00000077504
+|    gene:ENSSSAG00000077491
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000143752
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143752
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	112141	114038	.	-	.	ID=transcript:ENSSSAT00000143752;Name=hoxc4aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143752;version=2
+13:41179690-41398770	ensembl	three_prime_UTR	112141	112608	.	-	.	ID=three_prime_utr-5;Parent=transcript:ENSSSAT00000143752
+13:41179690-41398770	ensembl	exon	112141	112976	.	-	.	ID=ENSSSAE00000577599;Parent=transcript:ENSSSAT00000143752;Name=ENSSSAE00000577599;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577599;rank=2;version=1
+13:41179690-41398770	.	stop_codon	112609	112611	.	-	.	Parent=transcript:ENSSSAT00000143752
+13:41179690-41398770	ensembl	CDS	112609	112976	.	-	2	ID=CDS:ENSSSAP00000108895;Parent=transcript:ENSSSAT00000143752;protein_id=ENSSSAP00000108895
+13:41179690-41398770	.	intron	112977	113526	.	-	.	Parent=transcript:ENSSSAT00000143752
+13:41179690-41398770	ensembl	CDS	113527	113968	.	-	0	ID=CDS:ENSSSAP00000108895;Parent=transcript:ENSSSAT00000143752;protein_id=ENSSSAP00000108895
+13:41179690-41398770	ensembl	exon	113527	114038	.	-	.	ID=ENSSSAE00000577582;Parent=transcript:ENSSSAT00000143752;Name=ENSSSAE00000577582;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577582;rank=1;version=1
+13:41179690-41398770	.	start_codon	113966	113968	.	-	.	Parent=transcript:ENSSSAT00000143752
+13:41179690-41398770	ensembl	five_prime_UTR	113969	114038	.	-	.	ID=five_prime_utr-15;Parent=transcript:ENSSSAT00000143752
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	112141	114038	.	-	.	ID=transcript:ENSSSAT00000143752;Name=hoxc4aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143752;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	Liftoff	three_prime_UTR	112141	112608	.	-	.	ID=three_prime_UTR_8;Parent=transcript:ENSSSAT00000143752;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	112141	112976	.	-	.	ID=exon_27;Parent=transcript:ENSSSAT00000143752;Name=ENSSSAE00000577599;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577599;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	112609	112611	.	-	.	Parent=transcript:ENSSSAT00000143752
+13:41179690-41398770	Liftoff	CDS	112609	112976	.	-	2	ID=CDS:ENSSSAP00000108895;Parent=transcript:ENSSSAT00000143752;protein_id=ENSSSAP00000108895;extra_copy_number=0
+13:41179690-41398770	.	intron	112977	113526	.	-	.	Parent=transcript:ENSSSAT00000143752
+13:41179690-41398770	Liftoff	CDS	113527	113968	.	-	0	ID=CDS:ENSSSAP00000108895;Parent=transcript:ENSSSAT00000143752;protein_id=ENSSSAP00000108895;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	113527	114038	.	-	.	ID=exon_26;Parent=transcript:ENSSSAT00000143752;Name=ENSSSAE00000577582;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577582;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	113966	113968	.	-	.	Parent=transcript:ENSSSAT00000143752
+13:41179690-41398770	Liftoff	five_prime_UTR	113969	114038	.	-	.	ID=five_prime_UTR_13;Parent=transcript:ENSSSAT00000143752;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference  exons
+     |    2 prediction exons
+     |    Exon structures match perfectly!
+     |
+     |  UTR structure comparison
+     |    2 reference  UTR segments
+     |    2 prediction UTR segments
+     |    UTR structures match perfectly!
+     |
+     |    Gene structures match perfectly!
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000212336
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143725
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	83052	136089	.	-	.	ID=transcript:ENSSSAT00000212336;Name=hoxc10aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000212336;version=1
+13:41179690-41398770	ensembl	exon	83052	84533	.	-	.	ID=ENSSSAE00000789165;Parent=transcript:ENSSSAT00000212336;Name=ENSSSAE00000789165;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000789165;rank=8;version=1
+13:41179690-41398770	ensembl	three_prime_UTR	83052	84533	.	-	.	ID=three_prime_utr-2;Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	.	intron	84534	85014	.	-	.	Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	three_prime_UTR	85015	85716	.	-	.	ID=three_prime_utr-3;Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	exon	85015	86429	.	-	.	ID=ENSSSAE00001012535;Parent=transcript:ENSSSAT00000212336;Name=ENSSSAE00001012535;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00001012535;rank=7;version=1
+13:41179690-41398770	.	stop_codon	85717	85719	.	-	.	Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	CDS	85717	86429	.	-	2	ID=CDS:ENSSSAP00000152032;Parent=transcript:ENSSSAT00000212336;protein_id=ENSSSAP00000152032
+13:41179690-41398770	.	intron	86430	87899	.	-	.	Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	CDS	87900	88359	.	-	0	ID=CDS:ENSSSAP00000152032;Parent=transcript:ENSSSAT00000212336;protein_id=ENSSSAP00000152032
+13:41179690-41398770	ensembl	exon	87900	88587	.	-	.	ID=ENSSSAE00000577468;Parent=transcript:ENSSSAT00000212336;Name=ENSSSAE00000577468;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577468;rank=6;version=1
+13:41179690-41398770	.	start_codon	88357	88359	.	-	.	Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	five_prime_UTR	88360	88587	.	-	.	ID=five_prime_utr-7;Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	.	intron	88588	118684	.	-	.	Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	exon	118685	118733	.	-	.	ID=ENSSSAE00000577467;Parent=transcript:ENSSSAT00000212336;Name=ENSSSAE00000577467;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000577467;rank=5;version=1
+13:41179690-41398770	ensembl	five_prime_UTR	118685	118733	.	-	.	ID=five_prime_utr-8;Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	.	intron	118734	121633	.	-	.	Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	exon	121634	124191	.	-	.	ID=ENSSSAE00000870242;Parent=transcript:ENSSSAT00000212336;Name=ENSSSAE00000870242;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000870242;rank=4;version=1
+13:41179690-41398770	ensembl	five_prime_UTR	121634	124191	.	-	.	ID=five_prime_utr-9;Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	.	intron	124192	125178	.	-	.	Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	exon	125179	127982	.	-	.	ID=ENSSSAE00000748328;Parent=transcript:ENSSSAT00000212336;Name=ENSSSAE00000748328;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000748328;rank=3;version=1
+13:41179690-41398770	ensembl	five_prime_UTR	125179	127982	.	-	.	ID=five_prime_utr-10;Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	.	intron	127983	128473	.	-	.	Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	exon	128474	128641	.	-	.	ID=ENSSSAE00000824366;Parent=transcript:ENSSSAT00000212336;Name=ENSSSAE00000824366;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000824366;rank=2;version=1
+13:41179690-41398770	ensembl	five_prime_UTR	128474	128641	.	-	.	ID=five_prime_utr-11;Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	.	intron	128642	135420	.	-	.	Parent=transcript:ENSSSAT00000212336
+13:41179690-41398770	ensembl	exon	135421	136089	.	-	.	ID=ENSSSAE00000743990;Parent=transcript:ENSSSAT00000212336;Name=ENSSSAE00000743990;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000743990;rank=1;version=1
+13:41179690-41398770	ensembl	five_prime_UTR	135421	136089	.	-	.	ID=five_prime_utr-12;Parent=transcript:ENSSSAT00000212336
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	85717	137928	.	-	.	ID=transcript:ENSSSAT00000143725;Name=hoxc10aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143725;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	85717	85719	.	-	.	Parent=transcript:ENSSSAT00000143725
+13:41179690-41398770	Liftoff	exon	85717	86429	.	-	.	ID=exon_20;Parent=transcript:ENSSSAT00000143725;Name=ENSSSAE00000577470;constitutive=1;ensembl_end_phase=0;ensembl_phase=1;exon_id=ENSSSAE00000577470;rank=4;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	CDS	85717	86429	.	-	2	ID=CDS:ENSSSAP00000108869;Parent=transcript:ENSSSAT00000143725;protein_id=ENSSSAP00000108869;extra_copy_number=0
+13:41179690-41398770	.	intron	86430	87899	.	-	.	Parent=transcript:ENSSSAT00000143725
+13:41179690-41398770	Liftoff	CDS	87900	88359	.	-	0	ID=CDS:ENSSSAP00000108869;Parent=transcript:ENSSSAT00000143725;protein_id=ENSSSAP00000108869;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	87900	88587	.	-	.	ID=exon_19;Parent=transcript:ENSSSAT00000143725;Name=ENSSSAE00000577468;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577468;rank=3;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	88357	88359	.	-	.	Parent=transcript:ENSSSAT00000143725
+13:41179690-41398770	Liftoff	five_prime_UTR	88360	88587	.	-	.	ID=five_prime_UTR_10;Parent=transcript:ENSSSAT00000143725;extra_copy_number=0
+13:41179690-41398770	.	intron	88588	118684	.	-	.	Parent=transcript:ENSSSAT00000143725
+13:41179690-41398770	Liftoff	exon	118685	118733	.	-	.	ID=exon_18;Parent=transcript:ENSSSAT00000143725;Name=ENSSSAE00000577467;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000577467;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	five_prime_UTR	118685	118733	.	-	.	ID=five_prime_UTR_9;Parent=transcript:ENSSSAT00000143725;extra_copy_number=0
+13:41179690-41398770	.	intron	118734	137357	.	-	.	Parent=transcript:ENSSSAT00000143725
+13:41179690-41398770	Liftoff	exon	137358	137928	.	-	.	ID=exon_17;Parent=transcript:ENSSSAT00000143725;Name=ENSSSAE00000577466;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000577466;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	five_prime_UTR	137358	137928	.	-	.	ID=five_prime_UTR_8;Parent=transcript:ENSSSAT00000143725;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    8 reference exons
+     |        2 match prediction
+     |        6 don't match prediction
+     |    4 prediction exons
+     |        2 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.250     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.333     
+     |    Annotation edit distance:      0.625     
+     |
+     |  UTR structure comparison
+     |    8 reference UTR segments
+     |        2 match prediction
+     |        6 don't match prediction
+     |    3 prediction UTR segments
+     |        2 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.250     
+     |    Specificity:                   0.667     
+     |    F1 Score:                      0.364     
+     |    Annotation edit distance:      0.542     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.837      0.805
+     |    Correlation coefficient:       1.000      0.058      --        
+     |    Sensitivity:                   1.000      0.032      --        
+     |    Specificity:                   1.000      0.327      --        
+     |    F1 Score:                      1.000      0.058      --        
+     |    Annotation edit distance:      0.000      0.821      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000235754
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143743
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	91155	95823	.	+	.	ID=transcript:ENSSSAT00000235754;biotype=protein_coding;transcript_id=ENSSSAT00000235754;version=1
+13:41179690-41398770	ensembl	exon	91155	91677	.	+	.	ID=ENSSSAE00001093664;Parent=transcript:ENSSSAT00000235754;Name=ENSSSAE00001093664;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00001093664;rank=1;version=1
+13:41179690-41398770	ensembl	five_prime_UTR	91155	91677	.	+	.	ID=five_prime_utr-13;Parent=transcript:ENSSSAT00000235754
+13:41179690-41398770	.	intron	91678	92640	.	+	.	Parent=transcript:ENSSSAT00000235754
+13:41179690-41398770	ensembl	five_prime_UTR	92641	92843	.	+	.	ID=five_prime_utr-14;Parent=transcript:ENSSSAT00000235754
+13:41179690-41398770	ensembl	exon	92641	95823	.	+	.	ID=ENSSSAE00000718804;Parent=transcript:ENSSSAT00000235754;Name=ENSSSAE00000718804;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000718804;rank=2;version=1
+13:41179690-41398770	.	start_codon	92844	92846	.	+	.	Parent=transcript:ENSSSAT00000235754
+13:41179690-41398770	ensembl	CDS	92844	93110	.	+	0	ID=CDS:ENSSSAP00000148906;Parent=transcript:ENSSSAT00000235754;protein_id=ENSSSAP00000148906
+13:41179690-41398770	.	stop_codon	93108	93110	.	+	.	Parent=transcript:ENSSSAT00000235754
+13:41179690-41398770	ensembl	three_prime_UTR	93111	95823	.	+	.	ID=three_prime_utr-4;Parent=transcript:ENSSSAT00000235754
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	123950	125752	.	-	.	ID=transcript:ENSSSAT00000143743;Name=hoxc5aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143743;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	Liftoff	three_prime_UTR	123950	123973	.	-	.	ID=three_prime_UTR_7;Parent=transcript:ENSSSAT00000143743;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	123950	124191	.	-	.	ID=exon_24;Parent=transcript:ENSSSAT00000143743;Name=ENSSSAE00000577555;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577555;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	123974	123976	.	-	.	Parent=transcript:ENSSSAT00000143743
+13:41179690-41398770	Liftoff	CDS	123974	124191	.	-	2	ID=CDS:ENSSSAP00000108887;Parent=transcript:ENSSSAT00000143743;protein_id=ENSSSAP00000108887;extra_copy_number=0
+13:41179690-41398770	.	intron	124192	125178	.	-	.	Parent=transcript:ENSSSAT00000143743
+13:41179690-41398770	Liftoff	CDS	125179	125674	.	-	0	ID=CDS:ENSSSAP00000108887;Parent=transcript:ENSSSAT00000143743;protein_id=ENSSSAP00000108887;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	125179	125752	.	-	.	ID=exon_23;Parent=transcript:ENSSSAT00000143743;Name=ENSSSAE00000577544;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577544;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	125672	125674	.	-	.	Parent=transcript:ENSSSAT00000143743
+13:41179690-41398770	Liftoff	five_prime_UTR	125675	125752	.	-	.	ID=five_prime_UTR_12;Parent=transcript:ENSSSAT00000143743;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    1 reference CDS segments
+     |        0 match prediction
+     |        1 don't match prediction
+     |    2 prediction CDS segments
+     |        0 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  Exon structure comparison
+     |    2 reference exons
+     |        0 match prediction
+     |        2 don't match prediction
+     |    2 prediction exons
+     |        0 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  UTR structure comparison
+     |    3 reference UTR segments
+     |        0 match prediction
+     |        3 don't match prediction
+     |    2 prediction UTR segments
+     |        0 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          0.982      0.935      0.882
+     |    Correlation coefficient:       -0.008     -0.011     --        
+     |    Sensitivity:                   0.000      0.000      --        
+     |    Specificity:                   0.000      0.000      --        
+     |    F1 Score:                      --         --         --        
+     |    Annotation edit distance:      1.000      1.000      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--- Unmatched prediction transcripts ---
+     |----------------------------------------
+     |
+     |    transcript:ENSSSAT00000143735
+     |
+
+|-------------------------------------------------
+|---- Locus: seqid=13:41179690-41398770 range=149234-151826
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000077484
+|
+|  prediction genes:
+|    gene:ENSSSAG00000077484
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000143720
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143720
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	149234	151826	.	-	.	ID=transcript:ENSSSAT00000143720;Name=hoxc8aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143720;version=2
+13:41179690-41398770	ensembl	three_prime_UTR	149234	149439	.	-	.	ID=three_prime_utr-6;Parent=transcript:ENSSSAT00000143720
+13:41179690-41398770	ensembl	exon	149234	149768	.	-	.	ID=ENSSSAE00000577437;Parent=transcript:ENSSSAT00000143720;Name=ENSSSAE00000577437;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577437;rank=2;version=1
+13:41179690-41398770	.	stop_codon	149440	149442	.	-	.	Parent=transcript:ENSSSAT00000143720
+13:41179690-41398770	ensembl	CDS	149440	149768	.	-	2	ID=CDS:ENSSSAP00000108864;Parent=transcript:ENSSSAT00000143720;protein_id=ENSSSAP00000108864
+13:41179690-41398770	.	intron	149769	151086	.	-	.	Parent=transcript:ENSSSAT00000143720
+13:41179690-41398770	ensembl	CDS	151087	151516	.	-	0	ID=CDS:ENSSSAP00000108864;Parent=transcript:ENSSSAT00000143720;protein_id=ENSSSAP00000108864
+13:41179690-41398770	ensembl	exon	151087	151826	.	-	.	ID=ENSSSAE00000577417;Parent=transcript:ENSSSAT00000143720;Name=ENSSSAE00000577417;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577417;rank=1;version=1
+13:41179690-41398770	.	start_codon	151514	151516	.	-	.	Parent=transcript:ENSSSAT00000143720
+13:41179690-41398770	ensembl	five_prime_UTR	151517	151826	.	-	.	ID=five_prime_utr-16;Parent=transcript:ENSSSAT00000143720
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	149234	151826	.	-	.	ID=transcript:ENSSSAT00000143720;Name=hoxc8aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143720;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	Liftoff	three_prime_UTR	149234	149439	.	-	.	ID=three_prime_UTR_6;Parent=transcript:ENSSSAT00000143720;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	149234	149768	.	-	.	ID=exon_16;Parent=transcript:ENSSSAT00000143720;Name=ENSSSAE00000577437;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577437;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	149440	149442	.	-	.	Parent=transcript:ENSSSAT00000143720
+13:41179690-41398770	Liftoff	CDS	149440	149768	.	-	2	ID=CDS:ENSSSAP00000108864;Parent=transcript:ENSSSAT00000143720;protein_id=ENSSSAP00000108864;extra_copy_number=0
+13:41179690-41398770	.	intron	149769	151086	.	-	.	Parent=transcript:ENSSSAT00000143720
+13:41179690-41398770	Liftoff	CDS	151087	151516	.	-	0	ID=CDS:ENSSSAP00000108864;Parent=transcript:ENSSSAT00000143720;protein_id=ENSSSAP00000108864;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	151087	151826	.	-	.	ID=exon_15;Parent=transcript:ENSSSAT00000143720;Name=ENSSSAE00000577417;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577417;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	151514	151516	.	-	.	Parent=transcript:ENSSSAT00000143720
+13:41179690-41398770	Liftoff	five_prime_UTR	151517	151826	.	-	.	ID=five_prime_UTR_7;Parent=transcript:ENSSSAT00000143720;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference  exons
+     |    2 prediction exons
+     |    Exon structures match perfectly!
+     |
+     |  UTR structure comparison
+     |    2 reference  UTR segments
+     |    2 prediction UTR segments
+     |    UTR structures match perfectly!
+     |
+     |    Gene structures match perfectly!
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+|-------------------------------------------------
+|---- Locus: seqid=13:41179690-41398770 range=156214-158502
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000077481
+|
+|  prediction genes:
+|    gene:ENSSSAG00000077481
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000143708
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143708
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	156214	158502	.	-	.	ID=transcript:ENSSSAT00000143708;Name=hoxc9aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143708;version=2
+13:41179690-41398770	ensembl	three_prime_UTR	156214	156436	.	-	.	ID=three_prime_utr-7;Parent=transcript:ENSSSAT00000143708
+13:41179690-41398770	ensembl	exon	156214	156684	.	-	.	ID=ENSSSAE00000577389;Parent=transcript:ENSSSAT00000143708;Name=ENSSSAE00000577389;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577389;rank=2;version=2
+13:41179690-41398770	.	stop_codon	156437	156439	.	-	.	Parent=transcript:ENSSSAT00000143708
+13:41179690-41398770	ensembl	CDS	156437	156684	.	-	2	ID=CDS:ENSSSAP00000108852;Parent=transcript:ENSSSAT00000143708;protein_id=ENSSSAP00000108852
+13:41179690-41398770	.	intron	156685	157764	.	-	.	Parent=transcript:ENSSSAT00000143708
+13:41179690-41398770	ensembl	CDS	157765	158335	.	-	0	ID=CDS:ENSSSAP00000108852;Parent=transcript:ENSSSAT00000143708;protein_id=ENSSSAP00000108852
+13:41179690-41398770	ensembl	exon	157765	158502	.	-	.	ID=ENSSSAE00000577380;Parent=transcript:ENSSSAT00000143708;Name=ENSSSAE00000577380;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577380;rank=1;version=1
+13:41179690-41398770	.	start_codon	158333	158335	.	-	.	Parent=transcript:ENSSSAT00000143708
+13:41179690-41398770	ensembl	five_prime_UTR	158336	158502	.	-	.	ID=five_prime_utr-17;Parent=transcript:ENSSSAT00000143708
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	156223	158502	.	-	.	ID=transcript:ENSSSAT00000143708;Name=hoxc9aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143708;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	Liftoff	three_prime_UTR	156223	156436	.	-	.	ID=three_prime_UTR_5;Parent=transcript:ENSSSAT00000143708;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	156223	156684	.	-	.	ID=exon_14;Parent=transcript:ENSSSAT00000143708;Name=ENSSSAE00000577389;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577389;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	156437	156439	.	-	.	Parent=transcript:ENSSSAT00000143708
+13:41179690-41398770	Liftoff	CDS	156437	156684	.	-	2	ID=CDS:ENSSSAP00000108852;Parent=transcript:ENSSSAT00000143708;protein_id=ENSSSAP00000108852;extra_copy_number=0
+13:41179690-41398770	.	intron	156685	157764	.	-	.	Parent=transcript:ENSSSAT00000143708
+13:41179690-41398770	Liftoff	CDS	157765	158335	.	-	0	ID=CDS:ENSSSAP00000108852;Parent=transcript:ENSSSAT00000143708;protein_id=ENSSSAP00000108852;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	157765	158502	.	-	.	ID=exon_13;Parent=transcript:ENSSSAT00000143708;Name=ENSSSAE00000577380;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577380;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	158333	158335	.	-	.	Parent=transcript:ENSSSAT00000143708
+13:41179690-41398770	Liftoff	five_prime_UTR	158336	158502	.	-	.	ID=five_prime_UTR_6;Parent=transcript:ENSSSAT00000143708;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference exons
+     |        1 match prediction
+     |        1 don't match prediction
+     |    2 prediction exons
+     |        1 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.500     
+     |    Annotation edit distance:      0.500     
+     |
+     |  UTR structure comparison
+     |    2 reference UTR segments
+     |        1 match prediction
+     |        1 don't match prediction
+     |    2 prediction UTR segments
+     |        1 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.500     
+     |    Annotation edit distance:      0.500     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.996      0.996
+     |    Correlation coefficient:       1.000      0.986      --        
+     |    Sensitivity:                   1.000      0.977      --        
+     |    Specificity:                   1.000      1.000      --        
+     |    F1 Score:                      1.000      0.988      --        
+     |    Annotation edit distance:      0.000      0.012      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+|-------------------------------------------------
+|---- Locus: seqid=13:41179690-41398770 range=167578-171092
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000077476
+|
+|  prediction genes:
+|    gene:ENSSSAG00000077476
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000143702
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143702
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	167578	171092	.	-	.	ID=transcript:ENSSSAT00000143702;Name=hoxc10aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143702;version=2
+13:41179690-41398770	ensembl	three_prime_UTR	167578	167756	.	-	.	ID=three_prime_utr-8;Parent=transcript:ENSSSAT00000143702
+13:41179690-41398770	ensembl	exon	167578	168034	.	-	.	ID=ENSSSAE00000577358;Parent=transcript:ENSSSAT00000143702;Name=ENSSSAE00000577358;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577358;rank=2;version=2
+13:41179690-41398770	.	stop_codon	167757	167759	.	-	.	Parent=transcript:ENSSSAT00000143702
+13:41179690-41398770	ensembl	CDS	167757	168034	.	-	2	ID=CDS:ENSSSAP00000108847;Parent=transcript:ENSSSAT00000143702;protein_id=ENSSSAP00000108847
+13:41179690-41398770	.	intron	168035	170175	.	-	.	Parent=transcript:ENSSSAT00000143702
+13:41179690-41398770	ensembl	CDS	170176	170932	.	-	0	ID=CDS:ENSSSAP00000108847;Parent=transcript:ENSSSAT00000143702;protein_id=ENSSSAP00000108847
+13:41179690-41398770	ensembl	exon	170176	171092	.	-	.	ID=ENSSSAE00000577343;Parent=transcript:ENSSSAT00000143702;Name=ENSSSAE00000577343;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577343;rank=1;version=1
+13:41179690-41398770	.	start_codon	170930	170932	.	-	.	Parent=transcript:ENSSSAT00000143702
+13:41179690-41398770	ensembl	five_prime_UTR	170933	171092	.	-	.	ID=five_prime_utr-18;Parent=transcript:ENSSSAT00000143702
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	167629	171092	.	-	.	ID=transcript:ENSSSAT00000143702;Name=hoxc10aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143702;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	Liftoff	three_prime_UTR	167629	167756	.	-	.	ID=three_prime_UTR_4;Parent=transcript:ENSSSAT00000143702;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	167629	168034	.	-	.	ID=exon_11;Parent=transcript:ENSSSAT00000143702;Name=ENSSSAE00000577358;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577358;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	167757	167759	.	-	.	Parent=transcript:ENSSSAT00000143702
+13:41179690-41398770	Liftoff	CDS	167757	168034	.	-	2	ID=CDS:ENSSSAP00000108847;Parent=transcript:ENSSSAT00000143702;protein_id=ENSSSAP00000108847;extra_copy_number=0
+13:41179690-41398770	.	intron	168035	170175	.	-	.	Parent=transcript:ENSSSAT00000143702
+13:41179690-41398770	Liftoff	CDS	170176	170932	.	-	0	ID=CDS:ENSSSAP00000108847;Parent=transcript:ENSSSAT00000143702;protein_id=ENSSSAP00000108847;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	170176	171092	.	-	.	ID=exon_10;Parent=transcript:ENSSSAT00000143702;Name=ENSSSAE00000577343;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577343;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	170930	170932	.	-	.	Parent=transcript:ENSSSAT00000143702
+13:41179690-41398770	Liftoff	five_prime_UTR	170933	171092	.	-	.	ID=five_prime_UTR_5;Parent=transcript:ENSSSAT00000143702;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference exons
+     |        1 match prediction
+     |        1 don't match prediction
+     |    2 prediction exons
+     |        1 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.500     
+     |    Annotation edit distance:      0.500     
+     |
+     |  UTR structure comparison
+     |    2 reference UTR segments
+     |        1 match prediction
+     |        1 don't match prediction
+     |    2 prediction UTR segments
+     |        1 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.500     
+     |    Annotation edit distance:      0.500     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.985      0.985
+     |    Correlation coefficient:       1.000      0.914      --        
+     |    Sensitivity:                   1.000      0.850      --        
+     |    Specificity:                   1.000      1.000      --        
+     |    F1 Score:                      1.000      0.919      --        
+     |    Annotation edit distance:      0.000      0.075      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+|-------------------------------------------------
+|---- Locus: seqid=13:41179690-41398770 range=173661-184702
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000077471
+|
+|  prediction genes:
+|    gene:ENSSSAG00000077471
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000143686
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143686
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	173661	184702	.	-	.	ID=transcript:ENSSSAT00000143686;Name=hoxc11a-201;biotype=protein_coding;transcript_id=ENSSSAT00000143686;version=2
+13:41179690-41398770	ensembl	exon	173661	173940	.	-	.	ID=ENSSSAE00001043747;Parent=transcript:ENSSSAT00000143686;Name=ENSSSAE00001043747;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00001043747;rank=4;version=1
+13:41179690-41398770	ensembl	three_prime_UTR	173661	173940	.	-	.	ID=three_prime_utr-9;Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	.	intron	173941	174228	.	-	.	Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	ensembl	three_prime_UTR	174229	174309	.	-	.	ID=three_prime_utr-10;Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	ensembl	exon	174229	174333	.	-	.	ID=ENSSSAE00000908614;Parent=transcript:ENSSSAT00000143686;Name=ENSSSAE00000908614;constitutive=1;ensembl_end_phase=-1;ensembl_phase=0;exon_id=ENSSSAE00000908614;rank=3;version=1
+13:41179690-41398770	.	stop_codon	174310	174312	.	-	.	Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	ensembl	CDS	174310	174333	.	-	0	ID=CDS:ENSSSAP00000108831;Parent=transcript:ENSSSAT00000143686;protein_id=ENSSSAP00000108831
+13:41179690-41398770	.	intron	174334	182430	.	-	.	Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	ensembl	exon	182431	182573	.	-	.	ID=ENSSSAE00000577270;Parent=transcript:ENSSSAT00000143686;Name=ENSSSAE00000577270;constitutive=1;ensembl_end_phase=0;ensembl_phase=1;exon_id=ENSSSAE00000577270;rank=2;version=1
+13:41179690-41398770	ensembl	CDS	182431	182573	.	-	2	ID=CDS:ENSSSAP00000108831;Parent=transcript:ENSSSAT00000143686;protein_id=ENSSSAP00000108831
+13:41179690-41398770	.	intron	182574	183911	.	-	.	Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	ensembl	CDS	183912	184602	.	-	0	ID=CDS:ENSSSAP00000108831;Parent=transcript:ENSSSAT00000143686;protein_id=ENSSSAP00000108831
+13:41179690-41398770	ensembl	exon	183912	184702	.	-	.	ID=ENSSSAE00000577249;Parent=transcript:ENSSSAT00000143686;Name=ENSSSAE00000577249;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577249;rank=1;version=1
+13:41179690-41398770	.	start_codon	184600	184602	.	-	.	Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	ensembl	five_prime_UTR	184603	184702	.	-	.	ID=five_prime_utr-19;Parent=transcript:ENSSSAT00000143686
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	174310	184702	.	-	.	ID=transcript:ENSSSAT00000143686;Name=hoxc11aa-202;biotype=protein_coding;transcript_id=ENSSSAT00000143686;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	174310	174312	.	-	.	Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	Liftoff	exon	174310	174333	.	-	.	ID=exon_9;Parent=transcript:ENSSSAT00000143686;Name=ENSSSAE00000577293;constitutive=0;ensembl_end_phase=0;ensembl_phase=0;exon_id=ENSSSAE00000577293;rank=3;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	CDS	174310	174333	.	-	0	ID=CDS:ENSSSAP00000108831;Parent=transcript:ENSSSAT00000143686;protein_id=ENSSSAP00000108831;extra_copy_number=0
+13:41179690-41398770	.	intron	174334	182430	.	-	.	Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	Liftoff	exon	182431	182573	.	-	.	ID=exon_8;Parent=transcript:ENSSSAT00000143686;Name=ENSSSAE00000577270;constitutive=0;ensembl_end_phase=0;ensembl_phase=1;exon_id=ENSSSAE00000577270;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	Liftoff	CDS	182431	182573	.	-	2	ID=CDS:ENSSSAP00000108831;Parent=transcript:ENSSSAT00000143686;protein_id=ENSSSAP00000108831;extra_copy_number=0
+13:41179690-41398770	.	intron	182574	183911	.	-	.	Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	Liftoff	CDS	183912	184602	.	-	0	ID=CDS:ENSSSAP00000108831;Parent=transcript:ENSSSAT00000143686;protein_id=ENSSSAP00000108831;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	183912	184702	.	-	.	ID=exon_7;Parent=transcript:ENSSSAT00000143686;Name=ENSSSAE00000577249;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577249;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	184600	184602	.	-	.	Parent=transcript:ENSSSAT00000143686
+13:41179690-41398770	Liftoff	five_prime_UTR	184603	184702	.	-	.	ID=five_prime_UTR_4;Parent=transcript:ENSSSAT00000143686;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    3 reference  CDS segments
+     |    3 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    4 reference exons
+     |        2 match prediction
+     |        2 don't match prediction
+     |    3 prediction exons
+     |        2 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   0.667     
+     |    F1 Score:                      0.571     
+     |    Annotation edit distance:      0.417     
+     |
+     |  UTR structure comparison
+     |    3 reference UTR segments
+     |        1 match prediction
+     |        2 don't match prediction
+     |    1 prediction UTR segments
+     |        1 match reference
+     |        0 don't match reference
+     |    Sensitivity:                   0.333     
+     |    Specificity:                   1.000     
+     |    F1 Score:                      0.500     
+     |    Annotation edit distance:      0.333     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.967      0.941
+     |    Correlation coefficient:       1.000      0.458      --        
+     |    Sensitivity:                   1.000      0.217      --        
+     |    Specificity:                   1.000      1.000      --        
+     |    F1 Score:                      1.000      0.357      --        
+     |    Annotation edit distance:      0.000      0.392      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--- Unmatched prediction transcripts ---
+     |----------------------------------------
+     |
+     |    transcript:ENSSSAT00000143692
+     |
+
+|-------------------------------------------------
+|---- Locus: seqid=13:41179690-41398770 range=198979-200977
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000077464
+|
+|  prediction genes:
+|    gene:ENSSSAG00000077464
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000143673
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143673
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	198979	200977	.	-	.	ID=transcript:ENSSSAT00000143673;Name=hoxc12aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143673;version=2
+13:41179690-41398770	ensembl	three_prime_UTR	198979	199081	.	-	.	ID=three_prime_utr-11;Parent=transcript:ENSSSAT00000143673
+13:41179690-41398770	ensembl	exon	198979	199320	.	-	.	ID=ENSSSAE00000577202;Parent=transcript:ENSSSAT00000143673;Name=ENSSSAE00000577202;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577202;rank=2;version=1
+13:41179690-41398770	.	stop_codon	199082	199084	.	-	.	Parent=transcript:ENSSSAT00000143673
+13:41179690-41398770	ensembl	CDS	199082	199320	.	-	2	ID=CDS:ENSSSAP00000108818;Parent=transcript:ENSSSAT00000143673;protein_id=ENSSSAP00000108818
+13:41179690-41398770	.	intron	199321	200289	.	-	.	Parent=transcript:ENSSSAT00000143673
+13:41179690-41398770	ensembl	CDS	200290	200905	.	-	0	ID=CDS:ENSSSAP00000108818;Parent=transcript:ENSSSAT00000143673;protein_id=ENSSSAP00000108818
+13:41179690-41398770	ensembl	exon	200290	200977	.	-	.	ID=ENSSSAE00000577187;Parent=transcript:ENSSSAT00000143673;Name=ENSSSAE00000577187;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577187;rank=1;version=1
+13:41179690-41398770	.	start_codon	200903	200905	.	-	.	Parent=transcript:ENSSSAT00000143673
+13:41179690-41398770	ensembl	five_prime_UTR	200906	200977	.	-	.	ID=five_prime_utr-20;Parent=transcript:ENSSSAT00000143673
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	198979	200977	.	-	.	ID=transcript:ENSSSAT00000143673;Name=hoxc12aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143673;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	Liftoff	three_prime_UTR	198979	199081	.	-	.	ID=three_prime_UTR_2;Parent=transcript:ENSSSAT00000143673;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	198979	199320	.	-	.	ID=exon_4;Parent=transcript:ENSSSAT00000143673;Name=ENSSSAE00000577202;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577202;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	199082	199084	.	-	.	Parent=transcript:ENSSSAT00000143673
+13:41179690-41398770	Liftoff	CDS	199082	199320	.	-	2	ID=CDS:ENSSSAP00000108818;Parent=transcript:ENSSSAT00000143673;protein_id=ENSSSAP00000108818;extra_copy_number=0
+13:41179690-41398770	.	intron	199321	200289	.	-	.	Parent=transcript:ENSSSAT00000143673
+13:41179690-41398770	Liftoff	CDS	200290	200905	.	-	0	ID=CDS:ENSSSAP00000108818;Parent=transcript:ENSSSAT00000143673;protein_id=ENSSSAP00000108818;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	200290	200977	.	-	.	ID=exon_3;Parent=transcript:ENSSSAT00000143673;Name=ENSSSAE00000577187;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577187;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	200903	200905	.	-	.	Parent=transcript:ENSSSAT00000143673
+13:41179690-41398770	Liftoff	five_prime_UTR	200906	200977	.	-	.	ID=five_prime_UTR_2;Parent=transcript:ENSSSAT00000143673;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference  exons
+     |    2 prediction exons
+     |    Exon structures match perfectly!
+     |
+     |  UTR structure comparison
+     |    2 reference  UTR segments
+     |    2 prediction UTR segments
+     |    UTR structures match perfectly!
+     |
+     |    Gene structures match perfectly!
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+|-------------------------------------------------
+|---- Locus: seqid=13:41179690-41398770 range=211354-215853
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000077459
+|
+|  prediction genes:
+|    gene:ENSSSAG00000077459
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000143654
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000143654
+     |
+     | reference GFF3:
+##gff-version 3
+13:41179690-41398770	ensembl	mRNA	211354	215853	.	-	.	ID=transcript:ENSSSAT00000143654;Name=hoxc13a-201;biotype=protein_coding;transcript_id=ENSSSAT00000143654;version=2
+13:41179690-41398770	ensembl	three_prime_UTR	211354	211518	.	-	.	ID=three_prime_utr-12;Parent=transcript:ENSSSAT00000143654
+13:41179690-41398770	ensembl	exon	211354	211778	.	-	.	ID=ENSSSAE00000577148;Parent=transcript:ENSSSAT00000143654;Name=ENSSSAE00000577148;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577148;rank=2;version=1
+13:41179690-41398770	.	stop_codon	211519	211521	.	-	.	Parent=transcript:ENSSSAT00000143654
+13:41179690-41398770	ensembl	CDS	211519	211778	.	-	2	ID=CDS:ENSSSAP00000108799;Parent=transcript:ENSSSAT00000143654;protein_id=ENSSSAP00000108799
+13:41179690-41398770	.	intron	211779	214853	.	-	.	Parent=transcript:ENSSSAT00000143654
+13:41179690-41398770	ensembl	CDS	214854	215514	.	-	0	ID=CDS:ENSSSAP00000108799;Parent=transcript:ENSSSAT00000143654;protein_id=ENSSSAP00000108799
+13:41179690-41398770	ensembl	exon	214854	215853	.	-	.	ID=ENSSSAE00000577135;Parent=transcript:ENSSSAT00000143654;Name=ENSSSAE00000577135;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577135;rank=1;version=1
+13:41179690-41398770	.	start_codon	215512	215514	.	-	.	Parent=transcript:ENSSSAT00000143654
+13:41179690-41398770	ensembl	five_prime_UTR	215515	215853	.	-	.	ID=five_prime_utr-21;Parent=transcript:ENSSSAT00000143654
+###
+     | prediction GFF3:
+##gff-version 3
+13:41179690-41398770	Liftoff	mRNA	211354	215853	.	-	.	ID=transcript:ENSSSAT00000143654;Name=hoxc13aa-201;biotype=protein_coding;transcript_id=ENSSSAT00000143654;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+13:41179690-41398770	Liftoff	three_prime_UTR	211354	211518	.	-	.	ID=three_prime_UTR_1;Parent=transcript:ENSSSAT00000143654;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	211354	211778	.	-	.	ID=exon_2;Parent=transcript:ENSSSAT00000143654;Name=ENSSSAE00000577148;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577148;rank=2;version=1;extra_copy_number=0
+13:41179690-41398770	.	stop_codon	211519	211521	.	-	.	Parent=transcript:ENSSSAT00000143654
+13:41179690-41398770	Liftoff	CDS	211519	211778	.	-	2	ID=CDS:ENSSSAP00000108799;Parent=transcript:ENSSSAT00000143654;protein_id=ENSSSAP00000108799;extra_copy_number=0
+13:41179690-41398770	.	intron	211779	214853	.	-	.	Parent=transcript:ENSSSAT00000143654
+13:41179690-41398770	Liftoff	CDS	214854	215514	.	-	0	ID=CDS:ENSSSAP00000108799;Parent=transcript:ENSSSAT00000143654;protein_id=ENSSSAP00000108799;extra_copy_number=0
+13:41179690-41398770	Liftoff	exon	214854	215853	.	-	.	ID=exon_1;Parent=transcript:ENSSSAT00000143654;Name=ENSSSAE00000577135;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000577135;rank=1;version=1;extra_copy_number=0
+13:41179690-41398770	.	start_codon	215512	215514	.	-	.	Parent=transcript:ENSSSAT00000143654
+13:41179690-41398770	Liftoff	five_prime_UTR	215515	215853	.	-	.	ID=five_prime_UTR_1;Parent=transcript:ENSSSAT00000143654;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference  exons
+     |    2 prediction exons
+     |    Exon structures match perfectly!
+     |
+     |  UTR structure comparison
+     |    2 reference  UTR segments
+     |    2 prediction UTR segments
+     |    UTR structures match perfectly!
+     |
+     |    Gene structures match perfectly!
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+|-------------------------------------------------
+|---- Locus: seqid=15:92946040-93192783 range=843-11907
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000110153
+|    gene:ENSSSAG00000065715
+|
+|  prediction genes:
+|    gene:ENSSSAG00000065738
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000247659
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110316
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	5536	11907	.	+	.	ID=transcript:ENSSSAT00000247659;Name=cbx5-201;biotype=protein_coding;transcript_id=ENSSSAT00000247659;version=1
+15:92946040-93192783	ensembl	exon	5536	6380	.	+	.	ID=ENSSSAE00000713612;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000713612;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000713612;rank=1;version=1
+15:92946040-93192783	ensembl	five_prime_UTR	5536	6380	.	+	.	ID=five_prime_utr-26;Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	.	intron	6381	6968	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	five_prime_UTR	6969	7027	.	+	.	ID=five_prime_utr-27;Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	exon	6969	7170	.	+	.	ID=ENSSSAE00000411563;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000411563;constitutive=1;ensembl_end_phase=2;ensembl_phase=-1;exon_id=ENSSSAE00000411563;rank=2;version=1
+15:92946040-93192783	.	start_codon	7028	7030	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	CDS	7028	7170	.	+	0	ID=CDS:ENSSSAP00000141064;Parent=transcript:ENSSSAT00000247659;protein_id=ENSSSAP00000141064
+15:92946040-93192783	.	intron	7171	8315	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	exon	8316	8550	.	+	.	ID=ENSSSAE00000411610;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000411610;constitutive=1;ensembl_end_phase=0;ensembl_phase=2;exon_id=ENSSSAE00000411610;rank=3;version=1
+15:92946040-93192783	ensembl	CDS	8316	8550	.	+	1	ID=CDS:ENSSSAP00000141064;Parent=transcript:ENSSSAT00000247659;protein_id=ENSSSAP00000141064
+15:92946040-93192783	.	intron	8551	9007	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	exon	9008	9108	.	+	.	ID=ENSSSAE00000411630;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000411630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000411630;rank=4;version=1
+15:92946040-93192783	ensembl	CDS	9008	9108	.	+	0	ID=CDS:ENSSSAP00000141064;Parent=transcript:ENSSSAT00000247659;protein_id=ENSSSAP00000141064
+15:92946040-93192783	.	intron	9109	9395	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	CDS	9396	9537	.	+	1	ID=CDS:ENSSSAP00000141064;Parent=transcript:ENSSSAT00000247659;protein_id=ENSSSAP00000141064
+15:92946040-93192783	ensembl	exon	9396	11907	.	+	.	ID=ENSSSAE00000807538;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000807538;constitutive=1;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00000807538;rank=5;version=1
+15:92946040-93192783	.	stop_codon	9535	9537	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	three_prime_UTR	9538	11907	.	+	.	ID=three_prime_utr-22;Parent=transcript:ENSSSAT00000247659
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	6314	9591	.	+	.	ID=transcript:ENSSSAT00000110316;Name=cbx5-201;biotype=protein_coding;transcript_id=ENSSSAT00000110316;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	6314	6380	.	+	.	ID=exon_34;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411562;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000411562;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	five_prime_UTR	6314	6380	.	+	.	ID=five_prime_UTR_19;Parent=transcript:ENSSSAT00000110316;extra_copy_number=0
+15:92946040-93192783	.	intron	6381	6968	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	five_prime_UTR	6969	7027	.	+	.	ID=five_prime_UTR_20;Parent=transcript:ENSSSAT00000110316;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	6969	7170	.	+	.	ID=exon_35;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411563;constitutive=0;ensembl_end_phase=2;ensembl_phase=-1;exon_id=ENSSSAE00000411563;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	7028	7030	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	CDS	7028	7170	.	+	0	ID=CDS:ENSSSAP00000076836;Parent=transcript:ENSSSAT00000110316;protein_id=ENSSSAP00000076836;extra_copy_number=0
+15:92946040-93192783	.	intron	7171	8315	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	exon	8316	8550	.	+	.	ID=exon_36;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411610;constitutive=0;ensembl_end_phase=0;ensembl_phase=2;exon_id=ENSSSAE00000411610;rank=3;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8316	8550	.	+	1	ID=CDS:ENSSSAP00000076836;Parent=transcript:ENSSSAT00000110316;protein_id=ENSSSAP00000076836;extra_copy_number=0
+15:92946040-93192783	.	intron	8551	9007	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	exon	9008	9108	.	+	.	ID=exon_37;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000411630;rank=4;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9008	9108	.	+	0	ID=CDS:ENSSSAP00000076836;Parent=transcript:ENSSSAT00000110316;protein_id=ENSSSAP00000076836;extra_copy_number=0
+15:92946040-93192783	.	intron	9109	9395	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	CDS	9396	9537	.	+	1	ID=CDS:ENSSSAP00000076836;Parent=transcript:ENSSSAT00000110316;protein_id=ENSSSAP00000076836;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9396	9591	.	+	.	ID=exon_38;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411634;constitutive=1;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00000411634;rank=5;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	9535	9537	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	three_prime_UTR	9538	9591	.	+	.	ID=three_prime_UTR_9;Parent=transcript:ENSSSAT00000110316;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    4 reference  CDS segments
+     |    4 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    5 reference exons
+     |        3 match prediction
+     |        2 don't match prediction
+     |    5 prediction exons
+     |        3 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.600     
+     |    Specificity:                   0.600     
+     |    F1 Score:                      0.600     
+     |    Annotation edit distance:      0.400     
+     |
+     |  UTR structure comparison
+     |    3 reference UTR segments
+     |        1 match prediction
+     |        2 don't match prediction
+     |    3 prediction UTR segments
+     |        1 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.333     
+     |    Specificity:                   0.333     
+     |    F1 Score:                      0.333     
+     |    Annotation edit distance:      0.667     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.720      0.720
+     |    Correlation coefficient:       1.000      0.198      --        
+     |    Sensitivity:                   1.000      0.055      --        
+     |    Specificity:                   1.000      1.000      --        
+     |    F1 Score:                      1.000      0.104      --        
+     |    Annotation edit distance:      0.000      0.473      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110274
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110324
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	2138	5780	.	-	.	ID=transcript:ENSSSAT00000110274;biotype=protein_coding;transcript_id=ENSSSAT00000110274;version=2
+15:92946040-93192783	ensembl	exon	2138	2398	.	-	.	ID=nbis-exon-16;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411484;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000411484;rank=9;version=1
+15:92946040-93192783	ensembl	three_prime_UTR	2138	2398	.	-	.	ID=three_prime_utr-20;Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	.	intron	2399	2654	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	three_prime_UTR	2655	2665	.	-	.	ID=three_prime_utr-21;Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	2655	2742	.	-	.	ID=nbis-exon-17;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411472;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000411472;rank=8;version=1
+15:92946040-93192783	.	stop_codon	2666	2668	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	CDS	2666	2742	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	2743	2959	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	2960	3154	.	-	.	ID=nbis-exon-18;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411460;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411460;rank=7;version=2
+15:92946040-93192783	ensembl	CDS	2960	3154	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	3155	3533	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	3534	3722	.	-	.	ID=ENSSSAE00000815662;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000815662;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000815662;rank=6;version=1
+15:92946040-93192783	ensembl	CDS	3534	3722	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	3723	4234	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	4235	4285	.	-	.	ID=nbis-exon-19;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411388;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411388;rank=5;version=1
+15:92946040-93192783	ensembl	CDS	4235	4285	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	4286	4387	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	4388	4471	.	-	.	ID=nbis-exon-20;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411345;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411345;rank=4;version=2
+15:92946040-93192783	ensembl	CDS	4388	4471	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	4472	4558	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	4559	4916	.	-	.	ID=nbis-exon-21;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411328;constitutive=1;ensembl_end_phase=1;ensembl_phase=0;exon_id=ENSSSAE00000411328;rank=3;version=1
+15:92946040-93192783	ensembl	CDS	4559	4916	.	-	0	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	4917	5076	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	5077	5193	.	-	.	ID=nbis-exon-22;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411313;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=ENSSSAE00000411313;rank=2;version=1
+15:92946040-93192783	ensembl	CDS	5077	5193	.	-	0	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	5194	5738	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	CDS	5739	5750	.	-	0	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	ensembl	exon	5739	5780	.	-	.	ID=nbis-exon-23;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411311;constitutive=1;ensembl_end_phase=0;ensembl_phase=-1;exon_id=ENSSSAE00000411311;rank=1;version=1
+15:92946040-93192783	.	start_codon	5748	5750	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	five_prime_UTR	5751	5780	.	-	.	ID=five_prime_utr-25;Parent=transcript:ENSSSAT00000110274
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	6314	9591	.	+	.	ID=transcript:ENSSSAT00000110324;Name=cbx5-202;biotype=protein_coding;transcript_id=ENSSSAT00000110324;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	6314	6380	.	+	.	ID=exon_39;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411562;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000411562;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	five_prime_UTR	6314	6380	.	+	.	ID=five_prime_UTR_21;Parent=transcript:ENSSSAT00000110324;extra_copy_number=0
+15:92946040-93192783	Liftoff	five_prime_UTR	6969	7027	.	+	.	ID=five_prime_UTR_22;Parent=transcript:ENSSSAT00000110324;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	6969	7170	.	+	.	ID=exon_40;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411563;constitutive=0;ensembl_end_phase=2;ensembl_phase=-1;exon_id=ENSSSAE00000411563;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	7028	7030	.	+	.	Parent=transcript:ENSSSAT00000110324
+15:92946040-93192783	Liftoff	CDS	7028	7170	.	+	0	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	8316	8398	.	+	.	ID=exon_41;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411782;constitutive=0;ensembl_end_phase=1;ensembl_phase=2;exon_id=ENSSSAE00000411782;rank=3;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8316	8398	.	+	1	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	.	intron	8399	8473	.	+	.	Parent=transcript:ENSSSAT00000110324
+15:92946040-93192783	Liftoff	exon	8474	8550	.	+	.	ID=exon_42;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411786;constitutive=0;ensembl_end_phase=0;ensembl_phase=1;exon_id=ENSSSAE00000411786;rank=4;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8474	8550	.	+	2	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9008	9108	.	+	.	ID=exon_43;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000411630;rank=5;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9008	9108	.	+	0	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9396	9537	.	+	1	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9396	9591	.	+	.	ID=exon_44;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411634;constitutive=1;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00000411634;rank=6;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	9535	9537	.	+	.	Parent=transcript:ENSSSAT00000110324
+15:92946040-93192783	Liftoff	three_prime_UTR	9538	9591	.	+	.	ID=three_prime_UTR_10;Parent=transcript:ENSSSAT00000110324;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    8 reference CDS segments
+     |        0 match prediction
+     |        8 don't match prediction
+     |    5 prediction CDS segments
+     |        0 match reference
+     |        5 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  Exon structure comparison
+     |    9 reference exons
+     |        0 match prediction
+     |        9 don't match prediction
+     |    6 prediction exons
+     |        0 match reference
+     |        6 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  UTR structure comparison
+     |    3 reference UTR segments
+     |        0 match prediction
+     |        3 don't match prediction
+     |    3 prediction UTR segments
+     |        0 match reference
+     |        3 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          0.853      0.956      0.375
+     |    Correlation coefficient:       -0.075     -0.022     --        
+     |    Sensitivity:                   0.000      0.000      --        
+     |    Specificity:                   0.000      0.000      --        
+     |    F1 Score:                      --         --         --        
+     |    Annotation edit distance:      1.000      1.000      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000210623
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110349
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	843	5780	.	-	.	ID=transcript:ENSSSAT00000210623;biotype=protein_coding;transcript_id=ENSSSAT00000210623;version=1
+15:92946040-93192783	ensembl	exon	843	964	.	-	.	ID=ENSSSAE00000681495;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000681495;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000681495;rank=11;version=1
+15:92946040-93192783	ensembl	three_prime_UTR	843	964	.	-	.	ID=three_prime_utr-13;Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	.	intron	965	1085	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	1086	2398	.	-	.	ID=ENSSSAE00000805702;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000805702;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000805702;rank=10;version=1
+15:92946040-93192783	ensembl	three_prime_UTR	1086	2398	.	-	.	ID=three_prime_utr-14;Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	three_prime_UTR	2655	2665	.	-	.	ID=three_prime_utr-15;Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	2655	2742	.	-	.	ID=ENSSSAE00000411472;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411472;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000411472;rank=9;version=1
+15:92946040-93192783	.	stop_codon	2666	2668	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	CDS	2666	2742	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	.	intron	2743	3043	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	3044	3154	.	-	.	ID=ENSSSAE00000850205;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000850205;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000850205;rank=8;version=1
+15:92946040-93192783	ensembl	CDS	3044	3154	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	3534	3734	.	-	.	ID=ENSSSAE00000411456;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411456;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411456;rank=7;version=1
+15:92946040-93192783	ensembl	CDS	3534	3734	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	.	intron	3735	4020	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	4021	4110	.	-	.	ID=ENSSSAE00000411427;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411427;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411427;rank=6;version=1
+15:92946040-93192783	ensembl	CDS	4021	4110	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	.	intron	4111	4234	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	4235	4285	.	-	.	ID=ENSSSAE00000411388;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411388;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411388;rank=5;version=1
+15:92946040-93192783	ensembl	CDS	4235	4285	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	4388	4471	.	-	.	ID=ENSSSAE00000411345;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411345;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411345;rank=4;version=2
+15:92946040-93192783	ensembl	CDS	4388	4471	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	4559	4916	.	-	.	ID=ENSSSAE00000411328;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411328;constitutive=1;ensembl_end_phase=1;ensembl_phase=0;exon_id=ENSSSAE00000411328;rank=3;version=1
+15:92946040-93192783	ensembl	CDS	4559	4916	.	-	0	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	5077	5193	.	-	.	ID=ENSSSAE00000411313;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411313;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=ENSSSAE00000411313;rank=2;version=1
+15:92946040-93192783	ensembl	CDS	5077	5193	.	-	0	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	CDS	5739	5750	.	-	0	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	5739	5780	.	-	.	ID=ENSSSAE00000411311;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411311;constitutive=1;ensembl_end_phase=0;ensembl_phase=-1;exon_id=ENSSSAE00000411311;rank=1;version=1
+15:92946040-93192783	.	start_codon	5748	5750	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	five_prime_UTR	5751	5780	.	-	.	ID=five_prime_utr-22;Parent=transcript:ENSSSAT00000210623
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	6663	9591	.	+	.	ID=transcript:ENSSSAT00000110349;Name=cbx5-203;biotype=protein_coding;transcript_id=ENSSSAT00000110349;version=1;matches_ref_protein=True;valid_ORF=False;missing_start_codon=True;extra_copy_number=0
+15:92946040-93192783	.	start_codon	6663	6665	.	+	.	Parent=transcript:ENSSSAT00000110349
+15:92946040-93192783	Liftoff	exon	6663	6687	.	+	.	ID=exon_45;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411841;constitutive=0;ensembl_end_phase=1;ensembl_phase=0;exon_id=ENSSSAE00000411841;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	6663	6687	.	+	0	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	.	intron	6688	7025	.	+	.	Parent=transcript:ENSSSAT00000110349
+15:92946040-93192783	Liftoff	exon	7026	7170	.	+	.	ID=exon_46;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411850;constitutive=0;ensembl_end_phase=2;ensembl_phase=1;exon_id=ENSSSAE00000411850;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	7026	7170	.	+	2	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	8316	8372	.	+	.	ID=exon_47;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411898;constitutive=0;ensembl_end_phase=2;ensembl_phase=2;exon_id=ENSSSAE00000411898;rank=3;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8316	8372	.	+	1	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	.	intron	8373	8444	.	+	.	Parent=transcript:ENSSSAT00000110349
+15:92946040-93192783	Liftoff	exon	8445	8550	.	+	.	ID=exon_48;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411902;constitutive=0;ensembl_end_phase=0;ensembl_phase=2;exon_id=ENSSSAE00000411902;rank=4;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8445	8550	.	+	1	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9008	9108	.	+	.	ID=exon_49;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000411630;rank=5;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9008	9108	.	+	0	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9396	9537	.	+	1	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9396	9591	.	+	.	ID=exon_50;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411634;constitutive=1;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00000411634;rank=6;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	9535	9537	.	+	.	Parent=transcript:ENSSSAT00000110349
+15:92946040-93192783	Liftoff	three_prime_UTR	9538	9591	.	+	.	ID=three_prime_UTR_11;Parent=transcript:ENSSSAT00000110349;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    9 reference CDS segments
+     |        0 match prediction
+     |        9 don't match prediction
+     |    6 prediction CDS segments
+     |        0 match reference
+     |        6 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  Exon structure comparison
+     |    11 reference exons
+     |        0 match prediction
+     |        11 don't match prediction
+     |    6 prediction exons
+     |        0 match reference
+     |        6 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  UTR structure comparison
+     |    4 reference UTR segments
+     |        0 match prediction
+     |        4 don't match prediction
+     |    1 prediction UTR segments
+     |        0 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          0.848      0.862      0.289
+     |    Correlation coefficient:       -0.078     -0.027     --        
+     |    Sensitivity:                   0.000      0.000      --        
+     |    Specificity:                   0.000      0.000      --        
+     |    F1 Score:                      --         --         --        
+     |    Annotation edit distance:      1.000      1.000      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--- Unmatched reference transcripts ---
+     |---------------------------------------
+     |
+     |    transcript:ENSSSAT00000143771
+     |    transcript:ENSSSAT00000143781
+     |
+
+|-------------------------------------------------
+|---- Locus: seqid=15:92946040-93192783 range=76705-83077
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000081830
+|
+|  prediction genes:
+|    gene:ENSSSAG00000065764
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000231805
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110362
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	76705	83077	.	-	.	ID=transcript:ENSSSAT00000231805;biotype=protein_coding;transcript_id=ENSSSAT00000231805;version=1
+15:92946040-93192783	ensembl	three_prime_UTR	76705	79142	.	-	.	ID=three_prime_utr-23;Parent=transcript:ENSSSAT00000231805
+15:92946040-93192783	ensembl	exon	76705	79669	.	-	.	ID=ENSSSAE00001081413;Parent=transcript:ENSSSAT00000231805;Name=ENSSSAE00001081413;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00001081413;rank=2;version=1
+15:92946040-93192783	.	stop_codon	79143	79145	.	-	.	Parent=transcript:ENSSSAT00000231805
+15:92946040-93192783	ensembl	CDS	79143	79669	.	-	2	ID=CDS:ENSSSAP00000131646;Parent=transcript:ENSSSAT00000231805;protein_id=ENSSSAP00000131646
+15:92946040-93192783	.	intron	79670	82458	.	-	.	Parent=transcript:ENSSSAT00000231805
+15:92946040-93192783	ensembl	CDS	82459	83053	.	-	0	ID=CDS:ENSSSAP00000131646;Parent=transcript:ENSSSAT00000231805;protein_id=ENSSSAP00000131646
+15:92946040-93192783	ensembl	exon	82459	83077	.	-	.	ID=ENSSSAE00000411981;Parent=transcript:ENSSSAT00000231805;Name=ENSSSAE00000411981;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000411981;rank=1;version=1
+15:92946040-93192783	.	start_codon	83051	83053	.	-	.	Parent=transcript:ENSSSAT00000231805
+15:92946040-93192783	ensembl	five_prime_UTR	83054	83077	.	-	.	ID=five_prime_utr-28;Parent=transcript:ENSSSAT00000231805
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	79143	83077	.	-	.	ID=transcript:ENSSSAT00000110362;Name=hoxc1ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110362;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	79143	79145	.	-	.	Parent=transcript:ENSSSAT00000110362
+15:92946040-93192783	Liftoff	exon	79143	79669	.	-	.	ID=exon_51;Parent=transcript:ENSSSAT00000110362;Name=ENSSSAE00000412003;constitutive=0;ensembl_end_phase=0;ensembl_phase=1;exon_id=ENSSSAE00000412003;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	79143	79669	.	-	2	ID=CDS:ENSSSAP00000076882;Parent=transcript:ENSSSAT00000110362;protein_id=ENSSSAP00000076882;extra_copy_number=0
+15:92946040-93192783	.	intron	79670	82458	.	-	.	Parent=transcript:ENSSSAT00000110362
+15:92946040-93192783	Liftoff	CDS	82459	83053	.	-	0	ID=CDS:ENSSSAP00000076882;Parent=transcript:ENSSSAT00000110362;protein_id=ENSSSAP00000076882;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	82459	83077	.	-	.	ID=exon_52;Parent=transcript:ENSSSAT00000110362;Name=ENSSSAE00000411981;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000411981;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	83051	83053	.	-	.	Parent=transcript:ENSSSAT00000110362
+15:92946040-93192783	Liftoff	five_prime_UTR	83054	83077	.	-	.	ID=five_prime_UTR_23;Parent=transcript:ENSSSAT00000110362;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference exons
+     |        1 match prediction
+     |        1 don't match prediction
+     |    2 prediction exons
+     |        1 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.500     
+     |    Annotation edit distance:      0.500     
+     |
+     |  UTR structure comparison
+     |    2 reference UTR segments
+     |        1 match prediction
+     |        1 don't match prediction
+     |    1 prediction UTR segments
+     |        1 match reference
+     |        0 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   1.000     
+     |    F1 Score:                      0.667     
+     |    Annotation edit distance:      0.250     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.617      0.617
+     |    Correlation coefficient:       1.000      0.077      --        
+     |    Sensitivity:                   1.000      0.010      --        
+     |    Specificity:                   1.000      1.000      --        
+     |    F1 Score:                      1.000      0.019      --        
+     |    Annotation edit distance:      0.000      0.495      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--- Unmatched prediction transcripts ---
+     |----------------------------------------
+     |
+     |    transcript:ENSSSAT00000110372
+     |
+
+|-------------------------------------------------
+|---- Locus: seqid=15:92946040-93192783 range=124511-157802
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000065769
+|
+|  prediction genes:
+|    gene:ENSSSAG00000065769
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110389
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110389
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	126616	128740	.	-	.	ID=transcript:ENSSSAT00000110389;Name=hoxc5ab-202;biotype=protein_coding;transcript_id=ENSSSAT00000110389;version=2
+15:92946040-93192783	ensembl	three_prime_UTR	126616	127186	.	-	.	ID=three_prime_utr-25;Parent=transcript:ENSSSAT00000110389
+15:92946040-93192783	ensembl	exon	126616	127554	.	-	.	ID=ENSSSAE00000412101;Parent=transcript:ENSSSAT00000110389;Name=ENSSSAE00000412101;constitutive=0;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412101;rank=2;version=2
+15:92946040-93192783	.	stop_codon	127187	127189	.	-	.	Parent=transcript:ENSSSAT00000110389
+15:92946040-93192783	ensembl	CDS	127187	127554	.	-	2	ID=CDS:ENSSSAP00000076905;Parent=transcript:ENSSSAT00000110389;protein_id=ENSSSAP00000076905
+15:92946040-93192783	.	intron	127555	128229	.	-	.	Parent=transcript:ENSSSAT00000110389
+15:92946040-93192783	ensembl	CDS	128230	128671	.	-	0	ID=CDS:ENSSSAP00000076905;Parent=transcript:ENSSSAT00000110389;protein_id=ENSSSAP00000076905
+15:92946040-93192783	ensembl	exon	128230	128740	.	-	.	ID=ENSSSAE00000412090;Parent=transcript:ENSSSAT00000110389;Name=ENSSSAE00000412090;constitutive=0;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412090;rank=1;version=1
+15:92946040-93192783	.	start_codon	128669	128671	.	-	.	Parent=transcript:ENSSSAT00000110389
+15:92946040-93192783	ensembl	five_prime_UTR	128672	128740	.	-	.	ID=five_prime_utr-30;Parent=transcript:ENSSSAT00000110389
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	126616	128740	.	-	.	ID=transcript:ENSSSAT00000110389;Name=hoxc4ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110389;version=1;matches_ref_protein=False;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	three_prime_UTR	126616	127186	.	-	.	ID=three_prime_UTR_12;Parent=transcript:ENSSSAT00000110389;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	126616	127554	.	-	.	ID=exon_56;Parent=transcript:ENSSSAT00000110389;Name=ENSSSAE00000412101;constitutive=0;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412101;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	127187	127189	.	-	.	Parent=transcript:ENSSSAT00000110389
+15:92946040-93192783	Liftoff	CDS	127187	127554	.	-	2	ID=CDS:ENSSSAP00000076905;Parent=transcript:ENSSSAT00000110389;protein_id=ENSSSAP00000076905;extra_copy_number=0
+15:92946040-93192783	.	intron	127555	128229	.	-	.	Parent=transcript:ENSSSAT00000110389
+15:92946040-93192783	Liftoff	CDS	128230	128671	.	-	0	ID=CDS:ENSSSAP00000076905;Parent=transcript:ENSSSAT00000110389;protein_id=ENSSSAP00000076905;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	128230	128740	.	-	.	ID=exon_57;Parent=transcript:ENSSSAT00000110389;Name=ENSSSAE00000412090;constitutive=0;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412090;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	128669	128671	.	-	.	Parent=transcript:ENSSSAT00000110389
+15:92946040-93192783	Liftoff	five_prime_UTR	128672	128740	.	-	.	ID=five_prime_UTR_25;Parent=transcript:ENSSSAT00000110389;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference  exons
+     |    2 prediction exons
+     |    Exon structures match perfectly!
+     |
+     |  UTR structure comparison
+     |    2 reference  UTR segments
+     |    2 prediction UTR segments
+     |    UTR structures match perfectly!
+     |
+     |    Gene structures match perfectly!
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110393
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110393
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	155411	157179	.	-	.	ID=transcript:ENSSSAT00000110393;Name=hoxc5ab-203;biotype=protein_coding;transcript_id=ENSSSAT00000110393;version=2
+15:92946040-93192783	ensembl	three_prime_UTR	155411	155434	.	-	.	ID=three_prime_utr-26;Parent=transcript:ENSSSAT00000110393
+15:92946040-93192783	ensembl	exon	155411	155652	.	-	.	ID=ENSSSAE00000412111;Parent=transcript:ENSSSAT00000110393;Name=ENSSSAE00000412111;constitutive=0;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412111;rank=2;version=1
+15:92946040-93192783	.	stop_codon	155435	155437	.	-	.	Parent=transcript:ENSSSAT00000110393
+15:92946040-93192783	ensembl	CDS	155435	155652	.	-	2	ID=CDS:ENSSSAP00000076909;Parent=transcript:ENSSSAT00000110393;protein_id=ENSSSAP00000076909
+15:92946040-93192783	.	intron	155653	156676	.	-	.	Parent=transcript:ENSSSAT00000110393
+15:92946040-93192783	ensembl	CDS	156677	157163	.	-	0	ID=CDS:ENSSSAP00000076909;Parent=transcript:ENSSSAT00000110393;protein_id=ENSSSAP00000076909
+15:92946040-93192783	ensembl	exon	156677	157179	.	-	.	ID=ENSSSAE00000412107;Parent=transcript:ENSSSAT00000110393;Name=ENSSSAE00000412107;constitutive=0;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412107;rank=1;version=1
+15:92946040-93192783	.	start_codon	157161	157163	.	-	.	Parent=transcript:ENSSSAT00000110393
+15:92946040-93192783	ensembl	five_prime_UTR	157164	157179	.	-	.	ID=five_prime_utr-31;Parent=transcript:ENSSSAT00000110393
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	155411	157179	.	-	.	ID=transcript:ENSSSAT00000110393;Name=hoxc4ab-202;biotype=protein_coding;transcript_id=ENSSSAT00000110393;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	three_prime_UTR	155411	155434	.	-	.	ID=three_prime_UTR_13;Parent=transcript:ENSSSAT00000110393;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	155411	155652	.	-	.	ID=exon_58;Parent=transcript:ENSSSAT00000110393;Name=ENSSSAE00000412111;constitutive=0;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412111;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	155435	155437	.	-	.	Parent=transcript:ENSSSAT00000110393
+15:92946040-93192783	Liftoff	CDS	155435	155652	.	-	2	ID=CDS:ENSSSAP00000076909;Parent=transcript:ENSSSAT00000110393;protein_id=ENSSSAP00000076909;extra_copy_number=0
+15:92946040-93192783	.	intron	155653	156676	.	-	.	Parent=transcript:ENSSSAT00000110393
+15:92946040-93192783	Liftoff	CDS	156677	157163	.	-	0	ID=CDS:ENSSSAP00000076909;Parent=transcript:ENSSSAT00000110393;protein_id=ENSSSAP00000076909;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	156677	157179	.	-	.	ID=exon_59;Parent=transcript:ENSSSAT00000110393;Name=ENSSSAE00000412107;constitutive=0;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412107;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	157161	157163	.	-	.	Parent=transcript:ENSSSAT00000110393
+15:92946040-93192783	Liftoff	five_prime_UTR	157164	157179	.	-	.	ID=five_prime_UTR_26;Parent=transcript:ENSSSAT00000110393;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference  exons
+     |    2 prediction exons
+     |    Exon structures match perfectly!
+     |
+     |  UTR structure comparison
+     |    2 reference  UTR segments
+     |    2 prediction UTR segments
+     |    UTR structures match perfectly!
+     |
+     |    Gene structures match perfectly!
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--- Unmatched reference transcripts ---
+     |---------------------------------------
+     |
+     |    transcript:ENSSSAT00000234224
+     |
+
+|-------------------------------------------------
+|---- Locus: seqid=15:92946040-93192783 range=158990-167122
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000065777
+|
+|  prediction genes:
+|    gene:ENSSSAG00000065777
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000245752
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110410
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	158990	160844	.	-	.	ID=transcript:ENSSSAT00000245752;Name=hoxc6a-201;biotype=protein_coding;transcript_id=ENSSSAT00000245752;version=1
+15:92946040-93192783	ensembl	three_prime_UTR	158990	158990	.	-	.	ID=three_prime_utr-27;Parent=transcript:ENSSSAT00000245752
+15:92946040-93192783	ensembl	exon	158990	159274	.	-	.	ID=ENSSSAE00000412172;Parent=transcript:ENSSSAT00000245752;Name=ENSSSAE00000412172;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412172;rank=2;version=1
+15:92946040-93192783	.	stop_codon	158991	158993	.	-	.	Parent=transcript:ENSSSAT00000245752
+15:92946040-93192783	ensembl	CDS	158991	159274	.	-	2	ID=CDS:ENSSSAP00000124573;Parent=transcript:ENSSSAT00000245752;protein_id=ENSSSAP00000124573
+15:92946040-93192783	.	intron	159275	159830	.	-	.	Parent=transcript:ENSSSAT00000245752
+15:92946040-93192783	ensembl	CDS	159831	160233	.	-	0	ID=CDS:ENSSSAP00000124573;Parent=transcript:ENSSSAT00000245752;protein_id=ENSSSAP00000124573
+15:92946040-93192783	ensembl	exon	159831	160844	.	-	.	ID=ENSSSAE00000723524;Parent=transcript:ENSSSAT00000245752;Name=ENSSSAE00000723524;constitutive=0;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000723524;rank=1;version=1
+15:92946040-93192783	.	start_codon	160231	160233	.	-	.	Parent=transcript:ENSSSAT00000245752
+15:92946040-93192783	ensembl	five_prime_UTR	160234	160844	.	-	.	ID=five_prime_utr-32;Parent=transcript:ENSSSAT00000245752
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	158990	160233	.	-	.	ID=transcript:ENSSSAT00000110410;Name=hoxc6ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110410;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	three_prime_UTR	158990	158990	.	-	.	ID=three_prime_UTR_14;Parent=transcript:ENSSSAT00000110410;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	158990	159274	.	-	.	ID=exon_61;Parent=transcript:ENSSSAT00000110410;Name=ENSSSAE00000412172;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412172;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	158991	158993	.	-	.	Parent=transcript:ENSSSAT00000110410
+15:92946040-93192783	Liftoff	CDS	158991	159274	.	-	2	ID=CDS:ENSSSAP00000076921;Parent=transcript:ENSSSAT00000110410;protein_id=ENSSSAP00000076921;extra_copy_number=0
+15:92946040-93192783	.	intron	159275	159830	.	-	.	Parent=transcript:ENSSSAT00000110410
+15:92946040-93192783	Liftoff	exon	159831	160233	.	-	.	ID=exon_62;Parent=transcript:ENSSSAT00000110410;Name=ENSSSAE00000412167;constitutive=1;ensembl_end_phase=1;ensembl_phase=0;exon_id=ENSSSAE00000412167;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	159831	160233	.	-	0	ID=CDS:ENSSSAP00000076921;Parent=transcript:ENSSSAT00000110410;protein_id=ENSSSAP00000076921;extra_copy_number=0
+15:92946040-93192783	.	start_codon	160231	160233	.	-	.	Parent=transcript:ENSSSAT00000110410
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference exons
+     |        1 match prediction
+     |        1 don't match prediction
+     |    2 prediction exons
+     |        1 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.500     
+     |    Annotation edit distance:      0.500     
+     |
+     |  UTR structure comparison
+     |    2 reference UTR segments
+     |        1 match prediction
+     |        1 don't match prediction
+     |    1 prediction UTR segments
+     |        1 match reference
+     |        0 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   1.000     
+     |    F1 Score:                      0.667     
+     |    Annotation edit distance:      0.250     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.925      0.925
+     |    Correlation coefficient:       1.000      0.039      --        
+     |    Sensitivity:                   1.000      0.002      --        
+     |    Specificity:                   1.000      1.000      --        
+     |    F1 Score:                      1.000      0.003      --        
+     |    Annotation edit distance:      0.000      0.499      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--- Unmatched reference transcripts ---
+     |---------------------------------------
+     |
+     |    transcript:ENSSSAT00000110410
+     |
+
+|-------------------------------------------------
+|---- Locus: seqid=15:92946040-93192783 range=177412-181176
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000065782
+|
+|  prediction genes:
+|    gene:ENSSSAG00000065782
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110421
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110421
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	177412	181176	.	-	.	ID=transcript:ENSSSAT00000110421;Name=hoxc8ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110421;version=2
+15:92946040-93192783	ensembl	three_prime_UTR	177412	178758	.	-	.	ID=three_prime_utr-29;Parent=transcript:ENSSSAT00000110421
+15:92946040-93192783	ensembl	exon	177412	179084	.	-	.	ID=ENSSSAE00001056275;Parent=transcript:ENSSSAT00000110421;Name=ENSSSAE00001056275;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00001056275;rank=2;version=1
+15:92946040-93192783	.	stop_codon	178759	178761	.	-	.	Parent=transcript:ENSSSAT00000110421
+15:92946040-93192783	ensembl	CDS	178759	179084	.	-	2	ID=CDS:ENSSSAP00000076931;Parent=transcript:ENSSSAT00000110421;protein_id=ENSSSAP00000076931
+15:92946040-93192783	.	intron	179085	180384	.	-	.	Parent=transcript:ENSSSAT00000110421
+15:92946040-93192783	ensembl	CDS	180385	180820	.	-	0	ID=CDS:ENSSSAP00000076931;Parent=transcript:ENSSSAT00000110421;protein_id=ENSSSAP00000076931
+15:92946040-93192783	ensembl	exon	180385	181176	.	-	.	ID=ENSSSAE00000412214;Parent=transcript:ENSSSAT00000110421;Name=ENSSSAE00000412214;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412214;rank=1;version=2
+15:92946040-93192783	.	start_codon	180818	180820	.	-	.	Parent=transcript:ENSSSAT00000110421
+15:92946040-93192783	ensembl	five_prime_UTR	180821	181176	.	-	.	ID=five_prime_utr-34;Parent=transcript:ENSSSAT00000110421
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	178469	181126	.	-	.	ID=transcript:ENSSSAT00000110421;Name=hoxc8ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110421;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	three_prime_UTR	178469	178758	.	-	.	ID=three_prime_UTR_15;Parent=transcript:ENSSSAT00000110421;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	178469	179090	.	-	.	ID=exon_63;Parent=transcript:ENSSSAT00000110421;Name=ENSSSAE00000412223;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412223;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	178759	178761	.	-	.	Parent=transcript:ENSSSAT00000110421
+15:92946040-93192783	Liftoff	CDS	178759	179090	.	-	2	ID=CDS:ENSSSAP00000076931;Parent=transcript:ENSSSAT00000110421;protein_id=ENSSSAP00000076931;extra_copy_number=0
+15:92946040-93192783	.	intron	179091	180384	.	-	.	Parent=transcript:ENSSSAT00000110421
+15:92946040-93192783	Liftoff	CDS	180385	180820	.	-	0	ID=CDS:ENSSSAP00000076931;Parent=transcript:ENSSSAT00000110421;protein_id=ENSSSAP00000076931;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	180385	181126	.	-	.	ID=exon_64;Parent=transcript:ENSSSAT00000110421;Name=ENSSSAE00000412214;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412214;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	180818	180820	.	-	.	Parent=transcript:ENSSSAT00000110421
+15:92946040-93192783	Liftoff	five_prime_UTR	180821	181126	.	-	.	ID=five_prime_UTR_27;Parent=transcript:ENSSSAT00000110421;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference CDS segments
+     |        1 match prediction
+     |        1 don't match prediction
+     |    2 prediction CDS segments
+     |        1 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.500     
+     |    Annotation edit distance:      0.500     
+     |
+     |  Exon structure comparison
+     |    2 reference exons
+     |        0 match prediction
+     |        2 don't match prediction
+     |    2 prediction exons
+     |        0 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  UTR structure comparison
+     |    2 reference UTR segments
+     |        0 match prediction
+     |        2 don't match prediction
+     |    2 prediction UTR segments
+     |        0 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          0.998      0.706      0.704
+     |    Correlation coefficient:       0.995      0.477      --        
+     |    Sensitivity:                   1.000      0.350      --        
+     |    Specificity:                   0.992      1.000      --        
+     |    F1 Score:                      0.996      0.518      --        
+     |    Annotation edit distance:      0.004      0.325      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+|-------------------------------------------------
+|---- Locus: seqid=15:92946040-93192783 range=183942-202839
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000065789
+|    gene:ENSSSAG00000116370
+|
+|  prediction genes:
+|    gene:ENSSSAG00000065789
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110437
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110437
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	185650	187778	.	-	.	ID=transcript:ENSSSAT00000110437;Name=hoxc9ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110437;version=2
+15:92946040-93192783	ensembl	three_prime_UTR	185650	185776	.	-	.	ID=three_prime_utr-30;Parent=transcript:ENSSSAT00000110437
+15:92946040-93192783	ensembl	exon	185650	186024	.	-	.	ID=ENSSSAE00000412299;Parent=transcript:ENSSSAT00000110437;Name=ENSSSAE00000412299;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412299;rank=2;version=1
+15:92946040-93192783	.	stop_codon	185777	185779	.	-	.	Parent=transcript:ENSSSAT00000110437
+15:92946040-93192783	ensembl	CDS	185777	186024	.	-	2	ID=CDS:ENSSSAP00000076947;Parent=transcript:ENSSSAT00000110437;protein_id=ENSSSAP00000076947
+15:92946040-93192783	.	intron	186025	187041	.	-	.	Parent=transcript:ENSSSAT00000110437
+15:92946040-93192783	ensembl	CDS	187042	187582	.	-	0	ID=CDS:ENSSSAP00000076947;Parent=transcript:ENSSSAT00000110437;protein_id=ENSSSAP00000076947
+15:92946040-93192783	ensembl	exon	187042	187778	.	-	.	ID=ENSSSAE00000412295;Parent=transcript:ENSSSAT00000110437;Name=ENSSSAE00000412295;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412295;rank=1;version=1
+15:92946040-93192783	.	start_codon	187580	187582	.	-	.	Parent=transcript:ENSSSAT00000110437
+15:92946040-93192783	ensembl	five_prime_UTR	187583	187778	.	-	.	ID=five_prime_utr-35;Parent=transcript:ENSSSAT00000110437
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	185650	187778	.	-	.	ID=transcript:ENSSSAT00000110437;Name=hoxc10ab-202;biotype=protein_coding;transcript_id=ENSSSAT00000110437;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	three_prime_UTR	185650	185776	.	-	.	ID=three_prime_UTR_17;Parent=transcript:ENSSSAT00000110437;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	185650	186024	.	-	.	ID=exon_67;Parent=transcript:ENSSSAT00000110437;Name=ENSSSAE00000412299;constitutive=0;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412299;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	185777	185779	.	-	.	Parent=transcript:ENSSSAT00000110437
+15:92946040-93192783	Liftoff	CDS	185777	186024	.	-	2	ID=CDS:ENSSSAP00000076947;Parent=transcript:ENSSSAT00000110437;protein_id=ENSSSAP00000076947;extra_copy_number=0
+15:92946040-93192783	.	intron	186025	187041	.	-	.	Parent=transcript:ENSSSAT00000110437
+15:92946040-93192783	Liftoff	CDS	187042	187582	.	-	0	ID=CDS:ENSSSAP00000076947;Parent=transcript:ENSSSAT00000110437;protein_id=ENSSSAP00000076947;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	187042	187778	.	-	.	ID=exon_68;Parent=transcript:ENSSSAT00000110437;Name=ENSSSAE00000412295;constitutive=0;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412295;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	187580	187582	.	-	.	Parent=transcript:ENSSSAT00000110437
+15:92946040-93192783	Liftoff	five_prime_UTR	187583	187778	.	-	.	ID=five_prime_UTR_28;Parent=transcript:ENSSSAT00000110437;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference  exons
+     |    2 prediction exons
+     |    Exon structures match perfectly!
+     |
+     |  UTR structure comparison
+     |    2 reference  UTR segments
+     |    2 prediction UTR segments
+     |    UTR structures match perfectly!
+     |
+     |    Gene structures match perfectly!
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110439
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110439
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	198714	202839	.	-	.	ID=transcript:ENSSSAT00000110439;Name=hoxc10ab-202;biotype=protein_coding;transcript_id=ENSSSAT00000110439;version=2
+15:92946040-93192783	ensembl	three_prime_UTR	198714	198942	.	-	.	ID=three_prime_utr-32;Parent=transcript:ENSSSAT00000110439
+15:92946040-93192783	ensembl	exon	198714	199223	.	-	.	ID=ENSSSAE00000412317;Parent=transcript:ENSSSAT00000110439;Name=ENSSSAE00000412317;constitutive=0;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412317;rank=2;version=2
+15:92946040-93192783	.	stop_codon	198943	198945	.	-	.	Parent=transcript:ENSSSAT00000110439
+15:92946040-93192783	ensembl	CDS	198943	199223	.	-	2	ID=CDS:ENSSSAP00000076949;Parent=transcript:ENSSSAT00000110439;protein_id=ENSSSAP00000076949
+15:92946040-93192783	.	intron	199224	201931	.	-	.	Parent=transcript:ENSSSAT00000110439
+15:92946040-93192783	ensembl	CDS	201932	202676	.	-	0	ID=CDS:ENSSSAP00000076949;Parent=transcript:ENSSSAT00000110439;protein_id=ENSSSAP00000076949
+15:92946040-93192783	ensembl	exon	201932	202839	.	-	.	ID=nbis-exon-25;Parent=transcript:ENSSSAT00000110439;Name=ENSSSAE00000412316;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412316;rank=1;version=1
+15:92946040-93192783	.	start_codon	202674	202676	.	-	.	Parent=transcript:ENSSSAT00000110439
+15:92946040-93192783	ensembl	five_prime_UTR	202677	202839	.	-	.	ID=five_prime_utr-37;Parent=transcript:ENSSSAT00000110439
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	198714	202839	.	-	.	ID=transcript:ENSSSAT00000110439;Name=hoxc10ab-203;biotype=protein_coding;transcript_id=ENSSSAT00000110439;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	three_prime_UTR	198714	198942	.	-	.	ID=three_prime_UTR_18;Parent=transcript:ENSSSAT00000110439;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	198714	199223	.	-	.	ID=exon_69;Parent=transcript:ENSSSAT00000110439;Name=ENSSSAE00000412317;constitutive=0;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412317;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	198943	198945	.	-	.	Parent=transcript:ENSSSAT00000110439
+15:92946040-93192783	Liftoff	CDS	198943	199223	.	-	2	ID=CDS:ENSSSAP00000076949;Parent=transcript:ENSSSAT00000110439;protein_id=ENSSSAP00000076949;extra_copy_number=0
+15:92946040-93192783	.	intron	199224	201931	.	-	.	Parent=transcript:ENSSSAT00000110439
+15:92946040-93192783	Liftoff	CDS	201932	202676	.	-	0	ID=CDS:ENSSSAP00000076949;Parent=transcript:ENSSSAT00000110439;protein_id=ENSSSAP00000076949;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	201932	202839	.	-	.	ID=exon_70;Parent=transcript:ENSSSAT00000110439;Name=ENSSSAE00000412316;constitutive=0;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412316;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	202674	202676	.	-	.	Parent=transcript:ENSSSAT00000110439
+15:92946040-93192783	Liftoff	five_prime_UTR	202677	202839	.	-	.	ID=five_prime_UTR_29;Parent=transcript:ENSSSAT00000110439;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference  exons
+     |    2 prediction exons
+     |    Exon structures match perfectly!
+     |
+     |  UTR structure comparison
+     |    2 reference  UTR segments
+     |    2 prediction UTR segments
+     |    UTR structures match perfectly!
+     |
+     |    Gene structures match perfectly!
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110436
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110436
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	198325	202839	.	-	.	ID=transcript:ENSSSAT00000110436;Name=hoxc10ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110436;version=2
+15:92946040-93192783	ensembl	three_prime_UTR	198325	198326	.	-	.	ID=three_prime_utr-31;Parent=transcript:ENSSSAT00000110436
+15:92946040-93192783	ensembl	exon	198325	198405	.	-	.	ID=ENSSSAE00001083913;Parent=transcript:ENSSSAT00000110436;Name=ENSSSAE00001083913;constitutive=0;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00001083913;rank=3;version=1
+15:92946040-93192783	.	stop_codon	198327	198329	.	-	.	Parent=transcript:ENSSSAT00000110436
+15:92946040-93192783	ensembl	CDS	198327	198405	.	-	1	ID=CDS:ENSSSAP00000076946;Parent=transcript:ENSSSAT00000110436;protein_id=ENSSSAP00000076946
+15:92946040-93192783	.	intron	198406	199102	.	-	.	Parent=transcript:ENSSSAT00000110436
+15:92946040-93192783	ensembl	exon	199103	199223	.	-	.	ID=ENSSSAE00000873305;Parent=transcript:ENSSSAT00000110436;Name=ENSSSAE00000873305;constitutive=0;ensembl_end_phase=2;ensembl_phase=1;exon_id=ENSSSAE00000873305;rank=2;version=1
+15:92946040-93192783	ensembl	CDS	199103	199223	.	-	2	ID=CDS:ENSSSAP00000076946;Parent=transcript:ENSSSAT00000110436;protein_id=ENSSSAP00000076946
+15:92946040-93192783	ensembl	CDS	201932	202676	.	-	0	ID=CDS:ENSSSAP00000076946;Parent=transcript:ENSSSAT00000110436;protein_id=ENSSSAP00000076946
+15:92946040-93192783	ensembl	exon	201932	202839	.	-	.	ID=ENSSSAE00000412316;Parent=transcript:ENSSSAT00000110436;Name=ENSSSAE00000412316;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412316;rank=1;version=1
+15:92946040-93192783	.	start_codon	202674	202676	.	-	.	Parent=transcript:ENSSSAT00000110436
+15:92946040-93192783	ensembl	five_prime_UTR	202677	202839	.	-	.	ID=five_prime_utr-36;Parent=transcript:ENSSSAT00000110436
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	183942	202676	.	-	.	ID=transcript:ENSSSAT00000110436;Name=hoxc10ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110436;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	three_prime_UTR	183942	185776	.	-	.	ID=three_prime_UTR_16;Parent=transcript:ENSSSAT00000110436;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	183942	186024	.	-	.	ID=exon_65;Parent=transcript:ENSSSAT00000110436;Name=ENSSSAE00000412284;constitutive=0;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412284;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	185777	185779	.	-	.	Parent=transcript:ENSSSAT00000110436
+15:92946040-93192783	Liftoff	CDS	185777	186024	.	-	2	ID=CDS:ENSSSAP00000076946;Parent=transcript:ENSSSAT00000110436;protein_id=ENSSSAP00000076946;extra_copy_number=0
+15:92946040-93192783	.	intron	186025	201931	.	-	.	Parent=transcript:ENSSSAT00000110436
+15:92946040-93192783	Liftoff	exon	201932	202676	.	-	.	ID=exon_66;Parent=transcript:ENSSSAT00000110436;Name=ENSSSAE00000412283;constitutive=0;ensembl_end_phase=1;ensembl_phase=0;exon_id=ENSSSAE00000412283;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	201932	202676	.	-	0	ID=CDS:ENSSSAP00000076946;Parent=transcript:ENSSSAT00000110436;protein_id=ENSSSAP00000076946;extra_copy_number=0
+15:92946040-93192783	.	start_codon	202674	202676	.	-	.	Parent=transcript:ENSSSAT00000110436
+###
+ |
+     |  CDS structure comparison
+     |    3 reference CDS segments
+     |        1 match prediction
+     |        2 don't match prediction
+     |    2 prediction CDS segments
+     |        1 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.333     
+     |    Specificity:                   0.500     
+     |    F1 Score:                      0.400     
+     |    Annotation edit distance:      0.583     
+     |
+     |  Exon structure comparison
+     |    3 reference exons
+     |        0 match prediction
+     |        3 don't match prediction
+     |    2 prediction exons
+     |        0 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  UTR structure comparison
+     |    2 reference UTR segments
+     |        0 match prediction
+     |        2 don't match prediction
+     |    1 prediction UTR segments
+     |        0 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          0.976      0.894      0.220
+     |    Correlation coefficient:       0.757      -0.031     --        
+     |    Sensitivity:                   0.788      0.000      --        
+     |    Specificity:                   0.750      0.000      --        
+     |    F1 Score:                      0.769      --         --        
+     |    Annotation edit distance:      0.231      1.000      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+|-------------------------------------------------
+|---- Locus: seqid=15:92946040-93192783 range=211692-215972
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000065795
+|
+|  prediction genes:
+|    gene:ENSSSAG00000065795
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110454
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110454
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	212548	215972	.	-	.	ID=transcript:ENSSSAT00000110454;Name=hoxc11a-201;biotype=protein_coding;transcript_id=ENSSSAT00000110454;version=2
+15:92946040-93192783	ensembl	three_prime_UTR	212548	212655	.	-	.	ID=three_prime_utr-33;Parent=transcript:ENSSSAT00000110454
+15:92946040-93192783	ensembl	exon	212548	212888	.	-	.	ID=ENSSSAE00000577303;Parent=transcript:ENSSSAT00000110454;Name=ENSSSAE00000577303;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000577303;rank=2;version=2
+15:92946040-93192783	.	stop_codon	212656	212658	.	-	.	Parent=transcript:ENSSSAT00000110454
+15:92946040-93192783	ensembl	CDS	212656	212888	.	-	2	ID=CDS:ENSSSAP00000076961;Parent=transcript:ENSSSAT00000110454;protein_id=ENSSSAP00000076961
+15:92946040-93192783	.	intron	212889	214838	.	-	.	Parent=transcript:ENSSSAT00000110454
+15:92946040-93192783	ensembl	CDS	214839	215538	.	-	0	ID=CDS:ENSSSAP00000076961;Parent=transcript:ENSSSAT00000110454;protein_id=ENSSSAP00000076961
+15:92946040-93192783	ensembl	exon	214839	215972	.	-	.	ID=ENSSSAE00000412363;Parent=transcript:ENSSSAT00000110454;Name=ENSSSAE00000412363;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412363;rank=1;version=2
+15:92946040-93192783	.	start_codon	215536	215538	.	-	.	Parent=transcript:ENSSSAT00000110454
+15:92946040-93192783	ensembl	five_prime_UTR	215539	215972	.	-	.	ID=five_prime_utr-38;Parent=transcript:ENSSSAT00000110454
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	211692	215538	.	-	.	ID=transcript:ENSSSAT00000110454;Name=hoxc11ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110454;version=1;matches_ref_protein=False;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	three_prime_UTR	211692	212655	.	-	.	ID=three_prime_UTR_19;Parent=transcript:ENSSSAT00000110454;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	211692	212888	.	-	.	ID=exon_77;Parent=transcript:ENSSSAT00000110454;Name=ENSSSAE00000412375;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412375;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	212656	212658	.	-	.	Parent=transcript:ENSSSAT00000110454
+15:92946040-93192783	Liftoff	CDS	212656	212888	.	-	2	ID=CDS:ENSSSAP00000076961;Parent=transcript:ENSSSAT00000110454;protein_id=ENSSSAP00000076961;extra_copy_number=0
+15:92946040-93192783	.	intron	212889	214838	.	-	.	Parent=transcript:ENSSSAT00000110454
+15:92946040-93192783	Liftoff	exon	214839	215538	.	-	.	ID=exon_78;Parent=transcript:ENSSSAT00000110454;Name=ENSSSAE00000412363;constitutive=1;ensembl_end_phase=1;ensembl_phase=0;exon_id=ENSSSAE00000412363;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	214839	215538	.	-	0	ID=CDS:ENSSSAP00000076961;Parent=transcript:ENSSSAT00000110454;protein_id=ENSSSAP00000076961;extra_copy_number=0
+15:92946040-93192783	.	start_codon	215536	215538	.	-	.	Parent=transcript:ENSSSAT00000110454
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference exons
+     |        0 match prediction
+     |        2 don't match prediction
+     |    2 prediction exons
+     |        0 match reference
+     |        2 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  UTR structure comparison
+     |    2 reference UTR segments
+     |        0 match prediction
+     |        2 don't match prediction
+     |    1 prediction UTR segments
+     |        0 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.000     
+     |    Specificity:                   0.000     
+     |    F1 Score:                      --        
+     |    Annotation edit distance:      1.000     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.699      0.699
+     |    Correlation coefficient:       1.000      -0.024     --        
+     |    Sensitivity:                   1.000      0.199      --        
+     |    Specificity:                   1.000      0.112      --        
+     |    F1 Score:                      1.000      0.143      --        
+     |    Annotation edit distance:      0.000      0.844      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+|-------------------------------------------------
+|---- Locus: seqid=15:92946040-93192783 range=228175-231333
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000065800
+|
+|  prediction genes:
+|    gene:ENSSSAG00000065800
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110460
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110460
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	228175	231333	.	-	.	ID=transcript:ENSSSAT00000110460;Name=hoxc12a-201;biotype=protein_coding;transcript_id=ENSSSAT00000110460;version=2
+15:92946040-93192783	ensembl	three_prime_UTR	228175	228813	.	-	.	ID=three_prime_utr-34;Parent=transcript:ENSSSAT00000110460
+15:92946040-93192783	ensembl	exon	228175	228891	.	-	.	ID=ENSSSAE00000786586;Parent=transcript:ENSSSAT00000110460;Name=ENSSSAE00000786586;constitutive=1;ensembl_end_phase=-1;ensembl_phase=0;exon_id=ENSSSAE00000786586;rank=3;version=1
+15:92946040-93192783	.	stop_codon	228814	228816	.	-	.	Parent=transcript:ENSSSAT00000110460
+15:92946040-93192783	ensembl	CDS	228814	228891	.	-	0	ID=CDS:ENSSSAP00000076967;Parent=transcript:ENSSSAT00000110460;protein_id=ENSSSAP00000076967
+15:92946040-93192783	.	intron	228892	229561	.	-	.	Parent=transcript:ENSSSAT00000110460
+15:92946040-93192783	ensembl	exon	229562	229722	.	-	.	ID=ENSSSAE00000412441;Parent=transcript:ENSSSAT00000110460;Name=ENSSSAE00000412441;constitutive=1;ensembl_end_phase=0;ensembl_phase=1;exon_id=ENSSSAE00000412441;rank=2;version=1
+15:92946040-93192783	ensembl	CDS	229562	229722	.	-	2	ID=CDS:ENSSSAP00000076967;Parent=transcript:ENSSSAT00000110460;protein_id=ENSSSAP00000076967
+15:92946040-93192783	.	intron	229723	230645	.	-	.	Parent=transcript:ENSSSAT00000110460
+15:92946040-93192783	ensembl	CDS	230646	231261	.	-	0	ID=CDS:ENSSSAP00000076967;Parent=transcript:ENSSSAT00000110460;protein_id=ENSSSAP00000076967
+15:92946040-93192783	ensembl	exon	230646	231333	.	-	.	ID=ENSSSAE00000412432;Parent=transcript:ENSSSAT00000110460;Name=ENSSSAE00000412432;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412432;rank=1;version=2
+15:92946040-93192783	.	start_codon	231259	231261	.	-	.	Parent=transcript:ENSSSAT00000110460
+15:92946040-93192783	ensembl	five_prime_UTR	231262	231333	.	-	.	ID=five_prime_utr-39;Parent=transcript:ENSSSAT00000110460
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	228814	231333	.	-	.	ID=transcript:ENSSSAT00000110460;Name=hoxc12ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110460;version=1;matches_ref_protein=False;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	228814	228816	.	-	.	Parent=transcript:ENSSSAT00000110460
+15:92946040-93192783	Liftoff	exon	228814	228891	.	-	.	ID=exon_79;Parent=transcript:ENSSSAT00000110460;Name=ENSSSAE00000412449;constitutive=0;ensembl_end_phase=0;ensembl_phase=0;exon_id=ENSSSAE00000412449;rank=3;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	228814	228891	.	-	0	ID=CDS:ENSSSAP00000076967;Parent=transcript:ENSSSAT00000110460;protein_id=ENSSSAP00000076967;extra_copy_number=0
+15:92946040-93192783	.	intron	228892	229561	.	-	.	Parent=transcript:ENSSSAT00000110460
+15:92946040-93192783	Liftoff	exon	229562	229722	.	-	.	ID=exon_80;Parent=transcript:ENSSSAT00000110460;Name=ENSSSAE00000412441;constitutive=0;ensembl_end_phase=0;ensembl_phase=1;exon_id=ENSSSAE00000412441;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	229562	229722	.	-	2	ID=CDS:ENSSSAP00000076967;Parent=transcript:ENSSSAT00000110460;protein_id=ENSSSAP00000076967;extra_copy_number=0
+15:92946040-93192783	.	intron	229723	230645	.	-	.	Parent=transcript:ENSSSAT00000110460
+15:92946040-93192783	Liftoff	CDS	230646	231261	.	-	0	ID=CDS:ENSSSAP00000076967;Parent=transcript:ENSSSAT00000110460;protein_id=ENSSSAP00000076967;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	230646	231333	.	-	.	ID=exon_81;Parent=transcript:ENSSSAT00000110460;Name=ENSSSAE00000412432;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412432;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	231259	231261	.	-	.	Parent=transcript:ENSSSAT00000110460
+15:92946040-93192783	Liftoff	five_prime_UTR	231262	231333	.	-	.	ID=five_prime_UTR_30;Parent=transcript:ENSSSAT00000110460;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    3 reference  CDS segments
+     |    3 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    3 reference exons
+     |        2 match prediction
+     |        1 don't match prediction
+     |    3 prediction exons
+     |        2 match reference
+     |        1 don't match reference
+     |    Sensitivity:                   0.667     
+     |    Specificity:                   0.667     
+     |    F1 Score:                      0.667     
+     |    Annotation edit distance:      0.333     
+     |
+     |  UTR structure comparison
+     |    2 reference UTR segments
+     |        1 match prediction
+     |        1 don't match prediction
+     |    1 prediction UTR segments
+     |        1 match reference
+     |        0 don't match reference
+     |    Sensitivity:                   0.500     
+     |    Specificity:                   1.000     
+     |    F1 Score:                      0.667     
+     |    Annotation edit distance:      0.250     
+     |
+     |  Nucleotide-level comparison      CDS        UTRs       Overall   
+     |    Matching coefficient:          1.000      0.798      0.798
+     |    Correlation coefficient:       1.000      0.283      --        
+     |    Sensitivity:                   1.000      0.101      --        
+     |    Specificity:                   1.000      1.000      --        
+     |    F1 Score:                      1.000      0.184      --        
+     |    Annotation edit distance:      0.000      0.449      --        
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+     |
+     |--- Unmatched prediction transcripts ---
+     |----------------------------------------
+     |
+     |    transcript:ENSSSAT00000110461
+     |
+
+|-------------------------------------------------
+|---- Locus: seqid=15:92946040-93192783 range=240795-244347
+|-------------------------------------------------
+|
+|  reference genes:
+|    gene:ENSSSAG00000065802
+|
+|  prediction genes:
+|    gene:ENSSSAG00000065802
+|
+|----------
+     |
+     |--------------------------
+     |---- Begin comparison ----
+     |--------------------------
+     |
+     |  reference transcripts:
+     |    transcript:ENSSSAT00000110464
+     |  prediction transcripts:
+     |    transcript:ENSSSAT00000110464
+     |
+     | reference GFF3:
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	240795	244347	.	-	.	ID=transcript:ENSSSAT00000110464;Name=hoxc13ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110464;version=2
+15:92946040-93192783	ensembl	three_prime_UTR	240795	240941	.	-	.	ID=three_prime_utr-35;Parent=transcript:ENSSSAT00000110464
+15:92946040-93192783	ensembl	exon	240795	241201	.	-	.	ID=ENSSSAE00000412488;Parent=transcript:ENSSSAT00000110464;Name=ENSSSAE00000412488;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412488;rank=2;version=1
+15:92946040-93192783	.	stop_codon	240942	240944	.	-	.	Parent=transcript:ENSSSAT00000110464
+15:92946040-93192783	ensembl	CDS	240942	241201	.	-	2	ID=CDS:ENSSSAP00000076971;Parent=transcript:ENSSSAT00000110464;protein_id=ENSSSAP00000076971
+15:92946040-93192783	.	intron	241202	243342	.	-	.	Parent=transcript:ENSSSAT00000110464
+15:92946040-93192783	ensembl	CDS	243343	244006	.	-	0	ID=CDS:ENSSSAP00000076971;Parent=transcript:ENSSSAT00000110464;protein_id=ENSSSAP00000076971
+15:92946040-93192783	ensembl	exon	243343	244347	.	-	.	ID=ENSSSAE00000412483;Parent=transcript:ENSSSAT00000110464;Name=ENSSSAE00000412483;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412483;rank=1;version=2
+15:92946040-93192783	.	start_codon	244004	244006	.	-	.	Parent=transcript:ENSSSAT00000110464
+15:92946040-93192783	ensembl	five_prime_UTR	244007	244347	.	-	.	ID=five_prime_utr-40;Parent=transcript:ENSSSAT00000110464
+###
+     | prediction GFF3:
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	240795	244347	.	-	.	ID=transcript:ENSSSAT00000110464;Name=hoxc13ab-201;biotype=protein_coding;transcript_id=ENSSSAT00000110464;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	three_prime_UTR	240795	240941	.	-	.	ID=three_prime_UTR_21;Parent=transcript:ENSSSAT00000110464;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	240795	241201	.	-	.	ID=exon_84;Parent=transcript:ENSSSAT00000110464;Name=ENSSSAE00000412488;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000412488;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	240942	240944	.	-	.	Parent=transcript:ENSSSAT00000110464
+15:92946040-93192783	Liftoff	CDS	240942	241201	.	-	2	ID=CDS:ENSSSAP00000076971;Parent=transcript:ENSSSAT00000110464;protein_id=ENSSSAP00000076971;extra_copy_number=0
+15:92946040-93192783	.	intron	241202	243342	.	-	.	Parent=transcript:ENSSSAT00000110464
+15:92946040-93192783	Liftoff	CDS	243343	244006	.	-	0	ID=CDS:ENSSSAP00000076971;Parent=transcript:ENSSSAT00000110464;protein_id=ENSSSAP00000076971;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	243343	244347	.	-	.	ID=exon_85;Parent=transcript:ENSSSAT00000110464;Name=ENSSSAE00000412483;constitutive=1;ensembl_end_phase=1;ensembl_phase=-1;exon_id=ENSSSAE00000412483;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	244004	244006	.	-	.	Parent=transcript:ENSSSAT00000110464
+15:92946040-93192783	Liftoff	five_prime_UTR	244007	244347	.	-	.	ID=five_prime_UTR_32;Parent=transcript:ENSSSAT00000110464;extra_copy_number=0
+###
+ |
+     |  CDS structure comparison
+     |    2 reference  CDS segments
+     |    2 prediction CDS segments
+     |    CDS structures match perfectly!
+     |
+     |  Exon structure comparison
+     |    2 reference  exons
+     |    2 prediction exons
+     |    Exon structures match perfectly!
+     |
+     |  UTR structure comparison
+     |    2 reference  UTR segments
+     |    2 prediction UTR segments
+     |    UTR structures match perfectly!
+     |
+     |    Gene structures match perfectly!
+     |
+     |
+     |--------------------------
+     |----- End comparison -----
+     |--------------------------
+
+============================================================
+========== ParsEval Summary
+============================================================
+
+Started:                17 Sep 2025, 02:43PM
+Reference annotations:  data/toy-assemblies/Ssal_v3.1_hoxca_Ens.gff
+Prediction annotations: experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff
+Executing command:      parseval -f text -o experiments/parseval_test/parseval.txt -w data/toy-assemblies/Ssal_v3.1_hoxca_Ens.gff experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff 
+
+  Sequences compared
+    13:41179690-41398770
+    15:92946040-93192783
+
+  Gene loci................................17
+    shared.................................17
+    unique to reference....................0
+    unique to prediction...................0
+
+  Reference annotations
+    genes..................................21
+      average per locus....................1.235
+    transcripts............................28
+      average per locus....................1.647
+      average per gene.....................1.333
+
+  Prediction annotations
+    genes..................................20
+      average per locus....................1.176
+    transcripts............................28
+      average per locus....................1.647
+      average per gene.....................1.400
+
+  Total comparisons........................24
+    perfect matches........................9 (37.5%)
+      avg. length..........................19100.22 bp
+      avg. # refr exons....................2.00
+      avg. # pred exons....................2.00
+      avg. refr CDS length.................281.44 aa
+      avg. pred CDS length.................281.44 aa
+    perfect matches with mislabeled UTRs...0 (0.0%)
+    CDS structure matches..................10 (41.7%)
+      avg. length..........................11262.70 bp
+      avg. # refr exons....................3.50
+      avg. # pred exons....................3.10
+      avg. refr CDS length.................293.30 aa
+      avg. pred CDS length.................293.30 aa
+    exon structure matches.................0 (0.0%)
+    UTR structure matches..................0 (0.0%)
+    non-matches............................5 (20.8%)
+      avg. length..........................19934.00 bp
+      avg. # refr exons....................5.40
+      avg. # pred exons....................3.60
+      avg. refr CDS length.................277.20 aa
+      avg. pred CDS length.................239.80 aa
+
+  CDS structure comparison
+    reference CDS segments.................68
+      match prediction.....................47 (69.1%)
+      don't match prediction...............21 (30.9%)
+    prediction CDS segments................62
+      match reference......................47 (75.8%)
+      don't match reference................15 (24.2%)
+    Sensitivity............................0.691
+    Specificity............................0.758
+    F1 Score...............................0.723
+    Annotation edit distance...............0.275
+
+  Exon structure comparison
+    reference exons........................80
+      match prediction.....................35 (43.8%)
+      don't match prediction...............45 (56.2%)
+    prediction exons.......................67
+      match reference......................35 (52.2%)
+      don't match reference................32 (47.8%)
+    Sensitivity............................0.438
+    Specificity............................0.522
+    F1 Score...............................0.476
+    Annotation edit distance...............0.520
+
+  UTR structure comparison
+    reference UTR segments.................60
+      match prediction.....................28 (46.7%)
+      don't match prediction...............32 (53.3%)
+    prediction UTR segments................44
+      match reference......................28 (63.6%)
+      don't match reference................16 (36.4%)
+    Sensitivity............................0.467
+    Specificity............................0.636
+    F1 Score...............................0.538
+    Annotation edit distance...............0.448
+
+  Nucleotide-level comparison      CDS          UTRs         Overall   
+    Matching coefficient:          0.988        0.925        0.844
+    Correlation coefficient:       0.877        0.305        --        
+    Sensitivity:                   0.871        0.186        --        
+    Specificity:                   0.895        0.596        --        
+    F1 Score:                      0.883        0.284        --        
+    Annotation edit distance:      0.117        0.609        --        
