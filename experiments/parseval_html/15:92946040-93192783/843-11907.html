@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ParsEval: Locus at 15:92946040-93192783[843, 11907]</title>
+    <link rel="stylesheet" type="text/css" href="../parseval.css" />
+    <script type="text/javascript" src="../vendor/mootools-core-1.3.2-full-nocompat-yc.js"></script>
+    <script type="text/javascript" src="../vendor/mootools-more-1.3.2.1.js"></script>
+    <script type="text/javascript">
+window.addEvent('domready', function() {
+  var status =
+  {
+    'true': "(hide details)",
+    'false': "(show details)",
+  }
+  var compareWrapper0 = new Fx.Slide('compare_wrapper_0');
+  compareWrapper0.hide();
+  $('toggle_compare_0').addEvent('click', function(event){
+    event.stop();
+    compareWrapper0.toggle();
+  });
+  compareWrapper0.addEvent('complete', function() {
+    $('toggle_compare_0').set('text', status[compareWrapper0.open]);
+  });
+  var compareWrapper1 = new Fx.Slide('compare_wrapper_1');
+  compareWrapper1.hide();
+  $('toggle_compare_1').addEvent('click', function(event){
+    event.stop();
+    compareWrapper1.toggle();
+  });
+  compareWrapper1.addEvent('complete', function() {
+    $('toggle_compare_1').set('text', status[compareWrapper1.open]);
+  });
+  var compareWrapper2 = new Fx.Slide('compare_wrapper_2');
+  compareWrapper2.hide();
+  $('toggle_compare_2').addEvent('click', function(event){
+    event.stop();
+    compareWrapper2.toggle();
+  });
+  compareWrapper2.addEvent('complete', function() {
+    $('toggle_compare_2').set('text', status[compareWrapper2.open]);
+  });
+});
+    </script>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Locus at 15:92946040-93192783[843, 11907]</h1>
+      <p><a href="index.html">⇐ Back to 15:92946040-93192783 loci</a></p>
+
+      <h2>Gene annotations</h2>
+      <table>
+        <tr><th>Reference</th><th>Prediction</th></tr>
+        <tr><td>gene:ENSSSAG00000065715</td><td>gene:ENSSSAG00000065738</td></tr>
+        <tr><td>gene:ENSSSAG00000110153</td><td>&nbsp;</td></tr>
+      </table>
+
+      <div class='graphic'>
+        <a href='15:92946040-93192783_843-11907.png'><img src='15:92946040-93192783_843-11907.png' /></a>
+      </div>
+
+      <h2 class="bottomspace">Comparison(s)</h2>
+      <h3 class="compare-header">Comparison<a id="toggle_compare_0" href="#">(show details)</a></h3>
+      <div id="compare_wrapper_0"class="compare-wrapper">
+        <h3>Reference GFF3</h3>
+        <pre class="gff3 refr">
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	5536	11907	.	+	.	ID=transcript:ENSSSAT00000247659;Name=cbx5-201;biotype=protein_coding;transcript_id=ENSSSAT00000247659;version=1
+15:92946040-93192783	ensembl	exon	5536	6380	.	+	.	ID=ENSSSAE00000713612;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000713612;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000713612;rank=1;version=1
+15:92946040-93192783	ensembl	five_prime_UTR	5536	6380	.	+	.	ID=five_prime_utr-26;Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	.	intron	6381	6968	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	five_prime_UTR	6969	7027	.	+	.	ID=five_prime_utr-27;Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	exon	6969	7170	.	+	.	ID=ENSSSAE00000411563;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000411563;constitutive=1;ensembl_end_phase=2;ensembl_phase=-1;exon_id=ENSSSAE00000411563;rank=2;version=1
+15:92946040-93192783	.	start_codon	7028	7030	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	CDS	7028	7170	.	+	0	ID=CDS:ENSSSAP00000141064;Parent=transcript:ENSSSAT00000247659;protein_id=ENSSSAP00000141064
+15:92946040-93192783	.	intron	7171	8315	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	exon	8316	8550	.	+	.	ID=ENSSSAE00000411610;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000411610;constitutive=1;ensembl_end_phase=0;ensembl_phase=2;exon_id=ENSSSAE00000411610;rank=3;version=1
+15:92946040-93192783	ensembl	CDS	8316	8550	.	+	1	ID=CDS:ENSSSAP00000141064;Parent=transcript:ENSSSAT00000247659;protein_id=ENSSSAP00000141064
+15:92946040-93192783	.	intron	8551	9007	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	exon	9008	9108	.	+	.	ID=ENSSSAE00000411630;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000411630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000411630;rank=4;version=1
+15:92946040-93192783	ensembl	CDS	9008	9108	.	+	0	ID=CDS:ENSSSAP00000141064;Parent=transcript:ENSSSAT00000247659;protein_id=ENSSSAP00000141064
+15:92946040-93192783	.	intron	9109	9395	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	CDS	9396	9537	.	+	1	ID=CDS:ENSSSAP00000141064;Parent=transcript:ENSSSAT00000247659;protein_id=ENSSSAP00000141064
+15:92946040-93192783	ensembl	exon	9396	11907	.	+	.	ID=ENSSSAE00000807538;Parent=transcript:ENSSSAT00000247659;Name=ENSSSAE00000807538;constitutive=1;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00000807538;rank=5;version=1
+15:92946040-93192783	.	stop_codon	9535	9537	.	+	.	Parent=transcript:ENSSSAT00000247659
+15:92946040-93192783	ensembl	three_prime_UTR	9538	11907	.	+	.	ID=three_prime_utr-22;Parent=transcript:ENSSSAT00000247659
+###
+</pre>
+        <h3>Prediction GFF3</h3>
+        <pre class="gff3 pred">
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	6314	9591	.	+	.	ID=transcript:ENSSSAT00000110316;Name=cbx5-201;biotype=protein_coding;transcript_id=ENSSSAT00000110316;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	6314	6380	.	+	.	ID=exon_34;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411562;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000411562;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	five_prime_UTR	6314	6380	.	+	.	ID=five_prime_UTR_19;Parent=transcript:ENSSSAT00000110316;extra_copy_number=0
+15:92946040-93192783	.	intron	6381	6968	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	five_prime_UTR	6969	7027	.	+	.	ID=five_prime_UTR_20;Parent=transcript:ENSSSAT00000110316;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	6969	7170	.	+	.	ID=exon_35;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411563;constitutive=0;ensembl_end_phase=2;ensembl_phase=-1;exon_id=ENSSSAE00000411563;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	7028	7030	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	CDS	7028	7170	.	+	0	ID=CDS:ENSSSAP00000076836;Parent=transcript:ENSSSAT00000110316;protein_id=ENSSSAP00000076836;extra_copy_number=0
+15:92946040-93192783	.	intron	7171	8315	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	exon	8316	8550	.	+	.	ID=exon_36;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411610;constitutive=0;ensembl_end_phase=0;ensembl_phase=2;exon_id=ENSSSAE00000411610;rank=3;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8316	8550	.	+	1	ID=CDS:ENSSSAP00000076836;Parent=transcript:ENSSSAT00000110316;protein_id=ENSSSAP00000076836;extra_copy_number=0
+15:92946040-93192783	.	intron	8551	9007	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	exon	9008	9108	.	+	.	ID=exon_37;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000411630;rank=4;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9008	9108	.	+	0	ID=CDS:ENSSSAP00000076836;Parent=transcript:ENSSSAT00000110316;protein_id=ENSSSAP00000076836;extra_copy_number=0
+15:92946040-93192783	.	intron	9109	9395	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	CDS	9396	9537	.	+	1	ID=CDS:ENSSSAP00000076836;Parent=transcript:ENSSSAT00000110316;protein_id=ENSSSAP00000076836;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9396	9591	.	+	.	ID=exon_38;Parent=transcript:ENSSSAT00000110316;Name=ENSSSAE00000411634;constitutive=1;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00000411634;rank=5;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	9535	9537	.	+	.	Parent=transcript:ENSSSAT00000110316
+15:92946040-93192783	Liftoff	three_prime_UTR	9538	9591	.	+	.	ID=three_prime_UTR_9;Parent=transcript:ENSSSAT00000110316;extra_copy_number=0
+###
+</pre>
+        <h3>CDS structure comparison</h3>
+        <table class="table_normal table_extra_indent">
+          <tr><td>reference CDS segments</td><td>4</td></tr>
+          <tr><td>prediction CDS segments</td><td>4</td></tr>
+          <tr><th class="left-align" colspan="2">CDS segments structures match perfectly!</th></tr>
+        </table>
+
+        <h3>Exon structure comparison</h3>
+        <table class="table_normal table_extra_indent">
+          <tr><td>reference exons</td><td>5</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match prediction</td><td>3</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match prediction</td><td>2</td></tr>
+          <tr><td>prediction exons</td><td>5</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match reference</td><td>3</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match reference</td><td>2</td></tr>
+          <tr><td>Sensitivity</td><td>0.600     </td></tr>
+          <tr><td>Specificity</td><td>0.600     </td></tr>
+          <tr><td>F1 score</td><td>0.600     </td></tr>
+          <tr><td>Annotation edit distance</td><td>0.400     </td></tr>
+        </table>
+
+        <h3>UTR structure comparison</h3>
+        <table class="table_normal table_extra_indent">
+          <tr><td>reference UTR segments</td><td>3</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match prediction</td><td>1</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match prediction</td><td>2</td></tr>
+          <tr><td>prediction UTR segments</td><td>3</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match reference</td><td>1</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match reference</td><td>2</td></tr>
+          <tr><td>Sensitivity</td><td>0.333     </td></tr>
+          <tr><td>Specificity</td><td>0.333     </td></tr>
+          <tr><td>F1 score</td><td>0.333     </td></tr>
+          <tr><td>Annotation edit distance</td><td>0.667     </td></tr>
+        </table>
+
+        <h3>Nucleotide-level comparison</h3>
+        <table class="table_wide table_extra_indent">
+          <tr><td>&nbsp;</td><th>CDS</th><th>UTRs</th><th>Overall</th></tr>
+          <tr><th class="left-align">matching coefficient</th><td>1.000     </td><td>0.720     </td><td>0.720</td></tr>
+          <tr><th class="left-align">correlation coefficient</th><td>1.000     </td><td>0.198     </td><td>--</td></tr>
+          <tr><th class="left-align">sensitivity</th><td>1.000     </td><td>0.055     </td><td>--</td></tr>
+          <tr><th class="left-align">specificity</th><td>1.000     </td><td>1.000     </td><td>--</td></tr>
+          <tr><th class="left-align">F1 Score</th><td>1.000     </td><td>0.104     </td><td>--</td></tr>
+          <tr><th class="left-align">Annotation edit distance</th><td>0.000     </td><td>0.473     </td><td>--</td></tr>
+        </table>
+      </div>
+
+      <h3 class="compare-header">Comparison<a id="toggle_compare_1" href="#">(show details)</a></h3>
+      <div id="compare_wrapper_1"class="compare-wrapper">
+        <h3>Reference GFF3</h3>
+        <pre class="gff3 refr">
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	2138	5780	.	-	.	ID=transcript:ENSSSAT00000110274;biotype=protein_coding;transcript_id=ENSSSAT00000110274;version=2
+15:92946040-93192783	ensembl	exon	2138	2398	.	-	.	ID=nbis-exon-16;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411484;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000411484;rank=9;version=1
+15:92946040-93192783	ensembl	three_prime_UTR	2138	2398	.	-	.	ID=three_prime_utr-20;Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	.	intron	2399	2654	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	three_prime_UTR	2655	2665	.	-	.	ID=three_prime_utr-21;Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	2655	2742	.	-	.	ID=nbis-exon-17;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411472;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000411472;rank=8;version=1
+15:92946040-93192783	.	stop_codon	2666	2668	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	CDS	2666	2742	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	2743	2959	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	2960	3154	.	-	.	ID=nbis-exon-18;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411460;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411460;rank=7;version=2
+15:92946040-93192783	ensembl	CDS	2960	3154	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	3155	3533	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	3534	3722	.	-	.	ID=ENSSSAE00000815662;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000815662;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000815662;rank=6;version=1
+15:92946040-93192783	ensembl	CDS	3534	3722	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	3723	4234	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	4235	4285	.	-	.	ID=nbis-exon-19;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411388;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411388;rank=5;version=1
+15:92946040-93192783	ensembl	CDS	4235	4285	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	4286	4387	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	4388	4471	.	-	.	ID=nbis-exon-20;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411345;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411345;rank=4;version=2
+15:92946040-93192783	ensembl	CDS	4388	4471	.	-	2	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	4472	4558	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	4559	4916	.	-	.	ID=nbis-exon-21;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411328;constitutive=1;ensembl_end_phase=1;ensembl_phase=0;exon_id=ENSSSAE00000411328;rank=3;version=1
+15:92946040-93192783	ensembl	CDS	4559	4916	.	-	0	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	4917	5076	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	exon	5077	5193	.	-	.	ID=nbis-exon-22;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411313;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=ENSSSAE00000411313;rank=2;version=1
+15:92946040-93192783	ensembl	CDS	5077	5193	.	-	0	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	.	intron	5194	5738	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	CDS	5739	5750	.	-	0	ID=CDS:ENSSSAP00000076797;Parent=transcript:ENSSSAT00000110274;protein_id=ENSSSAP00000076797
+15:92946040-93192783	ensembl	exon	5739	5780	.	-	.	ID=nbis-exon-23;Parent=transcript:ENSSSAT00000110274;Name=ENSSSAE00000411311;constitutive=1;ensembl_end_phase=0;ensembl_phase=-1;exon_id=ENSSSAE00000411311;rank=1;version=1
+15:92946040-93192783	.	start_codon	5748	5750	.	-	.	Parent=transcript:ENSSSAT00000110274
+15:92946040-93192783	ensembl	five_prime_UTR	5751	5780	.	-	.	ID=five_prime_utr-25;Parent=transcript:ENSSSAT00000110274
+###
+</pre>
+        <h3>Prediction GFF3</h3>
+        <pre class="gff3 pred">
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	6314	9591	.	+	.	ID=transcript:ENSSSAT00000110324;Name=cbx5-202;biotype=protein_coding;transcript_id=ENSSSAT00000110324;version=1;matches_ref_protein=True;valid_ORF=True;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	6314	6380	.	+	.	ID=exon_39;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411562;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000411562;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	five_prime_UTR	6314	6380	.	+	.	ID=five_prime_UTR_21;Parent=transcript:ENSSSAT00000110324;extra_copy_number=0
+15:92946040-93192783	Liftoff	five_prime_UTR	6969	7027	.	+	.	ID=five_prime_UTR_22;Parent=transcript:ENSSSAT00000110324;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	6969	7170	.	+	.	ID=exon_40;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411563;constitutive=0;ensembl_end_phase=2;ensembl_phase=-1;exon_id=ENSSSAE00000411563;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	.	start_codon	7028	7030	.	+	.	Parent=transcript:ENSSSAT00000110324
+15:92946040-93192783	Liftoff	CDS	7028	7170	.	+	0	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	8316	8398	.	+	.	ID=exon_41;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411782;constitutive=0;ensembl_end_phase=1;ensembl_phase=2;exon_id=ENSSSAE00000411782;rank=3;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8316	8398	.	+	1	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	.	intron	8399	8473	.	+	.	Parent=transcript:ENSSSAT00000110324
+15:92946040-93192783	Liftoff	exon	8474	8550	.	+	.	ID=exon_42;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411786;constitutive=0;ensembl_end_phase=0;ensembl_phase=1;exon_id=ENSSSAE00000411786;rank=4;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8474	8550	.	+	2	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9008	9108	.	+	.	ID=exon_43;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000411630;rank=5;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9008	9108	.	+	0	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9396	9537	.	+	1	ID=CDS:ENSSSAP00000076844;Parent=transcript:ENSSSAT00000110324;protein_id=ENSSSAP00000076844;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9396	9591	.	+	.	ID=exon_44;Parent=transcript:ENSSSAT00000110324;Name=ENSSSAE00000411634;constitutive=1;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00000411634;rank=6;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	9535	9537	.	+	.	Parent=transcript:ENSSSAT00000110324
+15:92946040-93192783	Liftoff	three_prime_UTR	9538	9591	.	+	.	ID=three_prime_UTR_10;Parent=transcript:ENSSSAT00000110324;extra_copy_number=0
+###
+</pre>
+        <h3>CDS structure comparison</h3>
+        <table class="table_normal table_extra_indent">
+          <tr><td>reference CDS segments</td><td>8</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match prediction</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match prediction</td><td>8</td></tr>
+          <tr><td>prediction CDS segments</td><td>5</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match reference</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match reference</td><td>5</td></tr>
+          <tr><td>Sensitivity</td><td>0.000     </td></tr>
+          <tr><td>Specificity</td><td>0.000     </td></tr>
+          <tr><td>F1 score</td><td>--        </td></tr>
+          <tr><td>Annotation edit distance</td><td>1.000     </td></tr>
+        </table>
+
+        <h3>Exon structure comparison</h3>
+        <table class="table_normal table_extra_indent">
+          <tr><td>reference exons</td><td>9</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match prediction</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match prediction</td><td>9</td></tr>
+          <tr><td>prediction exons</td><td>6</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match reference</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match reference</td><td>6</td></tr>
+          <tr><td>Sensitivity</td><td>0.000     </td></tr>
+          <tr><td>Specificity</td><td>0.000     </td></tr>
+          <tr><td>F1 score</td><td>--        </td></tr>
+          <tr><td>Annotation edit distance</td><td>1.000     </td></tr>
+        </table>
+
+        <h3>UTR structure comparison</h3>
+        <table class="table_normal table_extra_indent">
+          <tr><td>reference UTR segments</td><td>3</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match prediction</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match prediction</td><td>3</td></tr>
+          <tr><td>prediction UTR segments</td><td>3</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match reference</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match reference</td><td>3</td></tr>
+          <tr><td>Sensitivity</td><td>0.000     </td></tr>
+          <tr><td>Specificity</td><td>0.000     </td></tr>
+          <tr><td>F1 score</td><td>--        </td></tr>
+          <tr><td>Annotation edit distance</td><td>1.000     </td></tr>
+        </table>
+
+        <h3>Nucleotide-level comparison</h3>
+        <table class="table_wide table_extra_indent">
+          <tr><td>&nbsp;</td><th>CDS</th><th>UTRs</th><th>Overall</th></tr>
+          <tr><th class="left-align">matching coefficient</th><td>0.853     </td><td>0.956     </td><td>0.375</td></tr>
+          <tr><th class="left-align">correlation coefficient</th><td>-0.075    </td><td>-0.022    </td><td>--</td></tr>
+          <tr><th class="left-align">sensitivity</th><td>0.000     </td><td>0.000     </td><td>--</td></tr>
+          <tr><th class="left-align">specificity</th><td>0.000     </td><td>0.000     </td><td>--</td></tr>
+          <tr><th class="left-align">F1 Score</th><td>--        </td><td>--        </td><td>--</td></tr>
+          <tr><th class="left-align">Annotation edit distance</th><td>1.000     </td><td>1.000     </td><td>--</td></tr>
+        </table>
+      </div>
+
+      <h3 class="compare-header">Comparison<a id="toggle_compare_2" href="#">(show details)</a></h3>
+      <div id="compare_wrapper_2"class="compare-wrapper">
+        <h3>Reference GFF3</h3>
+        <pre class="gff3 refr">
+##gff-version 3
+15:92946040-93192783	ensembl	mRNA	843	5780	.	-	.	ID=transcript:ENSSSAT00000210623;biotype=protein_coding;transcript_id=ENSSSAT00000210623;version=1
+15:92946040-93192783	ensembl	exon	843	964	.	-	.	ID=ENSSSAE00000681495;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000681495;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000681495;rank=11;version=1
+15:92946040-93192783	ensembl	three_prime_UTR	843	964	.	-	.	ID=three_prime_utr-13;Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	.	intron	965	1085	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	1086	2398	.	-	.	ID=ENSSSAE00000805702;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000805702;constitutive=0;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=ENSSSAE00000805702;rank=10;version=1
+15:92946040-93192783	ensembl	three_prime_UTR	1086	2398	.	-	.	ID=three_prime_utr-14;Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	three_prime_UTR	2655	2665	.	-	.	ID=three_prime_utr-15;Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	2655	2742	.	-	.	ID=ENSSSAE00000411472;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411472;constitutive=1;ensembl_end_phase=-1;ensembl_phase=1;exon_id=ENSSSAE00000411472;rank=9;version=1
+15:92946040-93192783	.	stop_codon	2666	2668	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	CDS	2666	2742	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	.	intron	2743	3043	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	3044	3154	.	-	.	ID=ENSSSAE00000850205;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000850205;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000850205;rank=8;version=1
+15:92946040-93192783	ensembl	CDS	3044	3154	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	3534	3734	.	-	.	ID=ENSSSAE00000411456;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411456;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411456;rank=7;version=1
+15:92946040-93192783	ensembl	CDS	3534	3734	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	.	intron	3735	4020	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	4021	4110	.	-	.	ID=ENSSSAE00000411427;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411427;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411427;rank=6;version=1
+15:92946040-93192783	ensembl	CDS	4021	4110	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	.	intron	4111	4234	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	exon	4235	4285	.	-	.	ID=ENSSSAE00000411388;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411388;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411388;rank=5;version=1
+15:92946040-93192783	ensembl	CDS	4235	4285	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	4388	4471	.	-	.	ID=ENSSSAE00000411345;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411345;constitutive=0;ensembl_end_phase=1;ensembl_phase=1;exon_id=ENSSSAE00000411345;rank=4;version=2
+15:92946040-93192783	ensembl	CDS	4388	4471	.	-	2	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	4559	4916	.	-	.	ID=ENSSSAE00000411328;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411328;constitutive=1;ensembl_end_phase=1;ensembl_phase=0;exon_id=ENSSSAE00000411328;rank=3;version=1
+15:92946040-93192783	ensembl	CDS	4559	4916	.	-	0	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	5077	5193	.	-	.	ID=ENSSSAE00000411313;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411313;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=ENSSSAE00000411313;rank=2;version=1
+15:92946040-93192783	ensembl	CDS	5077	5193	.	-	0	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	CDS	5739	5750	.	-	0	ID=CDS:ENSSSAP00000155874;Parent=transcript:ENSSSAT00000210623;protein_id=ENSSSAP00000155874
+15:92946040-93192783	ensembl	exon	5739	5780	.	-	.	ID=ENSSSAE00000411311;Parent=transcript:ENSSSAT00000210623;Name=ENSSSAE00000411311;constitutive=1;ensembl_end_phase=0;ensembl_phase=-1;exon_id=ENSSSAE00000411311;rank=1;version=1
+15:92946040-93192783	.	start_codon	5748	5750	.	-	.	Parent=transcript:ENSSSAT00000210623
+15:92946040-93192783	ensembl	five_prime_UTR	5751	5780	.	-	.	ID=five_prime_utr-22;Parent=transcript:ENSSSAT00000210623
+###
+</pre>
+        <h3>Prediction GFF3</h3>
+        <pre class="gff3 pred">
+##gff-version 3
+15:92946040-93192783	Liftoff	mRNA	6663	9591	.	+	.	ID=transcript:ENSSSAT00000110349;Name=cbx5-203;biotype=protein_coding;transcript_id=ENSSSAT00000110349;version=1;matches_ref_protein=True;valid_ORF=False;missing_start_codon=True;extra_copy_number=0
+15:92946040-93192783	.	start_codon	6663	6665	.	+	.	Parent=transcript:ENSSSAT00000110349
+15:92946040-93192783	Liftoff	exon	6663	6687	.	+	.	ID=exon_45;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411841;constitutive=0;ensembl_end_phase=1;ensembl_phase=0;exon_id=ENSSSAE00000411841;rank=1;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	6663	6687	.	+	0	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	.	intron	6688	7025	.	+	.	Parent=transcript:ENSSSAT00000110349
+15:92946040-93192783	Liftoff	exon	7026	7170	.	+	.	ID=exon_46;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411850;constitutive=0;ensembl_end_phase=2;ensembl_phase=1;exon_id=ENSSSAE00000411850;rank=2;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	7026	7170	.	+	2	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	8316	8372	.	+	.	ID=exon_47;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411898;constitutive=0;ensembl_end_phase=2;ensembl_phase=2;exon_id=ENSSSAE00000411898;rank=3;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8316	8372	.	+	1	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	.	intron	8373	8444	.	+	.	Parent=transcript:ENSSSAT00000110349
+15:92946040-93192783	Liftoff	exon	8445	8550	.	+	.	ID=exon_48;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411902;constitutive=0;ensembl_end_phase=0;ensembl_phase=2;exon_id=ENSSSAE00000411902;rank=4;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	8445	8550	.	+	1	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9008	9108	.	+	.	ID=exon_49;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411630;constitutive=1;ensembl_end_phase=2;ensembl_phase=0;exon_id=ENSSSAE00000411630;rank=5;version=1;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9008	9108	.	+	0	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	Liftoff	CDS	9396	9537	.	+	1	ID=CDS:ENSSSAP00000076868;Parent=transcript:ENSSSAT00000110349;protein_id=ENSSSAP00000076868;extra_copy_number=0
+15:92946040-93192783	Liftoff	exon	9396	9591	.	+	.	ID=exon_50;Parent=transcript:ENSSSAT00000110349;Name=ENSSSAE00000411634;constitutive=1;ensembl_end_phase=-1;ensembl_phase=2;exon_id=ENSSSAE00000411634;rank=6;version=1;extra_copy_number=0
+15:92946040-93192783	.	stop_codon	9535	9537	.	+	.	Parent=transcript:ENSSSAT00000110349
+15:92946040-93192783	Liftoff	three_prime_UTR	9538	9591	.	+	.	ID=three_prime_UTR_11;Parent=transcript:ENSSSAT00000110349;extra_copy_number=0
+###
+</pre>
+        <h3>CDS structure comparison</h3>
+        <table class="table_normal table_extra_indent">
+          <tr><td>reference CDS segments</td><td>9</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match prediction</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match prediction</td><td>9</td></tr>
+          <tr><td>prediction CDS segments</td><td>6</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match reference</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match reference</td><td>6</td></tr>
+          <tr><td>Sensitivity</td><td>0.000     </td></tr>
+          <tr><td>Specificity</td><td>0.000     </td></tr>
+          <tr><td>F1 score</td><td>--        </td></tr>
+          <tr><td>Annotation edit distance</td><td>1.000     </td></tr>
+        </table>
+
+        <h3>Exon structure comparison</h3>
+        <table class="table_normal table_extra_indent">
+          <tr><td>reference exons</td><td>11</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match prediction</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match prediction</td><td>11</td></tr>
+          <tr><td>prediction exons</td><td>6</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match reference</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match reference</td><td>6</td></tr>
+          <tr><td>Sensitivity</td><td>0.000     </td></tr>
+          <tr><td>Specificity</td><td>0.000     </td></tr>
+          <tr><td>F1 score</td><td>--        </td></tr>
+          <tr><td>Annotation edit distance</td><td>1.000     </td></tr>
+        </table>
+
+        <h3>UTR structure comparison</h3>
+        <table class="table_normal table_extra_indent">
+          <tr><td>reference UTR segments</td><td>4</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match prediction</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match prediction</td><td>4</td></tr>
+          <tr><td>prediction UTR segments</td><td>1</td></tr>
+          <tr class="cell_small"><td class="cell_indent">match reference</td><td>0</td></tr>
+          <tr class="cell_small"><td class="cell_indent">don't match reference</td><td>1</td></tr>
+          <tr><td>Sensitivity</td><td>0.000     </td></tr>
+          <tr><td>Specificity</td><td>0.000     </td></tr>
+          <tr><td>F1 score</td><td>--        </td></tr>
+          <tr><td>Annotation edit distance</td><td>1.000     </td></tr>
+        </table>
+
+        <h3>Nucleotide-level comparison</h3>
+        <table class="table_wide table_extra_indent">
+          <tr><td>&nbsp;</td><th>CDS</th><th>UTRs</th><th>Overall</th></tr>
+          <tr><th class="left-align">matching coefficient</th><td>0.848     </td><td>0.862     </td><td>0.289</td></tr>
+          <tr><th class="left-align">correlation coefficient</th><td>-0.078    </td><td>-0.027    </td><td>--</td></tr>
+          <tr><th class="left-align">sensitivity</th><td>0.000     </td><td>0.000     </td><td>--</td></tr>
+          <tr><th class="left-align">specificity</th><td>0.000     </td><td>0.000     </td><td>--</td></tr>
+          <tr><th class="left-align">F1 Score</th><td>--        </td><td>--        </td><td>--</td></tr>
+          <tr><th class="left-align">Annotation edit distance</th><td>1.000     </td><td>1.000     </td><td>--</td></tr>
+        </table>
+      </div>
+
+      <h2>Unmatched reference transcripts</h2>
+      <ul>
+        <li>transcript:ENSSSAT00000143771</li>
+        <li>transcript:ENSSSAT00000143781</li>
+      </ul>
+
+
+      <p class="footer">
+        Generated by <a href="https://github.com/standage/AEGeAn/releases/tag/v0.16.0">AEGeAn v0.16.0 (stable )</a>.<br />
+        Copyright © 2016 <a href="http://aegean.readthedocs.io/en/latest/contrib.html">AEGeAn authors</a>.<br />
+        See <a href="LICENSE">LICENSE</a> for details.      </p>
+    </div>
+  </body>
+</html>

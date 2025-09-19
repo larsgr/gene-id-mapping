@@ -372,11 +372,11 @@ Conclusion: reference-free multi-query mode emphasizes consensus and cross-mappi
 Attempted conda install on macOS arm64, but no package is available on bioconda/conda-forge for this platform. Therefore, use the BioContainers image (works like Liftoff/LiftoffTools):
 
 ```bash
-docker pull quay.io/biocontainers/aegean:<tag>
+docker pull quay.io/biocontainers/aegean:0.16.0--h71bfec9_5
 
 docker run -it \
   -v "$(pwd)":/workdir -w /workdir \
-  quay.io/biocontainers/aegean:<tag> \
+  quay.io/biocontainers/aegean:0.16.0--h71bfec9_5 \
   bash
 ```
 
@@ -398,14 +398,13 @@ Example command (inside container):
 out=experiments/parseval_test
 mkdir -p "$out"
 
-# ParsEval expects both annotations to be on the same assembly build.
-# -r: reference; -t: test; -g: genome FASTA; -w: write reports in directory
-# Note: the binary name is lowercase: `parseval`
 # Basic text report (single file):
 parseval -f text -o "$out/parseval.txt" -w \
          data/toy-assemblies/Ssal_v3.1_hoxca_Ens.gff \
          experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff
 ```
+
+> Note: parseval also has a csv output option but that did not work "error: CSV output mode support temporarily unavailable"
 
 Key outputs (this run):
 
@@ -458,3 +457,17 @@ Notes:
 
 - Run ParsEval container locally to generate the per‑locus reports in `experiments/parseval_test`.
 - Extract a concise per‑gene summary (CDS unchanged vs changed; exon/intron sensitivity/precision; matched isoforms) for inclusion in the README summary table.
+
+### parseval html output
+
+
+```bash
+out=experiments/parseval_html
+mkdir -p "$out"
+
+# HTML report (multi file):
+parseval -f html -o "$out" -w \
+         data/toy-assemblies/Ssal_v3.1_hoxca_Ens.gff \
+         experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff
+```
+
