@@ -125,3 +125,47 @@ Conda installation failed, but it suggested using docker like I did with LiftOff
 ```
 I have run "docker pull quay.io/biocontainers/aegean:0.16.0--h71bfec9_5" Can you use this?
 ```
+
+### (codex) Implement within-assembly comparison parser
+
+prompt to gpt-5-codex(high):
+(note that the context was reset)
+
+```
+Implement within-assembly comparison parser without dependencies.
+
+Based on experiments with gffcompare and parseval I find that while they could be used it would require extensive processing of the output to convert into the desired format. To avoid dependencies and have the flexibility to add features missing in existing tools I have decided to rather implement a gff3 comparison parser from scratch.
+
+The implementation shall use python. Single file. Do not use external libraries.
+
+Input: two or more sorted gff3 files containing gene annotations on the same assembly
+
+Output: 
+
+for each pair of overlapping genes from different annotations (overlap means that at least one bp of exon overlaps) it shall output a gene level comparison summary record followed by transcript level comparison for each pair of overlapping transcript isoform of those genes. The transcript level.
+Each record should include: feature type (gene or transcript), annA, geneA, txA, annB, geneB, txB, <stats>
+
+The transcript level stats (present in a compact format):
+Number of exons in transcript A
+Number of exons in transcript B
+Number of matching exons (same start and stop)
+Number of introns in A
+Number of introns in B
+Number of matching introns
+Number of bp in transcript A
+Number of bp in transcript B
+Number of bp overlapping
+(CDS) Number of coding bp in transcript A
+(CDS) Number of coding bp in transcript B
+(CDS) Number of of overlapping coding bp with same codon phase and strand (do not trust the phase field in the input gff, calculate phase yourself)
+
+The gene level stats should be some summary, like the number of matching transcripts etc..
+
+To keep it reference free you should include the comparison from both directions, i.e. A -> B and B -> A
+
+The parser shall be fast and memory efficient.
+
+Test the implementation of the same gff files that was used in the gffcompare and parseval experiment. Document the implementation and testing
+```
+
+Reflection: This seemed to work fine. Not sure how fast and memory efficient the implementation is though (but I guess that is not important at first). The problem is that I cannot really be sure if it is working properly. Also since the context was reset I should probably have told it to read the readme first to get some more context.

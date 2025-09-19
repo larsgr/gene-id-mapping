@@ -471,3 +471,21 @@ parseval -f html -o "$out" -w \
          experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff
 ```
 
+## Custom within-assembly comparison parser
+
+- Implemented a standalone Python script `within_assembly_compare.py` that compares two or more sorted GFF3 files without external dependencies. It walks gene intervals per scaffold, pairs overlapping genes, and reports both gene-level summaries and transcript-level stats (exon/intron counts, matching structures, total/overlapping bp, CDS overlap with codon phase agreement).
+- The script recomputes CDS phases from the ordered CDS fragments (strand-aware) instead of trusting the `phase` column, so `cds_bp_overlap_same_phase` reflects true codon-aligned agreement.
+- Usage on the toy data (Ensembl vs Liftoff on Ssal_v3.1):
+
+  ```bash
+  python3 within_assembly_compare.py \
+    -l Ensembl Liftoff -- \
+    data/toy-assemblies/Ssal_v3.1_hoxca_Ens.gff \
+    experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff \
+    > experiments/within_assembly_compare/ensembl_vs_liftoff.tsv
+  ```
+
+- The TSV lists each overlapping gene pair twice (Ensembl→Liftoff and Liftoff→Ensembl) followed by their transcript comparisons. Example highlights that reproduce the ParsEval observations:
+  - `gene:ENSSSAG00000096644` (Ensembl cbx5) vs `gene:ENSSSAG00000077510` (Liftoff): transcript `ENSSSAT00000177260` vs `ENSSSAT00000143756` shows 5 vs 6 exons with four matches, yet `cds_bp_overlap_same_phase=696` equals both CDS lengths, confirming identical coding sequence despite the extra Liftoff 5′ UTR exon.
+  - `gene:ENSSSAG00000077504` has a perfect transcript match in both directions (`matching_tx_pairs=1`, all exons/introns identical, CDS overlap 810 bp), matching gffcompare/ParsEval expectations.
+- Output lives in `experiments/within_assembly_compare/ensembl_vs_liftoff.tsv` for now; future work is to wrap this into the planned workflow so the same stats power the mapping confidence table.
