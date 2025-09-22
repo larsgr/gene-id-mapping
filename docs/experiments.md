@@ -453,10 +453,6 @@ Notes:
 - The run emitted warnings about missing `##sequence-region` lines and corrected missing CDS phases in the Liftoff GFF3; neither affected the comparisons.
 
 
-### next steps
-
-- Run ParsEval container locally to generate the per‑locus reports in `experiments/parseval_test`.
-- Extract a concise per‑gene summary (CDS unchanged vs changed; exon/intron sensitivity/precision; matched isoforms) for inclusion in the README summary table.
 
 ### parseval html output
 
@@ -470,6 +466,14 @@ parseval -f html -o "$out" -w \
          data/toy-assemblies/Ssal_v3.1_hoxca_Ens.gff \
          experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff
 ```
+
+## Conclusion from experiments with existing tools
+
+It seems clear that LiftOff + within-assembly comparison is the way to go. I am however not very satisfied with gffcompare (does not consider CDS) and parseval (hard to parse output format and poorly maintained). It should not be so hard to implement a script to compare gff files using AI so that is a viable option.
+
+LiftOffTools Variants can be used to record the differences introduced in the liftover but I haven't tested the proper use of it yet.
+
+Also, I do not know how liftoff scales to the full genome. This needs to be tested.
 
 ## Custom within-assembly comparison parser
 
@@ -489,3 +493,12 @@ parseval -f html -o "$out" -w \
   - `gene:ENSSSAG00000096644` (Ensembl cbx5) vs `gene:ENSSSAG00000077510` (Liftoff): transcript `ENSSSAT00000177260` vs `ENSSSAT00000143756` shows 5 vs 6 exons with four matches, yet `cds_bp_overlap_same_phase=696` equals both CDS lengths, confirming identical coding sequence despite the extra Liftoff 5′ UTR exon.
   - `gene:ENSSSAG00000077504` has a perfect transcript match in both directions (`matching_tx_pairs=1`, all exons/introns identical, CDS overlap 810 bp), matching gffcompare/ParsEval expectations.
 - Output lives in `experiments/within_assembly_compare/ensembl_vs_liftoff.tsv` for now; future work is to wrap this into the planned workflow so the same stats power the mapping confidence table.
+
+### My thoughts on the implementation
+
+This works as a proof of concept that it is possible to generate a custom script and not rely on existing tools.
+
+What needs improving:
+
+* The gene level summary stats that the AI came up with are not very useful. I need to work more on designing rules to summarise the transcript level comparisons into a short, useful and complete description on the gene level. In the end I would like to be able to drop the transcript comparison and only keep the gene level summary.
+* Need more testing to make sure that it actually works. Including testing it on more than two gff files.
