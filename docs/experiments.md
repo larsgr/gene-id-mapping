@@ -365,7 +365,7 @@ Examples (from `gffc_multi.tracking`):
 
 Conclusion: reference-free multi-query mode emphasizes consensus and cross-mapping. Use it to explore structural relationships; use `-r` when you want class codes and sensitivity/precision metrics against a designated reference.
 
-## ParsEval (AEGeAn)
+## ParsEval
 
 ### installation
 
