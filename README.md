@@ -46,7 +46,7 @@ Existing relevant tools identified:
 | **ParsEval** | Compares alternative annotations. |
 | **GeneOverlapAnnotator** | Part of SVAnnotator, returns gene/transcript overlap stats. |
 
-Initial **Liftoff** experiments are complete (see testing notes). **GffCompare** evaluation is complete (see experiments), and **ParsEval** is in progress.
+We now have full experiment notes for **Liftoff**, **GffCompare**, and **ParsEval** in [docs/experiments.md](docs/experiments.md). ParsEval's reporting confirmed CDS-conserving vs CDS-changing differences but remains cumbersome to parse, motivating development of a custom within-assembly comparison script (`within_assembly_compare.py`).
 
 ---
 
@@ -56,8 +56,8 @@ Initial **Liftoff** experiments are complete (see testing notes). **GffCompare**
 2. ✅ Create toy dataset for initial testing ([creating toy dataset](docs/creating-toy-dataset.md)).
 3. ✅ Experiment with Liftoff/LiftoffTools and document findings ([experiments: Liftoff](docs/experiments.md#liftoff)).
 4. ✅ Test GffCompare on the Liftoff results (see experiments: GffCompare).
-5. 🔄 Try ParsEval (CDS‑aware gene model comparison) on the same inputs (see experiments: ParsEval).
-6. ⬜ Develop and test mapping workflow (e.g., Snakemake or Nextflow).
+5. ✅ Try ParsEval (CDS‑aware gene model comparison) on the same inputs (see experiments: ParsEval).
+6. 🔄 Develop and test mapping workflow (currently prototyping custom comparison logic in [`within_assembly_compare.py`](within_assembly_compare.py)).
 7. ⬜ Integrate with Salmobase outputs.
 8. ⬜ Generate final documentation and publish results.
 
@@ -77,6 +77,7 @@ Initial **Liftoff** experiments are complete (see testing notes). **GffCompare**
 │   └── experiments.md           # Running log of experiments and findings
 ├── experiments/           # Scripts and results for exploratory testing (per-experiment dirs)
 ├── data/                  # Toy datasets and annotation files
+├── within_assembly_compare.py  # Prototype for on-assembly GFF3 comparison metrics
 └── workflow/              # Pipeline (e.g., Snakemake or Nextflow) for production use
 ```
 
@@ -116,11 +117,20 @@ To begin experimenting:
 
 ---
 
+## Current Progress Highlights
+
+- Lifted Ensembl ICSASG_v2 annotations to Ssal_v3.1 with Liftoff and documented per-gene agreement in [docs/experiments.md](docs/experiments.md#liftoff).
+- Benchmarked Liftoff outputs against Ensembl using GffCompare and ParsEval; both now have detailed notes capturing class-code breakdowns and CDS-preserving vs CDS-altering cases.
+- Built an initial Python prototype (`within_assembly_compare.py`) that compares multiple sorted GFF3 files within the same assembly, reporting exon/intron/CDS overlaps without relying on external binaries.
+- HTML and TSV artefacts for these comparisons live under `experiments/` for iterative review (see `experiments/parseval_html/` and `experiments/within_assembly_compare/`).
+
+---
+
 ## Status
 
 * 🔍 **Tool Research**: Completed
-* ⚗️ **Experimental Phase**: In Progress (GffCompare done; ParsEval in progress)
-* 🛠️ **Workflow Development**: Pending
+* ⚗️ **Experimental Phase**: Completed on toy dataset (Liftoff, GffCompare, ParsEval documented)
+* 🛠️ **Workflow Development**: In Progress (`within_assembly_compare.py` prototyping comparison metrics)
 * 📊 **Integration with Salmobase**: Planned
 
 ---
