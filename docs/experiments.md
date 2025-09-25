@@ -214,6 +214,87 @@ For the **NCBI** annotation the larger transcript count (52) gives more granular
 Taken together, LiftoffTools now complements the custom within-assembly comparison: use `variants` to flag assembly-induced CDS changes, `synteny` to record orientation/order shifts, and `clusters` to track potential copy-number differences before handing the lifted annotation to the within-assembly comparator.
 
 
+### Full-genome run (ICSASG_v2 → Ssal_v3.1, Ensembl annotation)
+
+With the full assemblies staged in `data/genomes/AtlanticSalmon`, I ran Liftoff across the entire genome and followed up with the LiftoffTools suite to characterise assembly-driven changes.
+
+```bash
+threads=$(python3 - <<'PY'
+import os
+print(os.cpu_count())
+PY)
+
+out=experiments/liftoff_full
+mkdir -p "$out"
+
+/usr/bin/time -l docker run --rm \
+  -v "$PWD":/workdir -w /workdir \
+  quay.io/biocontainers/liftoff:1.6.3--pyhdfd78af_1 \
+  liftoff -g data/genomes/AtlanticSalmon/ICSASG_v2_Ens.gff3 \
+          -o "$out/ICSASG_v2_to_Ssal_v3.1_Ens.gff3" \
+          -p "$threads" \
+          data/genomes/AtlanticSalmon/Ssal_v3.1.fa \
+          data/genomes/AtlanticSalmon/ICSASG_v2.fa \
+  > "$out/liftoff.stdout.log" 2> "$out/liftoff.stderr.log"
+```
+
+- Runtime (wall clock): **45 min 31 s** (`/usr/bin/time` real = 2730.62 s).
+- Minimap2 reported **18.9 GB peak RSS** while aligning (`Peak RSS: 18.920 GB`), confirming Docker’s 32 GB limit was sufficient. macOS `/usr/bin/time` only observes the Docker client (≈25 MB RSS), so I rely on the minimap log for in-container memory usage.
+- Liftoff rebuilt `Ssal_v3.1.fa.mmi` (~18 GB peak) in `data/genomes/AtlanticSalmon` and wrote the lifted annotation to `experiments/liftoff_full/ICSASG_v2_to_Ssal_v3.1_Ens.gff3` (593 MB).
+
+#### Mapping outcome snapshot
+
+- Source Ensembl genes: **47 329**; lifted genes: **43 870** → **3 459 genes (7.3 %)** failed to lift.
+- The `unmapped_closest_paralogs` report from LiftoffTools (below) shows **2 319** of those genes have a close paralog on Ssal_v3.1, while **1 140** lack an obvious counterpart.
+- mRNA models dropped from **120 968** (ICSASG_v2) to **115 741** after lift.
+
+#### LiftoffTools on the full liftover
+
+All modules were executed with the same input quartet, writing to `experiments/liftofftools_full_ensembl/`.
+
+```bash
+# Variants
+/usr/bin/time -l docker run --rm -v "$PWD":/workdir -w /workdir \
+  quay.io/biocontainers/liftofftools:0.4.3--pyhdfd78af_0 \
+  liftofftools variants -r data/genomes/AtlanticSalmon/ICSASG_v2.fa \
+    -t data/genomes/AtlanticSalmon/Ssal_v3.1.fa \
+    -rg data/genomes/AtlanticSalmon/ICSASG_v2_Ens.gff3 \
+    -tg experiments/liftoff_full/ICSASG_v2_to_Ssal_v3.1_Ens.gff3 \
+    -dir experiments/liftofftools_full_ensembl -force
+
+# Synteny / gene order
+/usr/bin/time -l docker run --rm -v "$PWD":/workdir -w /workdir \
+  quay.io/biocontainers/liftofftools:0.4.3--pyhdfd78af_0 \
+  liftofftools synteny -r data/genomes/AtlanticSalmon/ICSASG_v2.fa \
+    -t data/genomes/AtlanticSalmon/Ssal_v3.1.fa \
+    -rg data/genomes/AtlanticSalmon/ICSASG_v2_Ens.gff3 \
+    -tg experiments/liftoff_full/ICSASG_v2_to_Ssal_v3.1_Ens.gff3 \
+    -dir experiments/liftofftools_full_ensembl -force
+
+# Clusters (paralog census)
+/usr/bin/time -l docker run --rm -v "$PWD":/workdir -w /workdir \
+  quay.io/biocontainers/liftofftools:0.4.3--pyhdfd78af_0 \
+  liftofftools clusters -r data/genomes/AtlanticSalmon/ICSASG_v2.fa \
+    -t data/genomes/AtlanticSalmon/Ssal_v3.1.fa \
+    -rg data/genomes/AtlanticSalmon/ICSASG_v2_Ens.gff3 \
+    -tg experiments/liftoff_full/ICSASG_v2_to_Ssal_v3.1_Ens.gff3 \
+    -dir experiments/liftofftools_full_ensembl -force
+```
+
+- **Variants** (38 min, reported RSS ≤ 26 GB) generated `variant_effects` with **130 585 transcripts** analysed. Distribution:
+  - 44.9 % identical, 11.9 % synonymous → **56.9 % CDS-conservative**.
+  - 13.8 % nonsynonymous; 10.6 % frameshift; 2.4 % start lost; smaller fractions for in-frame indels and truncations → **31.2 % CDS-altering**.
+  - 11.3 % `NA` entries correspond to non-coding transcripts (no CDS comparison).
+- **Synteny** (13.8 min) produced `gene_order` (2.1 MB) and `gene_order_plot.pdf` summarising gene order differences:
+  - 43 870 rows mirror the lifted gene count; median identity 0.999 (10th percentile 0.952).
+  - 42 702 genes land on numbered Ssal_v3.1 chromosomes; 1 168 fall on smaller scaffolds.
+  - 87 ICSASG_v2 chromosomes/contigs map across multiple Ssal_v3.1 chromosomes, highlighting assembly rearrangements (gene_order plot visualises these splits and inversions).
+- **Clusters** (38 min) catalogued **40 231** paralog clusters:
+  - 35 033 clusters are 1:1 (no copy change); 3 435 are 2:2.
+  - 934 clusters show a 1:0 pattern (gene absent after lift) aligning with the 3 459 unmapped genes.
+  - `unmapped_closest_paralogs` lists every unmapped gene, plus its closest Ssal_v3.1 paralog (when available) for downstream curation.
+
+These full-genome runs demonstrate that Liftoff remains feasible on the entire Atlantic salmon assemblies within a ~45 min window on the laptop (under Rosetta/amd64 emulation) when Docker has ≥32 GB RAM. The LiftoffTools outputs scale to the genome and provide actionable counts for CDS-altering transcripts, gene-order contrasts, and copy-number changes that can feed the planned mapping-confidence pipeline.
 
 
 

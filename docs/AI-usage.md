@@ -185,3 +185,12 @@ What it did:
 
 
 Reflection: This worked as expected. I did not specify what to document about the experiments so it was interesting to see what it choose to do. The summary count of the variant types were a good choice, but the cluster and gene order summary was less informative. It is annoying having to approve the docker invocation every time, a solution could be to use dev-container weher I could install the tools using conda. This time I had not started the docker deamon which made it start looking for errors/alternatives. I stopped it and continued after starting the deamon
+
+### (codex) full genome liftoff test
+
+
+```
+I have downloaded the entire ICSASG_v2 and Ssal_v3.1 genome and Ensembl annotation to data/genomes/AtlanticSalmon. Try to run liftoff on this (from ICSASG_v2 to Ssal_v3.1), while recording the time and max memory usage. Use all available CPUs if possible. If liftoff works then run the cluster and synteny liftofftools also and analyse the results. Document the experiment
+```
+
+Reflection: It worked, which shows that codex can be used with long running tasks as long as it doesn’t need to ask for approval along the way. I did have trouble with docker running out of memory which the agent tried to solve by reducing threads, but which just required me to increase the docker memory limit. It also didn't consider running all of the tools in one go (which is an option in LiftoffTools). This would probably have saved some time. I wonder how it would work with slurm.. Would it set off multiple jobs in parallel? Would it know how to wait for the jobs to finish?

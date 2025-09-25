@@ -1,0 +1,4 @@
+#ignore everything except *.sh and .gitignore
+*
+!*.sh
+!.gitignore

@@ -41,7 +41,7 @@ Initial strategies from these issues include:
 4.  ✅ Test GffCompare on the Liftoff results ([experiments: GffCompare](docs/experiments.md#GffCompare)).
 5.  ✅ Try ParsEval (CDS‑aware gene model comparison) on the same inputs ([experiments: ParsEval](docs/experiments.md#ParsEval)).
 6.  ✅ Experimental implemention of custom comparison script ([`within_assembly_compare.py`](within_assembly_compare.py)).
-7.  🔄 Further testing of Liftoff/LiftoffTools (variants/synteny/clusters on lifted annotations)
+7.  ✅ Further testing of Liftoff/LiftoffTools (variants/synteny/clusters on lifted annotations)
 8.  ⬜ Design and develop custom comparison script.
 9.  ⬜ Design table schema.
 10. ⬜ Develop and implement workflow.
@@ -67,10 +67,12 @@ Initial strategies from these issues include:
 │   ├── gffcompare_test/        # Baseline gffcompare reference-vs-Liftoff comparison outputs
 │   ├── liftoff_test/           # Liftoff liftover GFF for HoxC A region (ICSASG_v2 → Ssal_v3.1)
 │   ├── liftoff_test_ncbi/      # Liftoff liftover of NCBI annotations for the HoxC A region
+│   ├── liftoff_full/           # Full-genome Liftoff (ICSASG_v2 → Ssal_v3.1) outputs + logs
 │   ├── liftofftools_test/      # LiftoffTools variant-effect summaries plus R inspection script
 │   ├── liftofftools_test2/     # Follow-up LiftoffTools run capturing alternate variant effects
 │   ├── liftofftools_crossassembly_ensembl/ # LiftoffTools cross-assembly stats for Ensembl inputs
 │   ├── liftofftools_crossassembly_ncbi/    # LiftoffTools cross-assembly stats for NCBI inputs
+│   ├── liftofftools_full_ensembl/ # LiftoffTools variants/synteny/clusters on full-genome liftover
 │   ├── parseval_html/          # ParsEval-generated HTML dashboards for CDS comparisons
 │   ├── parseval_test/          # ParsEval CLI outputs (text/CSV metrics)
 │   └── within_assembly_compare/# Prototype Ensembl vs Liftoff on-assembly comparison results
