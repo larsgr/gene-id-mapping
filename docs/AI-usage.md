@@ -203,3 +203,19 @@ PS: noticed that I did not ask it to run the variants tool but it did it anyway
 The variant_effects gives stats per transcript. I want per gene statistics. Calculate the same percentages as before but after summarising per gene. Do the gene summarisation in two ways: 1) the optimistic way where you select the best variant effect among the alternative transcripts (e.g. if at least one transcript is identical, count the gene as identical). 2) the pessimistic way where the worst variant
 ```
 
+### (codex) Test Named gene hypothesis
+
+```
+I want to test the hypothesis that genes with names are more conserved. Use the optimistic gene level variant types and divide the genes into those that have a "Name" attribute in the gene and those that do not. Calculate percentage of variant types within each the named and nameless genes. make a barchart and add it to the documentation. Also test for statistical significance
+```
+
+What it did:
+* Parsed the ICSASG_v2 Ensembl GFF3 to determine which genes have a `Name=` attribute, and joined that with the optimistic per-gene variant summary.
+* Computed category percentages for named versus unnamed genes, ran a two-proportion z-test on the identical gene counts, and produced a bar chart (`docs/img/liftoff_gene_name_conservation.png`).
+* Documented the findings in `docs/experiments.md` alongside the earlier full-genome Liftoff results.
+
+(codex agent's) Reflection: Smooth workflow once I nudged it toward Matplotlib’s headless mode. The quantitative split between curated and unnamed genes is striking—worth feeding into follow-up prioritisation rules.
+
+(my) Reflection: For some reason the codex agent decided to document what it did and reflect on it in this document.. This might not be a bad idea, although I need to separate the AIs reflection from mine.
+
+

@@ -4,3 +4,4 @@ temp/
 *.mmi
 *.gff_db
 *.log
+.cache/

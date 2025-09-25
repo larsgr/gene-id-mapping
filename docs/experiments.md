@@ -281,11 +281,11 @@ All modules were executed with the same input quartet, writing to `experiments/l
     -dir experiments/liftofftools_full_ensembl -force
 ```
 
-- **Variants** (38 min, reported RSS ≤ 26 GB) generated `variant_effects` with **130 585 transcripts** analysed. Distribution:
-  - 44.9 % identical, 11.9 % synonymous → **56.9 % CDS-conservative**.
-  - 13.8 % nonsynonymous; 10.6 % frameshift; 2.4 % start lost; smaller fractions for in-frame indels and truncations → **31.2 % CDS-altering**.
-  - 11.3 % `NA` entries correspond to non-coding transcripts (no CDS comparison).
-- To understand gene-level impact I mapped each transcript back to its Ensembl gene (`ID=transcript:*` / `Parent=gene:*` attributes in the ICSASG_v2 GFF3) and summarised the variant effect catalogue two ways:
+  - **Variants** (38 min, reported RSS ≤ 26 GB) generated `variant_effects` with **130 585 transcripts** analysed. Distribution:
+    - 44.9 % identical, 11.9 % synonymous → **56.9 % CDS-conservative**.
+    - 13.8 % nonsynonymous; 10.6 % frameshift; 2.4 % start lost; smaller fractions for in-frame indels and truncations → **31.2 % CDS-altering**.
+    - 11.3 % `NA` entries correspond to non-coding transcripts (no CDS comparison).
+  - To understand gene-level impact I mapped each transcript back to its Ensembl gene (`ID=transcript:*` / `Parent=gene:*` attributes in the ICSASG_v2 GFF3) and summarised the variant effect catalogue two ways:
   - **Optimistic rule** (take the least severe transcript outcome per gene, prioritising `identical → synonymous → noncoding → in-frame changes → nonsynonymous → frameshift/start/stop loss → truncations → unmapped`).
   - **Pessimistic rule** (take the most severe outcome in the same order, so any unmapped or frameshift isoform flags the whole gene).
   - Genes counted: **55 819** (some immune gene segments lack explicit `gene` features but still appear as `Parent=gene:*` in the GFF3).
@@ -301,6 +301,17 @@ All modules were executed with the same input quartet, writing to `experiments/l
   | unmapped isoforms   | 11 949  | 21.4 %       | 12 067            | 21.6 %         |
 
   The gap between optimistic and pessimistic counts highlights the 6–7 k genes where some transcripts still lift cleanly but others acquire damaging changes or fail to map. These aggregates will help drive gene-level confidence scoring in the downstream workflow.
+
+  **Named vs unnamed gene behaviour.** Hypothesis: curated (named) genes are more conserved. I split the optimistic per-gene calls into genes whose `gene` feature carries a `Name=` attribute (29 826 genes) versus those without it (25 993 genes, including ≈8.5 k loci that lack explicit `gene` features in the GFF3). Named genes retain far more identical mappings and rarely drop out during lift-over:
+
+  | Group | Genes | Identical | Synonymous | Protein change | Truncation | Unmapped | Noncoding |
+  |-------|-------|-----------|------------|----------------|------------|----------|-----------|
+  | `Name=` present | 29 826 | 18 317 (61.4 %) | 3 737 (12.5 %) | 6 846 (23.0 %) | 81 (0.27 %) | 825 (2.8 %) | 20 (0.07 %) |
+  | No `Name=` | 25 993 | 7 301 (28.1 %) | 913 (3.5 %) | 6 417 (24.7 %) | 211 (0.81 %) | 11 124 (42.8 %) | 27 (0.10 %) |
+
+  ![Gene naming vs Liftoff outcome](img/liftoff_gene_name_conservation.png)
+
+  A two-proportion z-test on the “identical” category (named 61.4 % vs unnamed 28.1 %) yields *z* = 78.8 (two-sided *p* < 10⁻¹³⁰), strongly supporting the idea that curated/named genes are preferentially conserved between assemblies. The unnamed set drives nearly all unmapped gene calls, so future confidence scoring should flag these loci for manual follow-up.
 - **Synteny** (13.8 min) produced `gene_order` (2.1 MB) and `gene_order_plot.pdf` summarising gene order differences:
   - 43 870 rows mirror the lifted gene count; median identity 0.999 (10th percentile 0.952).
   - 42 702 genes land on numbered Ssal_v3.1 chromosomes; 1 168 fall on smaller scaffolds.
