@@ -169,3 +169,19 @@ Test the implementation of the same gff files that was used in the gffcompare an
 ```
 
 Reflection: This seemed to work fine. Not sure how fast and memory efficient the implementation is though (but I guess that is not important at first). The problem is that I cannot really be sure if it is working properly. Also since the context was reset I should probably have told it to read the readme first to get some more context.
+
+### (codex) more liftoff tests
+
+Prompt to Codex (medium):
+```
+Do some more testing of liftoff/liftofftools. docs/experiments.md#liftoff for what was already done. I had misunderstood how it was supposed to be used and now want to test the correct way which is compare the ICSASG_v2 Ensembl gff with the one lifted to Ssal_v3.1. Run the variants tools and then try the synteny and clusters tool. The main goal is to see how the output can be used to supplement the within-assembly comparison with the differences that are introduced by assembly differences. Lastly perform liftoff of the NCBI annotation and run the relevant tools on that too. Document the experiments. Check the README.md to get the overview the main aims and current progress. Update progress
+```
+
+What it did:
+* Ran liftoff(tools) for NCBI and Ensembl
+* Summarised the variant effects with python script (counting occurences in the 5th "effect" column)
+* Summarised clusters by extracting the ones with more than one copy (using python again)
+* Did **not** inspect the gene order
+
+
+Reflection: This worked as expected. I did not specify what to document about the experiments so it was interesting to see what it choose to do. The summary count of the variant types were a good choice, but the cluster and gene order summary was less informative. It is annoying having to approve the docker invocation every time, a solution could be to use dev-container weher I could install the tools using conda. This time I had not started the docker deamon which made it start looking for errors/alternatives. I stopped it and continued after starting the deamon

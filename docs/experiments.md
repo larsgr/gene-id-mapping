@@ -170,17 +170,50 @@ As suspected there was no results as none of the IDs mapped. Even got a warning:
 
 > UserWarning: There are no gene features with matching IDs in the reference and target annotation
 
-#### conclusions
+#### Conclusions (initial test)
 
-This does not seem to be the tool I need. I believe the purpose of this tool is to check the quality of an annotation that has been lifted over. This can be useful for comparing different assemblies but is not so useful for comparing different existing annotations!
+The quick Ensembl-vs-NCBI run above gave no matches because I pointed LiftoffTools at two *independent* annotations with disjoint IDs. The tool really is focused on comparing an annotation to its lifted counterpart.
 
-The lifted-over annotations can be useful though, as they can be directly compared with tools that work within an assembly. In that case, it would be necessary take into account differences between the original and lifted over annotations.
+The idea below still holds: lift one annotation across assemblies, then compare "original vs lifted" to capture changes introduced by the assembly itself.
 
-Example: we want to compare **ref** with **target** but have to lift over **ref** before comparing. It could be that the assembly introduces differences but **ref_lifted** is identical to **target**. In that case `liftofftools variants` could be used to find differences caused by assembly differences. 
+**ref** -liftover→ **ref_lifted** ←compare→ **target**
 
-**ref** -liftover-> **ref_lifted** <-compare-> **target**
+With that in mind I re-ran the experiment the intended way (original ICSASG_v2 annotation vs the same annotation after Liftoff to Ssal_v3.1).
 
-Also the tool could be used to annotate differences for the annotations that have the same IDs
+### Correct usage: comparing an annotation to its Liftoff projection
+
+All commands were executed from the repo root with Docker images provided by BioContainers (see `experiments/liftofftools_crossassembly_*`).
+
+```bash
+# Example for the Ensembl annotation
+reference_fa=data/toy-assemblies/ICSASG_v2_hoxca.fa
+target_fa=data/toy-assemblies/Ssal_v3.1_hoxca.fa
+reference_gff3=data/toy-assemblies/ICSASG_v2_hoxca_Ens.gff
+target_gff3=experiments/liftoff_test/ICSASG_v2_to_Ssal_v3.1_hoxca_Ens.gff
+
+docker run --rm -v "$PWD":/workdir -w /workdir \
+  quay.io/biocontainers/liftofftools:0.4.3--pyhdfd78af_0 \
+  liftofftools variants -r "$reference_fa" -t "$target_fa" \
+    -rg "$reference_gff3" -tg "$target_gff3" -dir experiments/liftofftools_crossassembly_ensembl
+```
+
+The same pattern was used for the `synteny` and `clusters` modules, and for the NCBI annotation (swap GFF paths and use the liftoff output in `experiments/liftoff_test_ncbi`).
+
+| Dataset | transcripts compared | identical | synonymous | nonsynonymous | other |
+|---------|---------------------|-----------|------------|---------------|--------|
+| Ensembl | 28 | 22 | 2 | 4 | none |
+| NCBI    | 52 | 28 | 16 | 4 | 4 × `NA` (non-coding) |
+
+- **Variants** gives exactly what I needed: counts of transcripts whose CDS changed when jumping assemblies. The four Ensembl "nonsynonymous" cases line up with the transcripts where `within_assembly_compare` already reported mismatching CDS, confirming that those differences stem from assembly changes rather than the liftover process.
+- **Synteny** (`gene_order` + `gene_order_plot.pdf`) makes the large-scale differences explicit. For the HoxC A cluster the indices show a reversal between ICSASG_v2 and Ssal_v3.1—the first ten genes are inverted with perfect identity, mirroring what I saw in JBrowse.
+- **Clusters** highlights copy-number differences. Both datasets report a handful of 2:2 clusters (aa/ab paralog pairs) and `unmapped_closest_paralogs` is empty, so the liftover preserved all loci without dropping or duplicating genes.
+- Runtime for the toy region is a few seconds even under amd64 emulation; cluster mode leaves MMseqs intermediates on disk (`mmseqs_intermediates`), which can be cleaned after inspection.
+
+For the **NCBI** annotation the larger transcript count (52) gives more granularity: many isoforms differ only by synonymous substitutions, while four protein-coding transcripts pick up nonsynonymous changes (mostly in hoxc4/hoxc10 loci). Four entries are `NA` because those NCBI transcripts are annotated as non-coding, so CDS-level comparisons are skipped.
+
+Taken together, LiftoffTools now complements the custom within-assembly comparison: use `variants` to flag assembly-induced CDS changes, `synteny` to record orientation/order shifts, and `clusters` to track potential copy-number differences before handing the lifted annotation to the within-assembly comparator.
+
+
 
 
 
@@ -471,7 +504,7 @@ parseval -f html -o "$out" -w \
 
 It seems clear that LiftOff + within-assembly comparison is the way to go. I am however not very satisfied with gffcompare (does not consider CDS) and parseval (hard to parse output format and poorly maintained). It should not be so hard to implement a script to compare gff files using AI so that is a viable option.
 
-LiftOffTools Variants can be used to record the differences introduced in the liftover but I haven't tested the proper use of it yet.
+LiftoffTools (`variants`, `synteny`, `clusters`) plugs the gap by quantifying the changes introduced by switching assemblies before the within-assembly comparison runs.
 
 Also, I do not know how liftoff scales to the full genome. This needs to be tested.
 
