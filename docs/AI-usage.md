@@ -194,3 +194,12 @@ I have downloaded the entire ICSASG_v2 and Ssal_v3.1 genome and Ensembl annotati
 ```
 
 Reflection: It worked, which shows that codex can be used with long running tasks as long as it doesn’t need to ask for approval along the way. I did have trouble with docker running out of memory which the agent tried to solve by reducing threads, but which just required me to increase the docker memory limit. It also didn't consider running all of the tools in one go (which is an option in LiftoffTools). This would probably have saved some time. I wonder how it would work with slurm.. Would it set off multiple jobs in parallel? Would it know how to wait for the jobs to finish?
+
+PS: noticed that I did not ask it to run the variants tool but it did it anyway
+
+### (codex) add gene level variant stats
+
+```
+The variant_effects gives stats per transcript. I want per gene statistics. Calculate the same percentages as before but after summarising per gene. Do the gene summarisation in two ways: 1) the optimistic way where you select the best variant effect among the alternative transcripts (e.g. if at least one transcript is identical, count the gene as identical). 2) the pessimistic way where the worst variant
+```
+

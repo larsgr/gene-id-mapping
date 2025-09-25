@@ -285,6 +285,22 @@ All modules were executed with the same input quartet, writing to `experiments/l
   - 44.9 % identical, 11.9 % synonymous → **56.9 % CDS-conservative**.
   - 13.8 % nonsynonymous; 10.6 % frameshift; 2.4 % start lost; smaller fractions for in-frame indels and truncations → **31.2 % CDS-altering**.
   - 11.3 % `NA` entries correspond to non-coding transcripts (no CDS comparison).
+- To understand gene-level impact I mapped each transcript back to its Ensembl gene (`ID=transcript:*` / `Parent=gene:*` attributes in the ICSASG_v2 GFF3) and summarised the variant effect catalogue two ways:
+  - **Optimistic rule** (take the least severe transcript outcome per gene, prioritising `identical → synonymous → noncoding → in-frame changes → nonsynonymous → frameshift/start/stop loss → truncations → unmapped`).
+  - **Pessimistic rule** (take the most severe outcome in the same order, so any unmapped or frameshift isoform flags the whole gene).
+  - Genes counted: **55 819** (some immune gene segments lack explicit `gene` features but still appear as `Parent=gene:*` in the GFF3).
+  - Output tables live in `experiments/liftofftools_full_ensembl/variant_effects_gene_best.tsv` and `variant_effects_gene_worst.tsv`.
+
+  | Effect class | Optimistic genes | Optimistic % | Pessimistic genes | Pessimistic % |
+  |--------------|-----------------|--------------|-------------------|----------------|
+  | identical    | 25 618          | 45.9 %       | 21 687            | 38.9 %         |
+  | synonymous   | 4 650           | 8.3 %        | 3 957             | 7.1 %          |
+  | protein change (any) | 13 263 | 23.8 %       | 17 525            | 31.4 %         |
+  | truncation (5′/3′) | 292      | 0.5 %        | 552               | 1.0 %          |
+  | non-coding (`NA`)   | 47      | 0.1 %        | 31                | 0.1 %          |
+  | unmapped isoforms   | 11 949  | 21.4 %       | 12 067            | 21.6 %         |
+
+  The gap between optimistic and pessimistic counts highlights the 6–7 k genes where some transcripts still lift cleanly but others acquire damaging changes or fail to map. These aggregates will help drive gene-level confidence scoring in the downstream workflow.
 - **Synteny** (13.8 min) produced `gene_order` (2.1 MB) and `gene_order_plot.pdf` summarising gene order differences:
   - 43 870 rows mirror the lifted gene count; median identity 0.999 (10th percentile 0.952).
   - 42 702 genes land on numbered Ssal_v3.1 chromosomes; 1 168 fall on smaller scaffolds.
