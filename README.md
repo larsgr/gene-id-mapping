@@ -104,7 +104,7 @@ Existing relevant tools identified:
 | **ParsEval** | Compares alternative annotations. (note: hard to parse output format) |
 | **GeneOverlapAnnotator** | Part of SVAnnotator, returns gene/transcript overlap stats. (not tested) |
 
-We now have full experiment notes for **Liftoff**, **GffCompare**, and **ParsEval** in [docs/experiments.md](docs/experiments.md). ParsEval's reporting confirmed CDS-conserving vs CDS-changing differences but remains cumbersome to parse, motivating development of a custom within-assembly comparison script (`within_assembly_compare.py`).
+We now have full experiment notes for **Liftoff / LiftoffTools**, **GffCompare**, and **ParsEval** in [docs/experiments.md](docs/experiments.md). GffCompare does not consider CDS features and while ParsEval's reports CDS-changing differences it remains cumbersome to parse, motivating development of a custom within-assembly comparison script (`within_assembly_compare.py`). Since the custom script seems to do the job there is no need to test the rest of the tools. The strategy will be to use Liftoff, LiftoffTools (variants and synteny) combined with a custom script to compare the lifted gff with other annotations within each assembly.
 
 ---
 

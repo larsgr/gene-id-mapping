@@ -205,9 +205,9 @@ The same pattern was used for the `synteny` and `clusters` modules, and for the 
 | NCBI    | 52 | 28 | 16 | 4 | 4 × `NA` (non-coding) |
 
 - **Variants** gives exactly what I needed: counts of transcripts whose CDS changed when jumping assemblies. The four Ensembl "nonsynonymous" cases line up with the transcripts where `within_assembly_compare` already reported mismatching CDS, confirming that those differences stem from assembly changes rather than the liftover process.
-- **Synteny** (`gene_order` + `gene_order_plot.pdf`) makes the large-scale differences explicit. For the HoxC A cluster the indices show a reversal between ICSASG_v2 and Ssal_v3.1—the first ten genes are inverted with perfect identity, mirroring what I saw in JBrowse.
-- **Clusters** highlights copy-number differences. Both datasets report a handful of 2:2 clusters (aa/ab paralog pairs) and `unmapped_closest_paralogs` is empty, so the liftover preserved all loci without dropping or duplicating genes.
-- Runtime for the toy region is a few seconds even under amd64 emulation; cluster mode leaves MMseqs intermediates on disk (`mmseqs_intermediates`), which can be cleaned after inspection.
+- **Synteny** (`gene_order` + `gene_order_plot.pdf`) makes the large-scale differences explicit. For the HoxC A cluster the indices show a reversal between ICSASG_v2 and Ssal_v3.1—the first ten genes are inverted with perfect identity, mirroring what I saw in JBrowse. Noted that the order is based on the start of the gene and not TSS so the local order may appear changed inside a region that is reversed.
+- **Clusters** highlights copy-number differences. Each dataset report a couple of 2:2 clusters which are in fact ohnolog pairs. And `unmapped_closest_paralogs` is empty, so the liftover preserved all loci without dropping or duplicating genes.
+- cluster mode leaves MMseqs intermediates on disk (`mmseqs_intermediates`), which can be cleaned after inspection.
 
 For the **NCBI** annotation the larger transcript count (52) gives more granularity: many isoforms differ only by synonymous substitutions, while four protein-coding transcripts pick up nonsynonymous changes (mostly in hoxc4/hoxc10 loci). Four entries are `NA` because those NCBI transcripts are annotated as non-coding, so CDS-level comparisons are skipped.
 

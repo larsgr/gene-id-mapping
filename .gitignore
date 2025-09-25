@@ -3,3 +3,4 @@ temp/
 *.fai
 *.mmi
 *.gff_db
+*.log
