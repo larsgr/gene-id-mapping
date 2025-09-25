@@ -5,3 +5,4 @@ temp/
 *.gff_db
 *.log
 .cache/
+.matplotlib-cache/

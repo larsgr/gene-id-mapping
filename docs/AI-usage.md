@@ -218,4 +218,17 @@ What it did:
 
 (my) Reflection: For some reason the codex agent decided to document what it did and reflect on it in this document.. This might not be a bad idea, although I need to separate the AIs reflection from mine.
 
+### (codex) Persist variant-effect analysis scripts
 
+```
+Save all the scripts used for calculating variant effect stats as python files in the experiments/liftofftools_full_ensembl directory
+```
+
+What it did:
+* Reconstructed the ad-hoc notebook snippets into two reusable scripts: `summarise_variant_effects.py` (generates per-gene best/worst calls) and `compare_named_vs_unnamed.py` (recreates the gene-name analysis, chart, and stats).
+* Ran both scripts to refresh the TSV outputs and regenerate the figure, wiring Matplotlib to use a local cache so the CLI workflow stays headless-friendly.
+* Updated `.gitignore` to exclude Matplotlib cache folders.
+
+Codex reflection: Nice quality-of-life improvement—having the logic scripted clears a path toward baking these steps into the future workflow or a Makefile target.
+
+My reflection: I realized that having the AI agent run ad-hoc scripts is not reproducible, so I asked it to save the scripts as files. Going forward I should probably have it save all the scripts, perhaphs using python notebook. There are of course many commands the agent runs to explore files and build context which is not needed for reproducibility, so I may need to be smart about the instructions.
