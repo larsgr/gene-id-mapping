@@ -312,6 +312,24 @@ All modules were executed with the same input quartet, writing to `experiments/l
   ![Gene naming vs Liftoff outcome](img/liftoff_gene_name_conservation.png)
 
   A two-proportion z-test on the “identical” category (named 61.4 % vs unnamed 28.1 %) yields *z* = 78.8 (two-sided *p* < 10⁻¹³⁰), strongly supporting the idea that curated/named genes are preferentially conserved between assemblies. The unnamed set drives nearly all unmapped gene calls, so future confidence scoring should flag these loci for manual follow-up.
+
+  **Unmapped gene audit.** To understand the surprisingly large “unmapped” bucket (11 949 genes) I ran `experiments/liftofftools_full_ensembl/analyze_unmapped_genes.py`:
+
+  ```bash
+  python3 experiments/liftofftools_full_ensembl/analyze_unmapped_genes.py \
+    --best-effects experiments/liftofftools_full_ensembl/variant_effects_gene_best.tsv \
+    --gff data/genomes/AtlanticSalmon/ICSASG_v2_Ens.gff3 \
+    --outdir experiments/liftofftools_full_ensembl
+  ```
+
+  Key takeaways (full tables in `unmapped_genes_annotation.tsv` and summary JSON in the same directory):
+
+  - Location split: **55 % (6 595)** reside on unplaced scaffolds, **45 % (5 354)** still sit on named chromosomes. Anchored hotspots include `ssa06`, `ssa03`, `ssa12`, and `ssa09` (each >250 unmapped genes).
+  - Biotypes reveal why many lifts fail: small RNA classes dominate (`snRNA` 2 916, `lncRNA` 2 472, `snoRNA` 1 436, `miRNA` 497), alongside **3 458 protein-coding genes** and ~800 pseudogenes.
+  - Gene naming offers another clue: 5 080 have curated names (most frequently **U1/U2/U5/U3/U6** spliceosomal RNAs or `Metazoa_SRP`), while 6 869 lack `Name=` entirely; chromosome-anchored unmapped genes are predominantly unnamed (3 722/5 354).
+  - For scaffolds, unmapped protein-coding genes (2 669) cluster on many short contigs plus the mitochondrial scaffold (`MT`). Chromosome-anchored unmapped genes are richer in long non-coding RNAs and small RNAs.
+
+  Overall, the “unmapped” label mostly flags non-coding RNA loci, pseudogenes, and scaffold-only protein-coding models that lack close sequence support on Ssal_v3.1—plausible dropouts when the assembly or alignment context changes.
 - **Synteny** (13.8 min) produced `gene_order` (2.1 MB) and `gene_order_plot.pdf` summarising gene order differences:
   - 43 870 rows mirror the lifted gene count; median identity 0.999 (10th percentile 0.952).
   - 42 702 genes land on numbered Ssal_v3.1 chromosomes; 1 168 fall on smaller scaffolds.

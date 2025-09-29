@@ -239,4 +239,18 @@ Add references to the analysis scripts in experiments.md
 
 Reflection: I noticed that it did not refer to the scripts in the documentation during the previous prompt. Should probably have some instructions about always refering to the scripts that are used to make the report more reproducible.
 
+### (codex) Investigate unmapped Liftoff genes
+
+```
+I am curious about the large number of "Unmapped" genes. Since the assemblies are from the same species they should contain the same genes with exception of genes in stuctural variants in the population. Are the unmapped genes on chromosomes or unmapped scaffolds? Does the original gff contain some description/annotation that gives any clue? Perform an analysis. To make the analysis reproducible remember to document the procedure and findings in experiments.md and the prompt and summary of actions in AI-Usage.
+```
+
+What it did:
+* Added `analyze_unmapped_genes.py`, a helper that merges the Liftoff per-gene table with the source GFF to capture seqid, biotype, naming, and descriptions; produced both TSV (`unmapped_genes_annotation.tsv`) and JSON summaries.
+* Ran the helper and a few follow-up snippets to quantify chromosome vs scaffold counts, biotype composition, name coverage, and recurrent gene annotations (spliceosomal RNAs, snoRNAs, etc.).
+* Updated `docs/experiments.md` with the command, headline numbers, and interpretation so the analysis is reproducible.
+
+Codex reflection: Converting the ad-hoc checks into a script paid off quickly—the TSV/JSON outputs make it trivial to slice the data in other ways if we revisit these unmapped loci.
+
+My reflection: Looks like a useful analysis but the numbers do not match the previous analysis. Can I trust it?? (also not sure what the codex reflection is about)
 

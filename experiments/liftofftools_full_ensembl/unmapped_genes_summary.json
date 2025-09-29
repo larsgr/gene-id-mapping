@@ -1,0 +1,31 @@
+{
+  "biotype": {
+    "Mt_rRNA": 2,
+    "Mt_tRNA": 22,
+    "TR_V_gene": 1,
+    "Y_RNA": 2,
+    "lncRNA": 2472,
+    "miRNA": 497,
+    "misc_RNA": 161,
+    "processed_pseudogene": 47,
+    "protein_coding": 3458,
+    "pseudogene": 793,
+    "rRNA": 72,
+    "ribozyme": 29,
+    "scaRNA": 35,
+    "snRNA": 2916,
+    "snoRNA": 1436,
+    "vault_RNA": 6
+  },
+  "location": {
+    "anchored_chromosome": 5354,
+    "unplaced_scaffold": 6595
+  },
+  "missing": {
+    "missing_metadata": 0
+  },
+  "name": {
+    "has_name": 5080,
+    "no_name": 6869
+  }
+}
