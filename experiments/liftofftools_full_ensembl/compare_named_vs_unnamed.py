@@ -59,9 +59,11 @@ def load_gene_names(gff_path: Path) -> dict[str, bool]:
             if line.startswith("#") or "\t" not in line:
                 continue
             fields = line.rstrip("\n").split("\t")
-            if len(fields) < 9 or fields[2] != "gene":
+            if len(fields) < 9:
                 continue
             attrs = fields[8]
+            if "ID=gene:" not in attrs:
+                continue
             match = pattern.search(attrs)
             if not match:
                 continue

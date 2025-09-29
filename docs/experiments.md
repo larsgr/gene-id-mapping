@@ -302,16 +302,16 @@ All modules were executed with the same input quartet, writing to `experiments/l
 
   The gap between optimistic and pessimistic counts highlights the 6–7 k genes where some transcripts still lift cleanly but others acquire damaging changes or fail to map. These aggregates will help drive gene-level confidence scoring in the downstream workflow.
 
-  **Named vs unnamed gene behaviour.** Hypothesis: curated (named) genes are more conserved. Using `experiments/liftofftools_full_ensembl/compare_named_vs_unnamed.py` (fed by the summariser above) I split the optimistic per-gene calls into genes whose `gene` feature carries a `Name=` attribute (29 826 genes) versus those without it (25 993 genes, including ≈8.5 k loci that lack explicit `gene` features in the GFF3). Named genes retain far more identical mappings and rarely drop out during lift-over:
+  **Named vs unnamed gene behaviour.** Hypothesis: curated (named) genes are more conserved. Using `experiments/liftofftools_full_ensembl/compare_named_vs_unnamed.py` (fed by the summariser above) I split the optimistic per-gene calls into genes whose annotation includes a `Name=` attribute on any `*gene` feature (34 081 genes) versus those without it (21 738 genes). Named genes still retain far more identical mappings and rarely drop out during lift-over:
 
   | Group | Genes | Identical | Synonymous | Protein change | Truncation | Unmapped | Noncoding |
   |-------|-------|-----------|------------|----------------|------------|----------|-----------|
-  | `Name=` present | 29 826 | 18 317 (61.4 %) | 3 737 (12.5 %) | 6 846 (23.0 %) | 81 (0.27 %) | 825 (2.8 %) | 20 (0.07 %) |
-  | No `Name=` | 25 993 | 7 301 (28.1 %) | 913 (3.5 %) | 6 417 (24.7 %) | 211 (0.81 %) | 11 124 (42.8 %) | 27 (0.10 %) |
+  | `Name=` present | 34 081 | 18 317 (53.7 %) | 3 737 (11.0 %) | 6 846 (20.1 %) | 81 (0.24 %) | 5 080 (14.9 %) | 20 (0.06 %) |
+  | No `Name=` | 21 738 | 7 301 (33.6 %) | 913 (4.20 %) | 6 417 (29.5 %) | 211 (0.97 %) | 6 869 (31.6 %) | 27 (0.12 %) |
 
   ![Gene naming vs Liftoff outcome](img/liftoff_gene_name_conservation.png)
 
-  A two-proportion z-test on the “identical” category (named 61.4 % vs unnamed 28.1 %) yields *z* = 78.8 (two-sided *p* < 10⁻¹³⁰), strongly supporting the idea that curated/named genes are preferentially conserved between assemblies. The unnamed set drives nearly all unmapped gene calls, so future confidence scoring should flag these loci for manual follow-up.
+  A two-proportion z-test on the “identical” category (named 53.8 % vs unnamed 33.6 %) yields *z* = 46.6 (two-sided *p* ≪ 10⁻¹⁰⁰), strongly supporting the idea that curated/named genes are preferentially conserved between assemblies. Even after accounting for subtype-specific `ncRNA_gene` features, unnamed loci still contribute the majority of unmapped genes (6 869 vs 5 080), so they remain prime candidates for manual follow-up.
 
   **Unmapped gene audit.** To understand the surprisingly large “unmapped” bucket (11 949 genes) I ran `experiments/liftofftools_full_ensembl/analyze_unmapped_genes.py`:
 

@@ -254,3 +254,27 @@ Codex reflection: Converting the ad-hoc checks into a script paid off quickly—
 
 My reflection: Looks like a useful analysis but the numbers do not match the previous analysis. Can I trust it?? (also not sure what the codex reflection is about)
 
+### (codex) Explain named–vs–unnamed discrepancy
+
+```
+The number of named genes among the Unmapped genes is not the same as reported before. compare_named_vs_unnamed.py reported 825 Unmapped with "Name=" and 11 124 without "Name=" in the table in experments.md. analyze_unmapped_genes.py reports "has_name": 5080, "no_name": 6869. What causes this difference?
+```
+
+What it did:
+* Compared how each helper script detected gene features and realised the older analysis only looked at rows whose type was exactly `gene`, missing `ncRNA_gene`, `snRNA_gene`, etc.
+* Confirmed via the GFF that most of the unmapped loci are annotated with those subtype labels, explaining the mismatch in named counts.
+
+Codex reflection: Good reminder to key off the `ID=gene:` attribute instead of hard-coding the feature type when working with Ensembl GFF3 files.
+
+### (codex) Fix named–vs–unnamed analysis
+
+```
+That means that the the named vs unnamed analysis is wrong. Fix the script to include all types of genes. rerun and update the experiments.md. Remember ot update AI-usage.md with this and the previous prompt
+```
+
+What it did:
+* Updated `compare_named_vs_unnamed.py` to treat any feature containing `ID=gene:` as a gene record, reran the analysis, and regenerated the chart/summary TSV.
+* Refreshed `docs/experiments.md` with the corrected counts (34 081 named vs 21 738 unnamed) and updated z-test statistics.
+* Logged both the discrepancy investigation and fix here for future reference.
+
+Codex reflection: The corrected workflow now aligns with the unmapped gene audit (5 080 named vs 6 869 unnamed) and is robust to future GFF subtype quirks.
