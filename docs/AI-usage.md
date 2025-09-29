@@ -232,3 +232,11 @@ What it did:
 Codex reflection: Nice quality-of-life improvement—having the logic scripted clears a path toward baking these steps into the future workflow or a Makefile target.
 
 My reflection: I realized that having the AI agent run ad-hoc scripts is not reproducible, so I asked it to save the scripts as files. Going forward I should probably have it save all the scripts, perhaphs using python notebook. There are of course many commands the agent runs to explore files and build context which is not needed for reproducibility, so I may need to be smart about the instructions.
+
+```
+Add references to the analysis scripts in experiments.md
+```
+
+Reflection: I noticed that it did not refer to the scripts in the documentation during the previous prompt. Should probably have some instructions about always refering to the scripts that are used to make the report more reproducible.
+
+

@@ -289,7 +289,7 @@ All modules were executed with the same input quartet, writing to `experiments/l
   - **Optimistic rule** (take the least severe transcript outcome per gene, prioritising `identical → synonymous → noncoding → in-frame changes → nonsynonymous → frameshift/start/stop loss → truncations → unmapped`).
   - **Pessimistic rule** (take the most severe outcome in the same order, so any unmapped or frameshift isoform flags the whole gene).
   - Genes counted: **55 819** (some immune gene segments lack explicit `gene` features but still appear as `Parent=gene:*` in the GFF3).
-  - Output tables live in `experiments/liftofftools_full_ensembl/variant_effects_gene_best.tsv` and `variant_effects_gene_worst.tsv`.
+  - Output tables live in `experiments/liftofftools_full_ensembl/variant_effects_gene_best.tsv` and `variant_effects_gene_worst.tsv`; regenerate them with `experiments/liftofftools_full_ensembl/summarise_variant_effects.py` when needed.
 
   | Effect class | Optimistic genes | Optimistic % | Pessimistic genes | Pessimistic % |
   |--------------|-----------------|--------------|-------------------|----------------|
@@ -302,7 +302,7 @@ All modules were executed with the same input quartet, writing to `experiments/l
 
   The gap between optimistic and pessimistic counts highlights the 6–7 k genes where some transcripts still lift cleanly but others acquire damaging changes or fail to map. These aggregates will help drive gene-level confidence scoring in the downstream workflow.
 
-  **Named vs unnamed gene behaviour.** Hypothesis: curated (named) genes are more conserved. I split the optimistic per-gene calls into genes whose `gene` feature carries a `Name=` attribute (29 826 genes) versus those without it (25 993 genes, including ≈8.5 k loci that lack explicit `gene` features in the GFF3). Named genes retain far more identical mappings and rarely drop out during lift-over:
+  **Named vs unnamed gene behaviour.** Hypothesis: curated (named) genes are more conserved. Using `experiments/liftofftools_full_ensembl/compare_named_vs_unnamed.py` (fed by the summariser above) I split the optimistic per-gene calls into genes whose `gene` feature carries a `Name=` attribute (29 826 genes) versus those without it (25 993 genes, including ≈8.5 k loci that lack explicit `gene` features in the GFF3). Named genes retain far more identical mappings and rarely drop out during lift-over:
 
   | Group | Genes | Identical | Synonymous | Protein change | Truncation | Unmapped | Noncoding |
   |-------|-------|-----------|------------|----------------|------------|----------|-----------|
