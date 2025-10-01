@@ -13,9 +13,11 @@ The transcript pass still computes the raw measures. They drive both the
 transcript report and the gene aggregation logic, so persist the raw counts and
 derived fractions.
 
-- `Jaccard_exon`: overlapping exon bp ÷ union of exon bp.
+- `Jaccard_exon`: overlapping exon bp ÷ union of exon bp. Here the "union"
+  means the combined genomic footprint of the two transcripts being compared.
 - `Jaccard_CDS_phase`: overlapping CDS bp (same strand, same inferred codon
-  phase) ÷ union of CDS bp; ignore segments where one side lacks CDS.
+  phase) ÷ union of CDS bp for that transcript pair; ignore segments where one
+  side lacks CDS.
 - `Junction_F1_all`: F1-score over all splice junctions.
 - `Junction_F1_CDS`: F1-score over CDS junctions only.
 - `Strand_agree`: boolean flag; false means antisense.
@@ -53,6 +55,16 @@ Rolling up to genes introduces a second pass:
 This extra pass can reuse the in-memory structures already built for overlap
 detection in `within_assembly_compare.py`: extend the gene object so it tracks
 its transcript mappings and exposes helper methods for the aggregation logic.
+
+### Gene Exon Footprint vs. Transcript Union
+
+Per-gene statistics may still need a "gene exon footprint" for each annotation:
+the union of exons across every transcript isoform for a gene. This concept is
+distinct from the per-transcript "union of exon bp" used in the Jaccard metrics
+above, which considers only the two transcripts being compared. When aggregating
+to genes, make the distinction explicit in code and naming so downstream
+consumers do not confuse the gene-level footprint with the transcript-pair
+union.
 
 ## Gene-Level Classification Rules
 
@@ -155,6 +167,9 @@ gene rows when present.
   Yellow/Red or get shunted to NotMapped with `Conflict` notes.
 - **Representative transcript selection**: decide if the gene summary should
   cite a single best transcript pair or retain all supporting pairs.
+- **Terminology for unions**: ensure the code and outputs clearly separate the
+  per-transcript union used for Jaccard metrics from the gene-wide exon
+  footprint aggregation.
 
 These decisions can be iterated on once the per-gene aggregation is hooked into
 `within_assembly_compare.py` and we can inspect real-world output.

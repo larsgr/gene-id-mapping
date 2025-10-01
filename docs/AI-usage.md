@@ -320,3 +320,11 @@ Clean up this document. Add some discussion of how to go from the initial per tr
 ```
 
 reflection: I think it might be missunderstanding the "union of exon" which is supposed to be the union across transcript isoforms so does not make any sense on a per transript basis. I like the **Open Design Decisions** sections as it allows me to come with some feedback.
+
+### (codex) clearify "union of exons"
+
+```
+The definition for "union of exons" was not clear. The initial idea was to combine exons of all transcrtipt isoforms of gene (from a single annotation) into a single "union" transcript. This is not to be confused with the "union of exons" when calculating jaccard index between two annotations. Is this clear? Discuss how this will affect the design document
+```
+
+reflection: It only made slight changes to the design without re-evaluating the whole thing. Making small incremental changes is probably a good idea when coding, but I am afraid it missed the point here that it rewrite a large part. Is it best to continue with this context or to make a more clear specification and reset the context?
