@@ -278,3 +278,45 @@ What it did:
 * Logged both the discrepancy investigation and fix here for future reference.
 
 Codex reflection: The corrected workflow now aligns with the unmapped gene audit (5 080 named vs 6 869 unnamed) and is robust to future GFF subtype quirks.
+
+## Design and develop custom comparison script
+
+### initial notes comparison-script-design
+
+I prompted chatGPT with my initial green, yellow, red classification rules to have them refined: 
+
+```
+I am writing a program to compare gene annotations (gff files) between multiple annotations on the same assembly. The goal is to get a list of mapping between genes with a simple indicator of the quality of the mapping. The input is pairwise mapping of transcript isoforms with information with information about the overlap.
+
+Suggested rules for mapping quality classification:
+
+Green (high quality, it is the same gene): 
+Coding genes: reciprocally longest CDS overlaps 100%
+Non-coding: reciprocally longest transcript has >90% overlap AND all introns shared
+
+Yellow (medium quality, significant overlap but be aware of differences):
+Coding genes: > 50% CDS match in at least one transcript
+Non-coding: union of exons overlaps with >50% or with the other union transcripts
+
+Red (low quality, little overlap):
+coding and non-coding: same strand with ( >10% exon union overlap OR > 1 shared intron) OR other strand strand with >50% exon overlap
+
+Mappings that fail low quality are not considered to map and are not included in the mapping table.
+
+Discuss the suggested rules
+```
+
+It gave some good points about being more specific, using jaccard index and a list of measures to keep. It also made some suggestions that are not relevant within the same assemblies, such as synteny and identity. I pointed out the issues and got a more refined and detailed specification which I pasted into docs/comparison-script-design.md
+
+### (codex) refine the comparison-script-design.md
+
+prompt to codex (medium):
+
+```
+It is time to start designing the custom comparison script. Prepare to discuss the implementation of a within-assembly parser by looking at what was already done with in within_assembly_compare.py (refer to the notes in experiments.md and prompt in AI-usage.md) 
+
+The next step is to modify the script to summarise per gene mapping. The mapping shall be classified based on the quality of the mapping. I have put some notes in docs/comparison-script-design.md
+Clean up this document. Add some discussion of how to go from the initial per transcript mapping implementation to a per gene mapping. Also discuss if there are any design decisions that needs to be made.
+```
+
+reflection: I think it might be missunderstanding the "union of exon" which is supposed to be the union across transcript isoforms so does not make any sense on a per transript basis. I like the **Open Design Decisions** sections as it allows me to come with some feedback.
