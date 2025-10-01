@@ -1,27 +1,73 @@
 #!/usr/bin/env python3
-"""Within-assembly GFF3 comparison parser.
+"""Streamed within-assembly GFF3 comparison parser.
 
-This script compares two or more sorted GFF3 annotation files from the same
-assembly and reports per-gene and per-transcript overlap statistics for every
-pair of overlapping genes across annotations. It has no third-party
-dependencies and focuses on structural and CDS-aware similarities.
+This implementation compares sorted GFF3 annotation files for the same genome
+assembly. It streams gene records from the input, computes transcript-level
+metrics, rolls them up to per-gene summaries, and writes the results while
+keeping only the active locus in memory. Transcript rows are optional and can
+be interleaved with gene summaries on request.
 """
 
 from __future__ import annotations
 
 import argparse
-import collections
-import os
+import itertools
+import math
 import sys
-from dataclasses import dataclass
-from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Tuple
+from dataclasses import dataclass, field
+from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple, Union
 
 
 # ---------------------------------------------------------------------------
-# Generic helpers
+# Types and constants
 # ---------------------------------------------------------------------------
 
 Interval = Tuple[int, int]
+
+TRANSCRIPT_TYPES = {
+    "mRNA",
+    "transcript",
+    "ncRNA",
+    "lnc_RNA",
+    "miRNA",
+    "rRNA",
+    "tRNA",
+    "snRNA",
+    "snoRNA",
+    "primary_transcript",
+    "pseudogenic_transcript",
+}
+
+SEVERITY_ORDER = {
+    "NotMapped": 0,
+    "Red": 1,
+    "Yellow": 2,
+    "Green": 3,
+}
+
+# Threshold constants (can be surfaced as CLI options later if needed)
+GREEN_JACCARD_CDS = 0.98
+GREEN_JACCARD_CDS_SECONDARY = 0.95
+GREEN_JUNCTION_CDS = 0.95
+
+GREEN_NONCODING_JACCARD = 0.90
+GREEN_NONCODING_JUNCTION = 0.95
+GREEN_MONOEXONIC_JACCARD = 0.95
+GREEN_MONOEXONIC_RATIO_DELTA = 0.10
+
+YELLOW_JACCARD_CDS_LOW = 0.50
+YELLOW_JUNCTION_CDS_LOW = 0.50
+YELLOW_JACCARD_CDS_MIN = 0.40
+YELLOW_JACCARD_NONCODING_LOW = 0.50
+YELLOW_JUNCTION_NONCODING_LOW = 0.50
+YELLOW_MONOEXONIC_JACCARD_LOW = 0.50
+
+RED_JACCARD_EXON_LOW = 0.10
+
+
+# ---------------------------------------------------------------------------
+# Helper utilities
+# ---------------------------------------------------------------------------
 
 
 def parse_attributes(raw: str) -> Dict[str, str]:
@@ -37,10 +83,10 @@ def parse_attributes(raw: str) -> Dict[str, str]:
     return attrs
 
 
-def merge_intervals(intervals: Sequence[Interval]) -> List[Interval]:
-    if not intervals:
-        return []
+def merge_intervals(intervals: Iterable[Interval]) -> List[Interval]:
     sorted_intervals = sorted(intervals, key=lambda x: (x[0], x[1]))
+    if not sorted_intervals:
+        return []
     merged: List[List[int]] = [[sorted_intervals[0][0], sorted_intervals[0][1]]]
     for start, end in sorted_intervals[1:]:
         last = merged[-1]
@@ -52,11 +98,15 @@ def merge_intervals(intervals: Sequence[Interval]) -> List[Interval]:
     return [(start, end) for start, end in merged]
 
 
-def intervals_overlap(intervals_a: Sequence[Interval], intervals_b: Sequence[Interval]) -> bool:
+def intervals_length(intervals: Iterable[Interval]) -> int:
+    return sum(end - start + 1 for start, end in intervals)
+
+
+def intervals_overlap(a: Sequence[Interval], b: Sequence[Interval]) -> bool:
     i = j = 0
-    while i < len(intervals_a) and j < len(intervals_b):
-        a_start, a_end = intervals_a[i]
-        b_start, b_end = intervals_b[j]
+    while i < len(a) and j < len(b):
+        a_start, a_end = a[i]
+        b_start, b_end = b[j]
         if a_end < b_start:
             i += 1
         elif b_end < a_start:
@@ -66,12 +116,12 @@ def intervals_overlap(intervals_a: Sequence[Interval], intervals_b: Sequence[Int
     return False
 
 
-def intersection_length(intervals_a: Sequence[Interval], intervals_b: Sequence[Interval]) -> int:
+def intersection_length(a: Sequence[Interval], b: Sequence[Interval]) -> int:
     i = j = 0
     total = 0
-    while i < len(intervals_a) and j < len(intervals_b):
-        a_start, a_end = intervals_a[i]
-        b_start, b_end = intervals_b[j]
+    while i < len(a) and j < len(b):
+        a_start, a_end = a[i]
+        b_start, b_end = b[j]
         start = max(a_start, b_start)
         end = min(a_end, b_end)
         if start <= end:
@@ -83,13 +133,48 @@ def intersection_length(intervals_a: Sequence[Interval], intervals_b: Sequence[I
     return total
 
 
-def intervals_length(intervals: Sequence[Interval]) -> int:
-    return sum(end - start + 1 for start, end in intervals)
+def union_length(a: Sequence[Interval], b: Sequence[Interval]) -> int:
+    if not a and not b:
+        return 0
+    return intervals_length(merge_intervals(list(a) + list(b)))
+
+
+def f1_score(matches: int, count_a: int, count_b: int) -> float:
+    if count_a == 0 and count_b == 0:
+        return 1.0
+    denom = count_a + count_b
+    if denom == 0:
+        return 0.0
+    return 2.0 * matches / denom
+
+
+def float_to_str(value: float) -> str:
+    return f"{value:.4f}" if not math.isnan(value) else "nan"
+
+
+def stats_to_string(stats: Dict[str, Union[int, float, str]]) -> str:
+    parts: List[str] = []
+    for key in sorted(stats.keys()):
+        value = stats[key]
+        if isinstance(value, float):
+            parts.append(f"{key}={float_to_str(value)}")
+        else:
+            parts.append(f"{key}={value}")
+    return ";".join(parts)
+
+
+def severity_max(a: str, b: str) -> str:
+    return a if SEVERITY_ORDER[a] >= SEVERITY_ORDER[b] else b
+
+
+def severity_min(a: str, b: str) -> str:
+    return a if SEVERITY_ORDER[a] <= SEVERITY_ORDER[b] else b
 
 
 # ---------------------------------------------------------------------------
 # Domain objects
 # ---------------------------------------------------------------------------
+
 
 @dataclass
 class CodingSegment:
@@ -120,68 +205,69 @@ class Transcript:
         "exons",
         "cds_raw",
         "merged_exons",
+        "merged_cds",
         "intron_boundaries",
+        "cds_intron_boundaries",
         "exon_bp",
         "coding_segments",
         "coding_bp",
+        "monoexonic",
     )
 
-    def __init__(
-        self,
-        transcript_id: str,
-        gene_id: str,
-        seqid: str,
-        strand: str,
-        span_start: Optional[int] = None,
-        span_end: Optional[int] = None,
-    ) -> None:
+    def __init__(self, transcript_id: str, gene_id: str, seqid: str, strand: str) -> None:
         self.id = transcript_id
         self.gene_id = gene_id
         self.seqid = seqid
         self.strand = strand
-        self.span_start = span_start if span_start is not None else sys.maxsize
-        self.span_end = span_end if span_end is not None else -sys.maxsize
+        self.span_start = sys.maxsize
+        self.span_end = -sys.maxsize
         self.exons: List[Interval] = []
         self.cds_raw: List[Interval] = []
         self.merged_exons: List[Interval] = []
+        self.merged_cds: List[Interval] = []
         self.intron_boundaries: List[Tuple[int, int]] = []
+        self.cds_intron_boundaries: List[Tuple[int, int]] = []
         self.exon_bp: int = 0
         self.coding_segments: List[CodingSegment] = []
         self.coding_bp: int = 0
+        self.monoexonic = True
+
+    def update_span(self, start: int, end: int) -> None:
+        if start < self.span_start:
+            self.span_start = start
+        if end > self.span_end:
+            self.span_end = end
 
     def add_exon(self, start: int, end: int) -> None:
         self.exons.append((start, end))
-        if start < self.span_start:
-            self.span_start = start
-        if end > self.span_end:
-            self.span_end = end
+        self.update_span(start, end)
 
     def add_cds(self, start: int, end: int) -> None:
         self.cds_raw.append((start, end))
-        if start < self.span_start:
-            self.span_start = start
-        if end > self.span_end:
-            self.span_end = end
+        self.update_span(start, end)
 
     def finalize(self) -> None:
         if not self.exons:
             self.merged_exons = []
             self.intron_boundaries = []
             self.exon_bp = 0
+            self.monoexonic = True
         else:
             self.exons.sort(key=lambda x: (x[0], x[1]))
             self.merged_exons = merge_intervals(self.exons)
             self.exon_bp = intervals_length(self.exons)
-            self.intron_boundaries = []
+            introns: List[Tuple[int, int]] = []
             for first, second in zip(self.exons, self.exons[1:]):
-                prev_end = first[1]
-                next_start = second[0]
-                if prev_end < next_start:
-                    self.intron_boundaries.append((prev_end, next_start))
+                if first[1] < second[0]:
+                    introns.append((first[1], second[0]))
+            self.intron_boundaries = introns
+            self.monoexonic = len(introns) == 0
 
         if not self.cds_raw:
             self.coding_segments = []
             self.coding_bp = 0
+            self.cds_intron_boundaries = []
+            self.merged_cds = []
             return
 
         self.coding_bp = sum(end - start + 1 for start, end in self.cds_raw)
@@ -207,12 +293,23 @@ class Transcript:
                 offset += length
             segments = list(sorted(temp, key=lambda x: (x.start, x.end)))
         else:
-            # Unknown strand: still record segments but without reliable phase
             segments = [
                 CodingSegment(start, end, self.strand, 0, 0)
                 for start, end in cds_sorted
             ]
+
         self.coding_segments = segments
+        self.merged_cds = merge_intervals(self.cds_raw)
+
+        cds_introns: List[Tuple[int, int]] = []
+        for first, second in zip(cds_sorted, cds_sorted[1:]):
+            if first[1] < second[0]:
+                cds_introns.append((first[1], second[0]))
+        self.cds_intron_boundaries = cds_introns
+
+    @property
+    def is_coding(self) -> bool:
+        return self.coding_bp > 0
 
 
 class Gene:
@@ -227,96 +324,70 @@ class Gene:
         "exon_bp",
     )
 
-    def __init__(self, gene_id: str, seqid: str, strand: str, start: Optional[int] = None, end: Optional[int] = None) -> None:
+    def __init__(self, gene_id: str, seqid: str, strand: str, start: int, end: int) -> None:
         self.id = gene_id
         self.seqid = seqid
         self.strand = strand
-        self.start = start if start is not None else sys.maxsize
-        self.end = end if end is not None else -sys.maxsize
+        self.start = start
+        self.end = end
         self.transcripts: Dict[str, Transcript] = {}
         self.merged_exons: List[Interval] = []
         self.exon_bp: int = 0
 
     def add_transcript(self, transcript: Transcript) -> None:
         self.transcripts[transcript.id] = transcript
-        if transcript.span_start != sys.maxsize:
-            self.start = min(self.start, transcript.span_start)
-        if transcript.span_end != -sys.maxsize:
-            self.end = max(self.end, transcript.span_end)
+        if transcript.span_start < self.start:
+            self.start = transcript.span_start
+        if transcript.span_end > self.end:
+            self.end = transcript.span_end
 
     def update_bounds(self, start: int, end: int) -> None:
-        self.start = min(self.start, start)
-        self.end = max(self.end, end)
+        if start < self.start:
+            self.start = start
+        if end > self.end:
+            self.end = end
 
     def finalize(self) -> None:
+        for transcript in self.transcripts.values():
+            transcript.finalize()
         exon_intervals: List[Interval] = []
         for transcript in self.transcripts.values():
-            exon_intervals.extend(transcript.exons)
+            exon_intervals.extend(transcript.merged_exons)
         self.merged_exons = merge_intervals(exon_intervals)
         self.exon_bp = intervals_length(self.merged_exons)
-        if self.start == sys.maxsize:
-            if self.merged_exons:
-                self.start = self.merged_exons[0][0]
-            else:
-                self.start = 0
-        if self.end == -sys.maxsize:
-            if self.merged_exons:
-                self.end = self.merged_exons[-1][1]
-            else:
-                self.end = 0
-
-
-class Annotation:
-    def __init__(self, name: str) -> None:
-        self.name = name
-        self.genes_by_id: Dict[str, Gene] = {}
-        self.transcripts_by_id: Dict[str, Transcript] = {}
-        self.genes_by_seqid: Dict[str, List[Gene]] = collections.defaultdict(list)
-
-    def add_gene(self, gene: Gene) -> None:
-        self.genes_by_id[gene.id] = gene
-        self.genes_by_seqid[gene.seqid].append(gene)
-
-    def finalize(self) -> None:
-        for transcript in self.transcripts_by_id.values():
-            transcript.finalize()
-        for gene in self.genes_by_id.values():
-            gene.finalize()
-        for seqid in list(self.genes_by_seqid.keys()):
-            self.genes_by_seqid[seqid] = sorted(self.genes_by_seqid[seqid], key=lambda g: g.start)
 
 
 # ---------------------------------------------------------------------------
-# Parsing logic
+# Streaming parser
 # ---------------------------------------------------------------------------
 
-TRANSCRIPT_TYPES = {
-    "mRNA",
-    "transcript",
-    "ncRNA",
-    "lnc_RNA",
-    "miRNA",
-    "rRNA",
-    "tRNA",
-    "snRNA",
-    "snoRNA",
-    "primary_transcript",
-    "pseudogenic_transcript",
-}
+
+class GFFSortError(RuntimeError):
+    pass
 
 
-def load_annotation(path: str, name: Optional[str] = None) -> Annotation:
-    if name is None:
-        base = os.path.basename(path)
-        name = os.path.splitext(base)[0]
-    annotation = Annotation(name)
-
+def stream_genes(path: str) -> Iterator[Gene]:
     with open(path, "r", encoding="utf-8") as handle:
+        current_gene: Optional[Gene] = None
+        transcripts: Dict[str, Transcript] = {}
+        last_gene_key: Optional[Tuple[str, int]] = None
+
+        def finalize_current_gene() -> Optional[Gene]:
+            nonlocal current_gene, transcripts
+            if current_gene is None:
+                return None
+            for transcript in transcripts.values():
+                current_gene.add_transcript(transcript)
+            current_gene.finalize()
+            gene_to_return = current_gene
+            current_gene = None
+            transcripts = {}
+            return gene_to_return
+
         for raw_line in handle:
-            line = raw_line.strip()
-            if not line or line.startswith("#"):
+            if not raw_line.strip() or raw_line.startswith("#"):
                 continue
-            parts = line.split("\t")
+            parts = raw_line.rstrip("\n").split("\t")
             if len(parts) != 9:
                 continue
             seqid, source, feature_type, start_s, end_s, score, strand, phase, attr_raw = parts
@@ -331,98 +402,74 @@ def load_annotation(path: str, name: Optional[str] = None) -> Annotation:
             parents = parents_raw.split(",") if parents_raw else []
 
             if feature_type == "gene" and feature_id:
-                gene = annotation.genes_by_id.get(feature_id)
-                if gene is None:
-                    gene = Gene(feature_id, seqid, strand, start, end)
-                    annotation.add_gene(gene)
-                else:
-                    gene.update_bounds(start, end)
-                    gene.seqid = seqid
-                    gene.strand = strand if strand != "." else gene.strand
+                if last_gene_key is not None:
+                    last_seqid, last_start = last_gene_key
+                    if (seqid < last_seqid) or (seqid == last_seqid and start < last_start):
+                        raise GFFSortError(
+                            f"GFF not sorted: gene {feature_id} at {seqid}:{start} precedes {last_seqid}:{last_start}"
+                        )
+                last_gene_key = (seqid, start)
+                gene_done = finalize_current_gene()
+                if gene_done is not None:
+                    yield gene_done
+                current_gene = Gene(feature_id, seqid, strand, start, end)
+                transcripts = {}
+                continue
+
+            if current_gene is None:
+                # Ignore features before the first gene declaration
                 continue
 
             if feature_type in TRANSCRIPT_TYPES and feature_id:
                 if not parents:
-                    continue
-                gene_id = parents[0]
-                gene = annotation.genes_by_id.get(gene_id)
-                if gene is None:
-                    gene = Gene(gene_id, seqid, strand, start, end)
-                    annotation.add_gene(gene)
-                transcript = annotation.transcripts_by_id.get(feature_id)
+                    raise RuntimeError(f"Transcript {feature_id} missing Parent at {seqid}:{start}")
+                parent_gene = parents[0]
+                if parent_gene != current_gene.id:
+                    raise RuntimeError(
+                        f"Transcript {feature_id} refers to gene {parent_gene} while parsing {current_gene.id}"
+                    )
+                transcript = transcripts.get(feature_id)
                 if transcript is None:
-                    transcript = Transcript(feature_id, gene_id, seqid, strand, start, end)
-                    annotation.transcripts_by_id[feature_id] = transcript
-                    gene.add_transcript(transcript)
-                else:
-                    gene.add_transcript(transcript)
-                    transcript.gene_id = gene_id
-                    transcript.seqid = seqid
-                    transcript.strand = strand if strand != "." else transcript.strand
-                    if start < transcript.span_start:
-                        transcript.span_start = start
-                    if end > transcript.span_end:
-                        transcript.span_end = end
+                    transcript = Transcript(feature_id, current_gene.id, seqid, strand)
+                    transcripts[feature_id] = transcript
+                transcript.update_span(start, end)
+                current_gene.update_bounds(start, end)
                 continue
 
             if feature_type == "exon" and parents:
                 for parent in parents:
-                    transcript = annotation.transcripts_by_id.get(parent)
+                    transcript = transcripts.get(parent)
                     if transcript is None:
-                        # Transcript feature may be missing; create stub
-                        transcript = Transcript(parent, parent, seqid, strand, start, end)
-                        annotation.transcripts_by_id[parent] = transcript
+                        transcript = Transcript(parent, current_gene.id, seqid, strand)
+                        transcripts[parent] = transcript
                     transcript.add_exon(start, end)
+                    current_gene.update_bounds(start, end)
                 continue
 
             if feature_type == "CDS" and parents:
                 for parent in parents:
-                    transcript = annotation.transcripts_by_id.get(parent)
+                    transcript = transcripts.get(parent)
                     if transcript is None:
-                        transcript = Transcript(parent, parent, seqid, strand, start, end)
-                        annotation.transcripts_by_id[parent] = transcript
+                        transcript = Transcript(parent, current_gene.id, seqid, strand)
+                        transcripts[parent] = transcript
                     transcript.add_cds(start, end)
+                    current_gene.update_bounds(start, end)
                 continue
 
-    annotation.finalize()
-    return annotation
+        gene_done = finalize_current_gene()
+        if gene_done is not None:
+            yield gene_done
 
 
 # ---------------------------------------------------------------------------
 # Comparison logic
 # ---------------------------------------------------------------------------
 
-@dataclass
-class TranscriptComparison:
-    transcript_a: Transcript
-    transcript_b: Transcript
-    stats: Dict[str, int]
 
-
-@dataclass
-class GeneComparison:
-    gene_a: Gene
-    gene_b: Gene
-    transcript_pairs: List[TranscriptComparison]
-    stats: Dict[str, int]
-
-
-def transcript_overlap(transcript_a: Transcript, transcript_b: Transcript) -> bool:
+def transcript_pair_overlap(transcript_a: Transcript, transcript_b: Transcript) -> bool:
     if transcript_a.seqid != transcript_b.seqid:
         return False
     return intervals_overlap(transcript_a.merged_exons, transcript_b.merged_exons)
-
-
-def matching_exons(transcript_a: Transcript, transcript_b: Transcript) -> int:
-    set_a = set(transcript_a.exons)
-    set_b = set(transcript_b.exons)
-    return len(set_a & set_b)
-
-
-def matching_introns(transcript_a: Transcript, transcript_b: Transcript) -> int:
-    set_a = set(transcript_a.intron_boundaries)
-    set_b = set(transcript_b.intron_boundaries)
-    return len(set_a & set_b)
 
 
 def cds_overlap_same_phase(transcript_a: Transcript, transcript_b: Transcript) -> int:
@@ -451,153 +498,432 @@ def cds_overlap_same_phase(transcript_a: Transcript, transcript_b: Transcript) -
     return total
 
 
-def compare_transcripts(transcript_a: Transcript, transcript_b: Transcript) -> TranscriptComparison:
+def cds_overlap_total(transcript_a: Transcript, transcript_b: Transcript) -> int:
+    return intersection_length(transcript_a.merged_cds, transcript_b.merged_cds)
+
+
+@dataclass
+class TranscriptPairResult:
+    transcript_a: Transcript
+    transcript_b: Transcript
+    stats: Dict[str, Union[int, float, str]]
+    classification: str
+    category: str
+    notes: Dict[str, Union[int, float, str]] = field(default_factory=dict)
+
+
+@dataclass
+class GenePairRecord:
+    label_a: str
+    gene_a: Gene
+    label_b: str
+    gene_b: Gene
+    stats: Dict[str, Union[int, float, str]]
+    classification: str
+    transcript_pairs: List[TranscriptPairResult]
+    notes: Dict[str, Union[int, float, str]] = field(default_factory=dict)
+    pending: Set[str] = field(default_factory=lambda: {"A", "B"})
+
+
+@dataclass
+class ComparisonOptions:
+    include_transcripts: bool
+    antisense_red_threshold: float
+
+
+def compute_transcript_stats(transcript_a: Transcript, transcript_b: Transcript) -> Dict[str, Union[int, float, str]]:
+    stats: Dict[str, Union[int, float, str]] = {}
     exons_a = len(transcript_a.exons)
     exons_b = len(transcript_b.exons)
     introns_a = len(transcript_a.intron_boundaries)
     introns_b = len(transcript_b.intron_boundaries)
-    matched_exons = matching_exons(transcript_a, transcript_b)
-    matched_introns = matching_introns(transcript_a, transcript_b)
-    bp_a = transcript_a.exon_bp
-    bp_b = transcript_b.exon_bp
-    bp_overlap = intersection_length(transcript_a.merged_exons, transcript_b.merged_exons)
-    cds_bp_a = transcript_a.coding_bp
-    cds_bp_b = transcript_b.coding_bp
-    cds_overlap = cds_overlap_same_phase(transcript_a, transcript_b)
-    stats = {
-        "exonsA": exons_a,
-        "exonsB": exons_b,
-        "match_exons": matched_exons,
-        "intronsA": introns_a,
-        "intronsB": introns_b,
-        "match_introns": matched_introns,
-        "bpA": bp_a,
-        "bpB": bp_b,
-        "bp_overlap": bp_overlap,
-        "cds_bpA": cds_bp_a,
-        "cds_bpB": cds_bp_b,
-        "cds_bp_overlap_same_phase": cds_overlap,
-    }
-    return TranscriptComparison(transcript_a, transcript_b, stats)
+    matched_exons = len(set(transcript_a.exons) & set(transcript_b.exons))
+    matched_introns = len(set(transcript_a.intron_boundaries) & set(transcript_b.intron_boundaries))
+    matched_cds_introns = len(set(transcript_a.cds_intron_boundaries) & set(transcript_b.cds_intron_boundaries))
+
+    exon_overlap_bp = intersection_length(transcript_a.merged_exons, transcript_b.merged_exons)
+    exon_union_bp = union_length(transcript_a.merged_exons, transcript_b.merged_exons)
+    cds_overlap_bp = cds_overlap_total(transcript_a, transcript_b)
+    cds_union_bp = union_length(transcript_a.merged_cds, transcript_b.merged_cds)
+    cds_phase_overlap_bp = cds_overlap_same_phase(transcript_a, transcript_b)
+
+    stats.update(
+        {
+            "exonsA": exons_a,
+            "exonsB": exons_b,
+            "intronsA": introns_a,
+            "intronsB": introns_b,
+            "match_exons": matched_exons,
+            "match_introns": matched_introns,
+            "cds_match_introns": matched_cds_introns,
+            "bpA": transcript_a.exon_bp,
+            "bpB": transcript_b.exon_bp,
+            "bp_overlap": exon_overlap_bp,
+            "bp_union": exon_union_bp,
+            "cds_bpA": transcript_a.coding_bp,
+            "cds_bpB": transcript_b.coding_bp,
+            "cds_bp_overlap": cds_overlap_bp,
+            "cds_bp_union": cds_union_bp,
+            "cds_bp_overlap_same_phase": cds_phase_overlap_bp,
+            "strand_agree": 1 if transcript_a.strand == transcript_b.strand else 0,
+            "monoexonicA": 1 if transcript_a.monoexonic else 0,
+            "monoexonicB": 1 if transcript_b.monoexonic else 0,
+        }
+    )
+
+    stats["jaccard_exon"] = (exon_overlap_bp / exon_union_bp) if exon_union_bp else 0.0
+    stats["jaccard_cds_phase"] = (
+        cds_phase_overlap_bp / cds_union_bp if cds_union_bp else 0.0
+    )
+    stats["junction_f1_all"] = f1_score(matched_introns, introns_a, introns_b)
+    stats["junction_f1_cds"] = f1_score(matched_cds_introns, len(transcript_a.cds_intron_boundaries), len(transcript_b.cds_intron_boundaries))
+    stats["shared_introns_fraction"] = (
+        matched_introns / max(introns_a, introns_b) if max(introns_a, introns_b) else 1.0
+    )
+    if stats["strand_agree"]:
+        stats["antisense_overlap"] = 0.0
+    else:
+        stats["antisense_overlap"] = (exon_overlap_bp / exon_union_bp) if exon_union_bp else 0.0
+
+    return stats
 
 
-def compare_gene_pair(gene_a: Gene, gene_b: Gene) -> GeneComparison:
-    transcript_pairs: List[TranscriptComparison] = []
-    matching_transcript_pairs = 0
-    for transcript_a in gene_a.transcripts.values():
-        for transcript_b in gene_b.transcripts.values():
-            if not transcript_overlap(transcript_a, transcript_b):
-                continue
-            comparison = compare_transcripts(transcript_a, transcript_b)
-            transcript_pairs.append(comparison)
-            if (
-                transcript_a.exons == transcript_b.exons
-                and transcript_a.coding_bp == transcript_b.coding_bp
-                and transcript_a.coding_bp == comparison.stats["cds_bp_overlap_same_phase"]
-                and comparison.stats["bp_overlap"] == transcript_a.exon_bp == transcript_b.exon_bp
-            ):
-                matching_transcript_pairs += 1
+def classify_transcript_pair(
+    transcript_a: Transcript,
+    transcript_b: Transcript,
+    stats: Dict[str, Union[int, float, str]],
+) -> Tuple[str, str, Dict[str, Union[int, float, str]]]:
+    notes: Dict[str, Union[int, float, str]] = {}
+
+    strand_agree = bool(stats.get("strand_agree", 0))
+    if not strand_agree:
+        notes["reason"] = "antisense"
+        return "NotMapped", "antisense", notes
+
+    is_coding_a = transcript_a.is_coding
+    is_coding_b = transcript_b.is_coding
+
+    if is_coding_a and not is_coding_b or is_coding_b and not is_coding_a:
+        notes["reason"] = "discordant_biotype"
+        return "NotMapped", "mixed", notes
+
+    jaccard_exon = float(stats.get("jaccard_exon", 0.0))
+    jaccard_cds_phase = float(stats.get("jaccard_cds_phase", 0.0))
+    junction_all = float(stats.get("junction_f1_all", 0.0))
+    junction_cds = float(stats.get("junction_f1_cds", 0.0))
+    mono_a = bool(stats.get("monoexonicA", 0))
+    mono_b = bool(stats.get("monoexonicB", 0))
+    bp_a = int(stats.get("bpA", 0))
+    bp_b = int(stats.get("bpB", 0))
+    shared_introns = int(stats.get("match_introns", 0))
+
+    if is_coding_a and is_coding_b:
+        category = "coding"
+        if jaccard_cds_phase >= GREEN_JACCARD_CDS or (
+            junction_cds >= GREEN_JUNCTION_CDS and jaccard_cds_phase >= GREEN_JACCARD_CDS_SECONDARY
+        ):
+            return "Green", category, notes
+        if (
+            YELLOW_JACCARD_CDS_LOW <= jaccard_cds_phase < GREEN_JACCARD_CDS
+            or (
+                junction_cds >= YELLOW_JUNCTION_CDS_LOW
+                and jaccard_cds_phase >= YELLOW_JACCARD_CDS_MIN
+            )
+        ):
+            return "Yellow", category, notes
+        if jaccard_exon >= RED_JACCARD_EXON_LOW or (shared_introns > 0 and junction_all < YELLOW_JUNCTION_NONCODING_LOW):
+            notes["warning"] = "weak_coding_support"
+            return "Red", category, notes
+        return "NotMapped", category, notes
+
+    category = "noncoding"
+    if not mono_a and not mono_b:
+        if junction_all >= GREEN_NONCODING_JUNCTION or (
+            jaccard_exon >= GREEN_NONCODING_JACCARD and junction_all >= 0.90
+        ):
+            return "Green", category, notes
+    else:
+        if jaccard_exon >= GREEN_MONOEXONIC_JACCARD:
+            longer = max(bp_a, bp_b) if max(bp_a, bp_b) else 1
+            shorter = min(bp_a, bp_b)
+            ratio = shorter / longer if longer else 0.0
+            if ratio >= 1.0 - GREEN_MONOEXONIC_RATIO_DELTA:
+                return "Green", category, notes
+    if (
+        YELLOW_JACCARD_NONCODING_LOW <= jaccard_exon < GREEN_NONCODING_JACCARD
+        or YELLOW_JUNCTION_NONCODING_LOW <= junction_all < GREEN_NONCODING_JUNCTION
+    ):
+        return "Yellow", category, notes
+    if jaccard_exon >= RED_JACCARD_EXON_LOW or (shared_introns > 0 and junction_all < YELLOW_JUNCTION_NONCODING_LOW):
+        notes["warning"] = "weak_noncoding_support"
+        return "Red", category, notes
+    return "NotMapped", category, notes
+
+
+def classify_gene_pair(
+    gene_a: Gene,
+    gene_b: Gene,
+    transcript_pairs: List[TranscriptPairResult],
+    options: ComparisonOptions,
+) -> Tuple[str, Dict[str, Union[int, float, str]], Dict[str, Union[int, float, str]]]:
+    notes: Dict[str, Union[int, float, str]] = {}
+    stats: Dict[str, Union[int, float, str]] = {}
 
     exon_overlap_bp = intersection_length(gene_a.merged_exons, gene_b.merged_exons)
-    gene_overlap_bp = max(0, min(gene_a.end, gene_b.end) - max(gene_a.start, gene_b.start) + 1)
-    stats = {
-        "txA": len(gene_a.transcripts),
-        "txB": len(gene_b.transcripts),
-        "overlap_tx_pairs": len(transcript_pairs),
-        "matching_tx_pairs": matching_transcript_pairs,
-        "exon_bp_A": gene_a.exon_bp,
-        "exon_bp_B": gene_b.exon_bp,
-        "exon_bp_overlap": exon_overlap_bp,
-        "gene_bp_overlap": gene_overlap_bp,
-    }
-    strand_match = 1 if gene_a.strand == gene_b.strand else 0
-    stats["strand_match"] = strand_match
-    return GeneComparison(gene_a, gene_b, transcript_pairs, stats)
+    exon_union_bp = union_length(gene_a.merged_exons, gene_b.merged_exons)
+    stats["overlap_bp"] = exon_overlap_bp
+    stats["exon_union_bp"] = exon_union_bp
+    stats["strand_match"] = 1 if gene_a.strand == gene_b.strand else 0
+
+    if gene_a.strand != gene_b.strand and gene_a.strand != "." and gene_b.strand != ".":
+        antisense_overlap = (exon_overlap_bp / exon_union_bp) if exon_union_bp else 0.0
+        stats["antisense_overlap"] = antisense_overlap
+        notes["antisense_conflict"] = 1
+        if antisense_overlap >= options.antisense_red_threshold:
+            stats["class_initial"] = "Red"
+            return "Red", stats, notes
+        stats["class_initial"] = "NotMapped"
+        return "NotMapped", stats, notes
+
+    best_coding = "NotMapped"
+    best_noncoding = "NotMapped"
+    best_cds_jaccard = 0.0
+    best_exon_jaccard = 0.0
+    discordant_biotype = False
+
+    for pair in transcript_pairs:
+        stats_local = pair.stats
+        jaccard_exon = float(stats_local.get("jaccard_exon", 0.0))
+        jaccard_cds = float(stats_local.get("jaccard_cds_phase", 0.0))
+        best_exon_jaccard = max(best_exon_jaccard, jaccard_exon)
+        best_cds_jaccard = max(best_cds_jaccard, jaccard_cds)
+        if pair.category == "coding":
+            best_coding = severity_max(best_coding, pair.classification)
+        elif pair.category == "noncoding":
+            best_noncoding = severity_max(best_noncoding, pair.classification)
+        elif pair.category == "mixed":
+            discordant_biotype = True
+
+    stats["best_coding"] = best_coding
+    stats["best_noncoding"] = best_noncoding
+    stats["best_jaccard_exon"] = best_exon_jaccard
+    stats["best_jaccard_cds_phase"] = best_cds_jaccard
+
+    if not transcript_pairs:
+        stats["class_initial"] = "NotMapped"
+        return "NotMapped", stats, notes
+
+    combined = "NotMapped"
+    for candidate in (best_coding, best_noncoding):
+        combined = severity_max(combined, candidate)
+    stats["class_initial"] = combined
+
+    if discordant_biotype and SEVERITY_ORDER[combined] > SEVERITY_ORDER["Yellow"]:
+        combined = "Yellow"
+        notes["discordant_biotype"] = 1
+
+    return combined, stats, notes
 
 
-def genes_overlap(gene_a: Gene, gene_b: Gene) -> bool:
-    if gene_a.seqid != gene_b.seqid:
-        return False
-    if gene_a.end < gene_b.start or gene_b.end < gene_a.start:
-        return False
-    return intervals_overlap(gene_a.merged_exons, gene_b.merged_exons)
+def downgrade_class(current: str, target: str) -> str:
+    return severity_min(current, target)
 
 
-def generate_gene_pairs(annotation_a: Annotation, annotation_b: Annotation) -> Iterator[Tuple[Gene, Gene]]:
-    for seqid in sorted(set(annotation_a.genes_by_seqid) & set(annotation_b.genes_by_seqid)):
-        genes_a = annotation_a.genes_by_seqid[seqid]
-        genes_b = annotation_b.genes_by_seqid[seqid]
-        j = 0
-        for gene_a in genes_a:
-            while j < len(genes_b) and genes_b[j].end < gene_a.start:
-                j += 1
-            k = j
-            while k < len(genes_b) and genes_b[k].start <= gene_a.end:
-                gene_b = genes_b[k]
-                if genes_overlap(gene_a, gene_b):
-                    yield gene_a, gene_b
-                k += 1
+def analyse_gene_pair(
+    label_a: str,
+    gene_a: Gene,
+    label_b: str,
+    gene_b: Gene,
+    options: ComparisonOptions,
+) -> Optional[GenePairRecord]:
+    transcript_pairs: List[TranscriptPairResult] = []
+    for transcript_a in gene_a.transcripts.values():
+        for transcript_b in gene_b.transcripts.values():
+            if not transcript_pair_overlap(transcript_a, transcript_b):
+                continue
+            stats = compute_transcript_stats(transcript_a, transcript_b)
+            classification, category, notes = classify_transcript_pair(transcript_a, transcript_b, stats)
+            stats["class"] = classification
+            result = TranscriptPairResult(transcript_a, transcript_b, stats, classification, category, notes)
+            transcript_pairs.append(result)
+
+    if not transcript_pairs:
+        return None
+
+    classification, stats, notes = classify_gene_pair(gene_a, gene_b, transcript_pairs, options)
+    stats["class"] = classification
+    return GenePairRecord(label_a, gene_a, label_b, gene_b, stats, classification, transcript_pairs, notes)
 
 
 # ---------------------------------------------------------------------------
-# Output helpers
+# Streaming pairwise comparison
 # ---------------------------------------------------------------------------
 
-def stats_to_string(stats: Dict[str, int]) -> str:
-    return ";".join(f"{key}={value}" for key, value in stats.items())
 
+class RecordBuffer:
+    def __init__(self, out_handle, options: ComparisonOptions) -> None:
+        self.out_handle = out_handle
+        self.options = options
+        self.records_by_gene_a: Dict[str, List[GenePairRecord]] = {}
+        self.records_by_gene_b: Dict[str, List[GenePairRecord]] = {}
+        self.partner_sets_a: Dict[str, Set[str]] = {}
+        self.partner_sets_b: Dict[str, Set[str]] = {}
 
-def write_gene_comparisons(
-    annotation_a: Annotation,
-    annotation_b: Annotation,
-    out_handle,
-) -> None:
-    for gene_a, gene_b in generate_gene_pairs(annotation_a, annotation_b):
-        comparison = compare_gene_pair(gene_a, gene_b)
-        if not comparison.transcript_pairs:
-            continue
-        gene_stats = comparison.stats.copy()
-        gene_stats.setdefault("strand_match", 1 if gene_a.strand == gene_b.strand else 0)
-        out_handle.write(
-            "\t".join(
-                [
-                    "gene",
-                    annotation_a.name,
-                    gene_a.id,
-                    ".",
-                    annotation_b.name,
-                    gene_b.id,
-                    ".",
-                    stats_to_string(gene_stats),
-                ]
-            )
-            + "\n"
+    def add_record(self, record: GenePairRecord) -> None:
+        self.records_by_gene_a.setdefault(record.gene_a.id, []).append(record)
+        self.records_by_gene_b.setdefault(record.gene_b.id, []).append(record)
+        self.partner_sets_a.setdefault(record.gene_a.id, set()).add(record.gene_b.id)
+        self.partner_sets_b.setdefault(record.gene_b.id, set()).add(record.gene_a.id)
+
+    def finalize_gene(self, side: str, gene_id: str) -> None:
+        if side == "A":
+            partner_set = self.partner_sets_a.get(gene_id, set())
+            records = self.records_by_gene_a.pop(gene_id, [])
+        else:
+            partner_set = self.partner_sets_b.get(gene_id, set())
+            records = self.records_by_gene_b.pop(gene_id, [])
+
+        partner_count = len(partner_set)
+        split_flag = 1 if partner_count > 1 else 0
+        for record in records:
+            if side == "A":
+                record.stats["partner_countA"] = partner_count
+                if split_flag:
+                    record.notes["split_or_merge_A"] = partner_count
+                    record.classification = downgrade_class(record.classification, "Yellow")
+                    record.stats["class"] = record.classification
+            else:
+                record.stats["partner_countB"] = partner_count
+                if split_flag:
+                    record.notes["split_or_merge_B"] = partner_count
+                    record.classification = downgrade_class(record.classification, "Yellow")
+                    record.stats["class"] = record.classification
+            record.pending.discard(side)
+            if not record.pending:
+                self.write_record(record)
+
+        if side == "A":
+            self.partner_sets_a.pop(gene_id, None)
+        else:
+            self.partner_sets_b.pop(gene_id, None)
+
+    def flush_remaining(self) -> None:
+        for records in itertools.chain(self.records_by_gene_a.values(), self.records_by_gene_b.values()):
+            for record in records:
+                record.pending.clear()
+                self.write_record(record)
+        self.records_by_gene_a.clear()
+        self.records_by_gene_b.clear()
+
+    def write_record(self, record: GenePairRecord) -> None:
+        stats_combined = dict(record.stats)
+        for key, value in record.notes.items():
+            stats_combined[f"note_{key}"] = value
+        stats_str = stats_to_string(stats_combined)
+        line = "\t".join(
+            [
+                "gene",
+                record.label_a,
+                record.gene_a.id,
+                ".",
+                record.label_b,
+                record.gene_b.id,
+                ".",
+                stats_str,
+            ]
         )
-        for tx_comp in comparison.transcript_pairs:
-            tx_stats = tx_comp.stats
-            out_handle.write(
-                "\t".join(
+        self.out_handle.write(line + "\n")
+        if self.options.include_transcripts:
+            for tx_pair in record.transcript_pairs:
+                tx_stats = dict(tx_pair.stats)
+                for key, value in tx_pair.notes.items():
+                    tx_stats[f"note_{key}"] = value
+                tx_stats_str = stats_to_string(tx_stats)
+                tx_line = "\t".join(
                     [
                         "transcript",
-                        annotation_a.name,
-                        tx_comp.transcript_a.gene_id,
-                        tx_comp.transcript_a.id,
-                        annotation_b.name,
-                        tx_comp.transcript_b.gene_id,
-                        tx_comp.transcript_b.id,
-                        stats_to_string(tx_stats),
+                        record.label_a,
+                        tx_pair.transcript_a.gene_id,
+                        tx_pair.transcript_a.id,
+                        record.label_b,
+                        tx_pair.transcript_b.gene_id,
+                        tx_pair.transcript_b.id,
+                        tx_stats_str,
                     ]
                 )
-                + "\n"
-            )
+                self.out_handle.write(tx_line + "\n")
+
+
+def compare_pair_streaming(
+    path_a: str,
+    label_a: str,
+    path_b: str,
+    label_b: str,
+    out_handle,
+    options: ComparisonOptions,
+) -> None:
+    stream_a = stream_genes(path_a)
+    stream_b = stream_genes(path_b)
+    buffer = RecordBuffer(out_handle, options)
+
+    active_b: List[Gene] = []
+    next_b: Optional[Gene] = None
+
+    try:
+        next_b = next(stream_b)
+    except StopIteration:
+        next_b = None
+
+    for gene_a in stream_a:
+        # Remove B genes that can no longer overlap with current or future A genes
+        remaining_b: List[Gene] = []
+        for gene_b in active_b:
+            if gene_b.seqid < gene_a.seqid or (gene_b.seqid == gene_a.seqid and gene_b.end < gene_a.start):
+                buffer.finalize_gene("B", gene_b.id)
+            else:
+                remaining_b.append(gene_b)
+        active_b = remaining_b
+
+        # Pull in B genes that might overlap gene_a
+        while next_b is not None and (
+            next_b.seqid < gene_a.seqid
+            or (next_b.seqid == gene_a.seqid and next_b.start <= gene_a.end)
+        ):
+            active_b.append(next_b)
+            try:
+                next_b = next(stream_b)
+            except StopIteration:
+                next_b = None
+
+        # Compare gene_a against active gene_b entries
+        for gene_b in active_b:
+            if gene_b.seqid != gene_a.seqid:
+                continue
+            if gene_b.start > gene_a.end or gene_b.end < gene_a.start:
+                continue
+            record = analyse_gene_pair(label_a, gene_a, label_b, gene_b, options)
+            if record is not None:
+                buffer.add_record(record)
+
+        buffer.finalize_gene("A", gene_a.id)
+
+    # All genes from A processed; remaining B genes cannot overlap future genes
+    for gene_b in active_b:
+        buffer.finalize_gene("B", gene_b.id)
+
+    for gene_b in stream_b:
+        buffer.finalize_gene("B", gene_b.id)
+
+    buffer.flush_remaining()
 
 
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Compare GFF3 annotations within the same assembly")
+    parser = argparse.ArgumentParser(description="Compare sorted GFF3 annotations within the same assembly")
     parser.add_argument("gff", nargs="+", help="Sorted GFF3 annotation files")
     parser.add_argument(
         "-l",
@@ -610,29 +936,52 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         "--output",
         help="Output file (TSV). Defaults to stdout",
     )
+    parser.add_argument(
+        "--include-transcripts",
+        action="store_true",
+        help="Include transcript-level mappings interleaved with gene summaries",
+    )
+    parser.add_argument(
+        "--antisense-red-threshold",
+        type=float,
+        default=0.5,
+        help="Fraction of exon union that triggers a Red warning for antisense overlaps",
+    )
     return parser.parse_args(argv)
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parse_args(argv)
+    if len(args.gff) < 2:
+        sys.stderr.write("Error: provide at least two GFF files\n")
+        return 1
     if args.labels and len(args.labels) != len(args.gff):
         sys.stderr.write("Error: number of labels must match number of GFF files\n")
         return 1
 
     labels = args.labels if args.labels else [None] * len(args.gff)
-    annotations = [load_annotation(path, label) for path, label in zip(args.gff, labels)]
 
     out_handle = open(args.output, "w", encoding="utf-8") if args.output else sys.stdout
+    options = ComparisonOptions(
+        include_transcripts=args.include_transcripts,
+        antisense_red_threshold=args.antisense_red_threshold,
+    )
+
     try:
         out_handle.write("feature\tannA\tgeneA\ttxA\tannB\tgeneB\ttxB\tstats\n")
-        for idx_a, annotation_a in enumerate(annotations):
-            for idx_b, annotation_b in enumerate(annotations):
-                if idx_a == idx_b:
-                    continue
-                write_gene_comparisons(annotation_a, annotation_b, out_handle)
+        for idx_a, (path_a, label_a) in enumerate(zip(args.gff, labels)):
+            label_a = label_a or f"ann{idx_a+1}"
+            for idx_b in range(idx_a + 1, len(args.gff)):
+                path_b = args.gff[idx_b]
+                label_b = (labels[idx_b] if labels[idx_b] else f"ann{idx_b+1}")
+                compare_pair_streaming(path_a, label_a, path_b, label_b, out_handle, options)
+    except GFFSortError as exc:
+        sys.stderr.write(f"Error: {exc}\n")
+        return 1
     finally:
         if out_handle is not sys.stdout:
             out_handle.close()
+
     return 0
 
 

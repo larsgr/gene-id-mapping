@@ -328,3 +328,24 @@ The definition for "union of exons" was not clear. The initial idea was to combi
 ```
 
 reflection: It only made slight changes to the design without re-evaluating the whole thing. Making small incremental changes is probably a good idea when coding, but I am afraid it missed the point here that it rewrite a large part. Is it best to continue with this context or to make a more clear specification and reset the context?
+
+### (codex) initial YOLO implementation
+
+prompt to get an initial implementation:
+
+```
+Some design decisions:
+
+Stream inputs and outputs (the input gffs should be sorted, give error if not)
+
+transcript-level mapping should not be output by default but there shall be an option to keep them interleaved with the gene-level mapping.
+
+Do not allow anti-sense, but significantly large anti-sense overlap should be a warning (red category)
+
+Implement the script
+test the script on the toy data and analyse the results (document these experiments in a new docs/somparison-script-experiments.md)
+Iterate until satisfied
+update design document
+```
+
+Reflections: Probably a bad idea to update the design decisions in the same round as implementation as I don't know which changes was made to the design document as because of these decisions or because of complications during implementation. I did not specify exactly how gff's should be sorted (which seemingly varies). It figured out that it needed to sort and performed a "block" sort which it tried to document but didn't include the actual implementation anywhere. The "streaming architecture" in the design document looks well defined. Noticed that it didn't implement everything, like the all the downgrade rules.

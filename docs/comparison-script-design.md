@@ -1,11 +1,23 @@
 # Comparison Script Design
 
-This note refines the custom comparison script that will extend the
-`within_assembly_compare.py` prototype described in `docs/experiments.md` and
-`docs/AI-usage.md`. The existing parser already produces transcript-level
-overlaps across annotations on the same assembly. The next phase is to keep the
-per-transcript detail while rolling it up into per-gene mapping summaries that
-drive the Green / Yellow / Red / NotMapped labels.
+This note now documents the streamed `within_assembly_compare.py`
+implementation. The parser keeps only the active locus in memory, computes
+transcript-level overlaps, rolls them into per-gene summaries, and emits one TSV
+row per overlapping gene pair (with optional transcript rows interleaved on
+request).
+
+## Streaming architecture
+
+- **Input contract**: each GFF must be sorted by `(seqid, gene start)` with gene
+  blocks kept intact. The script validates this ordering and exits with an error
+  if it detects regression. A tiny helper script in
+  `docs/somparison-script-experiments.md` shows how the toy data was prepared.
+- **Gene streaming**: the parser yields one `Gene` object at a time (with all
+  transcripts resolved) and maintains only the overlapping partner genes from
+  the other annotation in memory.
+- **Output buffering**: per-gene records are buffered until both partners have
+  no further overlaps, at which point split/merge partner counts can safely be
+  applied before writing.
 
 ## Metrics to Compute Per Transcript Pair
 
@@ -32,10 +44,11 @@ thresholds below are still provisional.
 
 ## Current Per-Transcript Flow
 
-The within-assembly parser emits one record per overlapping transcript pair with
-the metrics above. That output already distinguishes coding vs. non-coding
-transcripts, handles antisense overlaps, and records CDS phase matches by
-recomputing reading frame from CDS features.
+For every overlapping transcript pair the parser logs the metrics above, plus
+derived values such as Jaccard scores, junction F1, monoexonic flags, and a
+pair-level classification. Transcript rows are written only when
+`--include-transcripts` is specified; otherwise they remain internal evidence
+for the gene-level label.
 
 ## Transition to Per-Gene Mapping
 
@@ -52,14 +65,14 @@ Rolling up to genes introduces a second pass:
 5. **Emit both summaries**: one gene-level record per partner pair plus the
    existing transcript-level rows.
 
-This extra pass can reuse the in-memory structures already built for overlap
-detection in `within_assembly_compare.py`: extend the gene object so it tracks
-its transcript mappings and exposes helper methods for the aggregation logic.
+The streaming implementation adds a lightweight buffering layer that collects
+all transcript comparisons for a gene pair, records partner counts for split /​
+merge detection, and writes the gene row only once the overlap window closes.
 
 ### Gene Exon Footprint vs. Transcript Union
 
-Per-gene statistics may still need a "gene exon footprint" for each annotation:
-the union of exons across every transcript isoform for a gene. This concept is
+Per-gene statistics still use a "gene exon footprint" for each annotation: the
+union of exons across every transcript isoform for a gene. This concept is
 distinct from the per-transcript "union of exon bp" used in the Jaccard metrics
 above, which considers only the two transcripts being compared. When aggregating
 to genes, make the distinction explicit in code and naming so downstream
@@ -91,28 +104,33 @@ before combining them into a single class for the gene pair.
   - `0.50 ≤ Jaccard_exon < 0.90`, or
   - `0.50 ≤ Junction_F1_all < 0.95`.
 - **Monoexonic pairs**: `0.50 ≤ Jaccard_exon < 0.95`.
-- Antisense overlaps covering ≥ 50% of exon union can be reported as Yellow only
-  if antisense families are explicitly allowed; otherwise flag `Conflict` and
-  demote to NotMapped.
+- Antisense overlaps are no longer allowed; see "Antisense handling" below.
 
 ### Red
 - Same strand but weak evidence:
   - `0.10 ≤ Jaccard_exon < 0.50`, or
   - At least one shared intron while `Junction_F1_all < 0.50`.
-- Antisense overlaps with `Jaccard_exon ≥ 0.10` go to the notes as `Conflict` by
-  default. They can be promoted to Red if the workflow decides to count them.
+- Antisense overlaps with a large fractional overlap are treated as Red
+  warnings (threshold defaults to `0.5`).
 
 ### NotMapped
 - Different chromosomes, zero overlap, or metrics below the Red thresholds.
 - Any antisense case when antisense mappings are disallowed.
+
+### Antisense handling
+
+- Set `note_antisense_conflict` on every opposite-strand overlap.
+- If exon-overlap / exon-union ≥ antisense threshold (default 0.5) downgrade to
+  Red and emit the gene row; otherwise suppress the mapping (NotMapped) but keep
+  the warning in the notes.
 
 ## Downgrade Rules (Green → Yellow)
 
 Gene-level downgrades fire if any transcript pair triggers them; record the
 trigger in the notes and demote the gene summary:
 
-- **Split / Merge detection**: overlaps with ≥ 2 distinct partners where each
-  subpair is at least Yellow.
+- **Split / Merge detection**: overlaps with ≥ 2 distinct partners (currently
+  triggers an automatic downgrade to Yellow and records `note_split_or_merge_*`).
 - **Competing partner within Δ**: another partner whose key metric is within the
   delta tolerance (e.g. `ΔJaccard_CDS_phase ≤ 0.02`).
 - **Frame inconsistency**: mixed in-phase and out-of-phase transcript pairs.
@@ -128,19 +146,18 @@ trigger in the notes and demote the gene summary:
 Carry these annotations up to the gene level; expose them in both transcript and
 gene rows when present.
 
-- `split_parts` / `merge_parts`: partner IDs and per-part metrics.
-- `ambiguous_partners`: partner IDs plus metric deltas.
-- `antisense_conflict`: true with overlap fraction.
-- `monoexonic_caveat`: true if one side is monoexonic and the other spliced.
-- `phase_disagreement_segments`: list CDS intervals excluded by phase rule.
-- `utr_divergence`: exon Jaccard outside CDS.
+- `split_or_merge_A` / `split_or_merge_B`: partner counts when we detect a split
+  or merge and downgrade the class.
+- `discordant_biotype`: set when coding/non-coding evidence conflicts.
+- Additional flags from the earlier wish list (e.g. `ambiguous_partners`,
+  `phase_disagreement_segments`) remain TODO.
 
 ## Decision Sketch
 
 1. If `Strand_agree` is false:
-   - If `Jaccard_exon ≥ 0.50` and antisense is allowed, return Yellow with
-     `antisense_conflict`.
-   - Otherwise mark NotMapped with the conflict note.
+   - Compute exon overlap fraction. If it exceeds the antisense threshold,
+     classify as Red with an `antisense_conflict` warning; otherwise return
+     NotMapped.
 2. Evaluate coding transcript pairs:
    - If any pair meets Green coding, set `Green_coding_candidate`.
    - Else if any meets Yellow coding, set `Yellow_coding_candidate`.
@@ -150,23 +167,21 @@ gene rows when present.
    - Else any Yellow candidate → Yellow.
    - Else any Red evidence → Red.
    - Otherwise NotMapped.
-5. Apply downgrade rules before finalising the gene record.
+5. Apply downgrade rules before finalising the gene record (currently split /
+   merge and discordant biotype are wired in; others remain on the backlog).
 
 ## Open Design Decisions
 
-- **Data model changes**: extend the current parser to store transcript metrics
-  grouped by gene without excessive memory use. Decide whether to stream gene
-  summaries immediately after processing each locus or buffer until all pairs
-  are seen.
-- **Output format**: confirm whether gene-level summaries should be TSV rows
-  interleaved with transcript rows or split into dedicated sections/files.
+- **Input preparation**: provide or automate a safe GFF block sorter so users
+  do not break gene grouping when satisfying the sorted-input requirement.
 - **Threshold calibration**: the provisional cut-offs above come from the
   transcript prototype; we need to validate or tune them once real assemblies
   are processed.
-- **Antisense policy**: final decision on whether antisense overlaps qualify as
-  Yellow/Red or get shunted to NotMapped with `Conflict` notes.
+- **Additional downgrade rules**: competing partner deltas, frame
+  inconsistency, problematic CDS introns, and UTR divergence are still pending.
 - **Representative transcript selection**: decide if the gene summary should
-  cite a single best transcript pair or retain all supporting pairs.
+  cite a single best transcript pair or retain all supporting pairs (today all
+  supporting pairs are kept when `--include-transcripts` is used).
 - **Terminology for unions**: ensure the code and outputs clearly separate the
   per-transcript union used for Jaccard metrics from the gene-wide exon
   footprint aggregation.
