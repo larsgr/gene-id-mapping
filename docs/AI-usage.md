@@ -349,3 +349,9 @@ update design document
 ```
 
 Reflections: Probably a bad idea to update the design decisions in the same round as implementation as I don't know which changes was made to the design document as because of these decisions or because of complications during implementation. I did not specify exactly how gff's should be sorted (which seemingly varies). It figured out that it needed to sort and performed a "block" sort which it tried to document but didn't include the actual implementation anywhere. The "streaming architecture" in the design document looks well defined. Noticed that it didn't implement everything, like the all the downgrade rules.
+
+### (Codex) Implment gff block sort script
+
+```
+implement the gff block sorting as a stand-alone python script
+```

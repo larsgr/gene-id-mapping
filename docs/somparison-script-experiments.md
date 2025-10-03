@@ -6,10 +6,16 @@ Goal: sanity-check the streaming comparison on the toy ICSASG_v2 annotation pair
 
 ### Preparation
 
-The parser insists on sorted input and on keeping gene blocks intact. I wrote a
-quick Python helper (`python - <<'PY' ...`) that buckets every gene with its
-nested features and rewrites the file ordered by `(seqid, gene_start)`.
-Sorted copies now live under `experiments/sorted/` with the suffix
+The parser insists on sorted input and on keeping gene blocks intact. A
+dedicated helper (`gff_block_sort.py`) now buckets every gene with its nested
+features and rewrites the file ordered by `(seqid, gene_start)`:
+
+```
+./gff_block_sort.py data/toy-assemblies/ICSASG_v2_hoxca_Ens.gff \
+  -o experiments/sorted/ICSASG_v2_hoxca_Ens.blocksorted.gff
+```
+
+Sorted copies live under `experiments/sorted/` with the suffix
 `.blocksorted.gff`.
 
 ### Run

@@ -10,8 +10,8 @@ request).
 
 - **Input contract**: each GFF must be sorted by `(seqid, gene start)` with gene
   blocks kept intact. The script validates this ordering and exits with an error
-  if it detects regression. A tiny helper script in
-  `docs/somparison-script-experiments.md` shows how the toy data was prepared.
+  if it detects regression. Use `./gff_block_sort.py` (documented in
+  `docs/somparison-script-experiments.md`) to pre-sort inputs safely.
 - **Gene streaming**: the parser yields one `Gene` object at a time (with all
   transcripts resolved) and maintains only the overlapping partner genes from
   the other annotation in memory.
