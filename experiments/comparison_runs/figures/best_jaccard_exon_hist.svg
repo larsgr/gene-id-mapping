@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420">
+<title>Best exon Jaccard</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="400.0" y="30.0" text-anchor="middle" font-family="Helvetica" font-size="18">Best exon Jaccard</text>
+<line x1="60" y1="360" x2="740" y2="360" stroke="#333"/>
+<line x1="60" y1="60" x2="60" y2="360" stroke="#333"/>
+<rect x="60.00" y="288.78" width="33.00" height="71.22" fill="#66aa55"/>
+<rect x="94.00" y="305.95" width="33.00" height="54.05" fill="#66aa55"/>
+<rect x="128.00" y="307.14" width="33.00" height="52.86" fill="#66aa55"/>
+<rect x="162.00" y="308.52" width="33.00" height="51.48" fill="#66aa55"/>
+<rect x="196.00" y="303.80" width="33.00" height="56.20" fill="#66aa55"/>
+<rect x="230.00" y="302.96" width="33.00" height="57.04" fill="#66aa55"/>
+<rect x="264.00" y="301.77" width="33.00" height="58.23" fill="#66aa55"/>
+<rect x="298.00" y="297.48" width="33.00" height="62.52" fill="#66aa55"/>
+<rect x="332.00" y="294.41" width="33.00" height="65.59" fill="#66aa55"/>
+<rect x="366.00" y="292.95" width="33.00" height="67.05" fill="#66aa55"/>
+<rect x="400.00" y="288.62" width="33.00" height="71.38" fill="#66aa55"/>
+<rect x="434.00" y="286.25" width="33.00" height="73.75" fill="#66aa55"/>
+<rect x="468.00" y="283.98" width="33.00" height="76.02" fill="#66aa55"/>
+<rect x="502.00" y="281.38" width="33.00" height="78.62" fill="#66aa55"/>
+<rect x="536.00" y="276.66" width="33.00" height="83.34" fill="#66aa55"/>
+<rect x="570.00" y="278.54" width="33.00" height="81.46" fill="#66aa55"/>
+<rect x="604.00" y="275.32" width="33.00" height="84.68" fill="#66aa55"/>
+<rect x="638.00" y="276.39" width="33.00" height="83.61" fill="#66aa55"/>
+<rect x="672.00" y="274.82" width="33.00" height="85.18" fill="#66aa55"/>
+<rect x="706.00" y="60.00" width="33.00" height="300.00" fill="#66aa55"/>
+<line x1="60.00" y1="360" x2="60.00" y2="365" stroke="#333"/>
+<text x="60.00" y="385.00" text-anchor="middle" font-family="Helvetica" font-size="12">0.00</text>
+<line x1="230.00" y1="360" x2="230.00" y2="365" stroke="#333"/>
+<text x="230.00" y="385.00" text-anchor="middle" font-family="Helvetica" font-size="12">0.25</text>
+<line x1="400.00" y1="360" x2="400.00" y2="365" stroke="#333"/>
+<text x="400.00" y="385.00" text-anchor="middle" font-family="Helvetica" font-size="12">0.50</text>
+<line x1="570.00" y1="360" x2="570.00" y2="365" stroke="#333"/>
+<text x="570.00" y="385.00" text-anchor="middle" font-family="Helvetica" font-size="12">0.75</text>
+<line x1="740.00" y1="360" x2="740.00" y2="365" stroke="#333"/>
+<text x="740.00" y="385.00" text-anchor="middle" font-family="Helvetica" font-size="12">1.00</text>
+<line x1="55" y1="285.00" x2="740" y2="285.00" stroke="#cccccc" stroke-dasharray="4,4"/>
+<text x="50" y="289.00" text-anchor="end" font-family="Helvetica" font-size="12">1956</text>
+<line x1="55" y1="210.00" x2="740" y2="210.00" stroke="#cccccc" stroke-dasharray="4,4"/>
+<text x="50" y="214.00" text-anchor="end" font-family="Helvetica" font-size="12">3913</text>
+<line x1="55" y1="135.00" x2="740" y2="135.00" stroke="#cccccc" stroke-dasharray="4,4"/>
+<text x="50" y="139.00" text-anchor="end" font-family="Helvetica" font-size="12">5869</text>
+<line x1="55" y1="60.00" x2="740" y2="60.00" stroke="#cccccc" stroke-dasharray="4,4"/>
+<text x="50" y="64.00" text-anchor="end" font-family="Helvetica" font-size="12">7826</text>
+</svg>

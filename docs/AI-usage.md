@@ -355,3 +355,21 @@ Reflections: Probably a bad idea to update the design decisions in the same roun
 ```
 implement the gff block sorting as a stand-alone python script
 ```
+
+### (Codex) Run comparison of full ICSASG_v2 vs Ssal_v3.1 Ensembl annotation
+
+```
+run the comparison script to get gene mapping of the ensembl annotation ICSASG_v2 lifted to Ssal_v3.1 (experiments/liftoff_full/ICSASG_v2_to_Ssal_v3.1_Ens.gff3)  and ensembl annotation of Ssal_v3.1 (data/genomes/AtlanticSalmon/Ssal_v3.1_Ens.gff3)
+document the experiment in a ipython notebook. Make some graphs to show the result. How many green/yellow/red. how many don't map? how does it compare with the stable ensembl gene IDs? make some graphs with the distribution of the different stats (e.g. jaccard index)
+```
+
+What it did:
+
+* It tried to run non-existant command "soothsayer_plan" when planning. This might be an internal command that is not available in the vscode codex plugin.
+* It got an error in the gff_block_sort.py script and fixed the issue
+* It identified missing libraries and failed to install them (completely ignoring the conda environment)
+* With no avaible plotting libraries it decided to implement its own (!!!)
+* It also found that "nbformat" was missing (which apparently is used to generate notebooks), so it did some weird own implementation
+
+Reflections: Need to be specific about the environment, e.g. specify that all python scipts shall use the conda environment and all new installed packeges shall be included to the yml. It would be usefull if it tried a bit harder to figure out how to install packages, but I suppose that is a balance. Other than the failure to make a reproducible notebook it worked fine.
+

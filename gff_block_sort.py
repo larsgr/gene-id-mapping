@@ -88,6 +88,7 @@ def sort_gff_blocks(input_path: str) -> Tuple[List[str], List[GeneBlock], List[s
     order_counter = 0
     seen_gene = False
     current_gene_id: Optional[str] = None
+    pending_by_gene: Dict[str, List[str]] = {}
 
     with open(input_path, "r", encoding="utf-8") as handle:
         for raw in handle:
@@ -128,6 +129,9 @@ def sort_gff_blocks(input_path: str) -> Tuple[List[str], List[GeneBlock], List[s
                 order_counter += 1
                 seen_gene = True
                 current_gene_id = feature_id
+                if feature_id in pending_by_gene:
+                    for pending_line in pending_by_gene.pop(feature_id):
+                        block.add_line(pending_line)
                 continue
 
             if not seen_gene:
@@ -138,18 +142,23 @@ def sort_gff_blocks(input_path: str) -> Tuple[List[str], List[GeneBlock], List[s
 
             if gene_id is None:
                 if parents:
-                    raise BlockSorterError(
-                        f"Cannot resolve gene for feature with ID '{feature_id}' and parents {parents!r}"
-                    )
+                    parent_gene = parents[0]
+                    pending_by_gene.setdefault(parent_gene, []).append(line)
+                    if feature_id:
+                        feature_to_gene[feature_id] = parent_gene
+                    current_gene_id = None
+                    continue
                 trailing_lines.append(line)
                 current_gene_id = None
                 continue
 
             block = blocks.get(gene_id)
             if block is None:
-                raise BlockSorterError(
-                    f"Feature assigned to gene '{gene_id}' before the gene definition appeared"
-                )
+                pending_by_gene.setdefault(gene_id, []).append(line)
+                if feature_id:
+                    feature_to_gene[feature_id] = gene_id
+                current_gene_id = None
+                continue
 
             block.add_line(line)
             current_gene_id = gene_id

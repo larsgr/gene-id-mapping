@@ -75,9 +75,13 @@ Initial strategies from these issues include:
 │   ├── liftofftools_full_ensembl/ # LiftoffTools variants/synteny/clusters on full-genome liftover
 │   ├── parseval_html/          # ParsEval-generated HTML dashboards for CDS comparisons
 │   ├── parseval_test/          # ParsEval CLI outputs (text/CSV metrics)
+│   ├── comparison_runs/        # Outputs & figures from within-assembly comparison runs
 │   └── within_assembly_compare/# Prototype Ensembl vs Liftoff on-assembly comparison results
 ├── data/                  # Toy datasets and annotation files
+├── gff_block_sort.py      # Helper to preserve gene blocks while sorting GFF3 input
 ├── within_assembly_compare.py  # Prototype for on-assembly GFF3 comparison metrics
+├── notebooks/             # In-depth analysis notebooks
+│   └── ens_liftoff_vs_native.ipynb # Gene-level comparison of lifted vs native Ensembl annotation
 └── workflow/              # Pipeline (e.g., Snakemake or Nextflow) for production use
 ```
 
