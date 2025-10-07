@@ -367,9 +367,27 @@ What it did:
 
 * It tried to run non-existant command "soothsayer_plan" when planning. This might be an internal command that is not available in the vscode codex plugin.
 * It got an error in the gff_block_sort.py script and fixed the issue
+* It sorted the gffs and ran comparison script
 * It identified missing libraries and failed to install them (completely ignoring the conda environment)
 * With no avaible plotting libraries it decided to implement its own (!!!)
 * It also found that "nbformat" was missing (which apparently is used to generate notebooks), so it did some weird own implementation
 
 Reflections: Need to be specific about the environment, e.g. specify that all python scipts shall use the conda environment and all new installed packeges shall be included to the yml. It would be usefull if it tried a bit harder to figure out how to install packages, but I suppose that is a balance. Other than the failure to make a reproducible notebook it worked fine.
 
+### (Codex) Re-run notebook analysis with conda environment
+
+```
+Redo the python notebook analysis. This time use the conda environment and install the required packages for working with notebooks and plotting (add them to the environment.yml). If you fail to install a package that should be possible to install, stop and ask me for help
+```
+
+What it did:
+
+* Added Jupyter, pandas, matplotlib, seaborn, nbformat, and ipykernel to `environment.yml`.
+* Stopped when it failed to install packages (it doesn't have internet access)
+* (I installed/updated environment and confirmed the packages are available so it could continue)
+* Re-generated the comparison figures with seaborn/matplotlib (PNG outputs) and rewrote the notebook to use pandas-backed plots.
+* It also create run_analysis.py and saved all the stats to file.. I would have been satisfied with the python notebook
+
+Codex's reflections: Nice improvement over the first attempt—plots now come from standard tooling and the notebook is reproducible via the conda environment. The only surprise was matplotlib complaining about a non-writable cache directory; easy to fix by pointing `MPLCONFIGDIR` at a repo-local folder.
+
+Reflection: Not sure why it made a script and a python notebook.. Perhaps the agent doesn't know how to run a notebook? At least I could run the notebook. nb: I added some colors to plots in the notebook. 

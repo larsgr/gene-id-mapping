@@ -1,0 +1,11 @@
+{
+  "total_gene_pairs": 49125,
+  "class_counts": {
+    "Green": 15706,
+    "Yellow": 18143,
+    "Red": 5890,
+    "NotMapped": 9386
+  },
+  "stable_same": 24602,
+  "stable_different": 24523
+}

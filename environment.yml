@@ -8,4 +8,10 @@ dependencies:
   - agat
   - gffcompare
   - gffread
+  - jupyterlab
+  - ipykernel
+  - pandas
+  - matplotlib
+  - seaborn
+  - nbformat
   # ParsEval (AEGeAn) is not available on osx-arm64 via conda; use Docker instead.
