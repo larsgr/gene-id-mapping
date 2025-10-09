@@ -4,7 +4,7 @@
 
 This project aims to develop a bioinformatics workflow for mapping gene annotations across and within genome assemblies. The primary goal is to convert gene IDs from one annotation to another (e.g., from an older to a newer assembly) with accompanying metadata on mapping confidence and annotation similarity.
 
-This workflow will ultimately be used to generate mapping tables for [**Salmobase**](https://salmobase.org), but this repository also serves as a lab notebook documenting tool evaluation, experiments, and methodology.
+This workflow will ultimately be used to generate mapping tables for [**Salmobase**](https://salmobase.org), but this repository also serves as a lab notebook documenting tool evaluation, experiments, methodology and specifically my attempts at using AI in the process (see [**AI-Usage**](docs/AI-usage.md))
 
 ---
 
