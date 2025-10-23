@@ -391,3 +391,18 @@ What it did:
 Codex's reflections: Nice improvement over the first attempt—plots now come from standard tooling and the notebook is reproducible via the conda environment. The only surprise was matplotlib complaining about a non-writable cache directory; easy to fix by pointing `MPLCONFIGDIR` at a repo-local folder.
 
 Reflection: Not sure why it made a script and a python notebook.. Perhaps the agent doesn't know how to run a notebook? At least I could run the notebook. nb: I added some colors to plots in the notebook. 
+
+### generated copilot-instructions.md
+
+Just to see what would happen I pressed the "generate agent instructions" in the copilot chat. This promptet it to explore the repo and write a set of instuctions that apparently is useful contaxt for the agent. The instructions cover:
+
+* Project Architecture - The two-step workflow using Liftoff/LiftoffTools and custom comparison scripts
+* Critical Workflows - Environment setup and processing pipeline
+* Key Conventions - GFF processing requirements and comparison classifications
+* Common Patterns - Examples of streaming processing and metric calculations
+* Integration Points - How outputs feed into Salmobase
+* Project-Specific Notes - Important implementation considerations
+
+[copilot-instructions.md](../.github/copilot-instructions.md)
+
+I don't think these are very useful in this project but I can see how it could work in a more typical software project.
