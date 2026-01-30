@@ -406,3 +406,11 @@ Just to see what would happen I pressed the "generate agent instructions" in the
 [copilot-instructions.md](../.github/copilot-instructions.md)
 
 I don't think these are very useful in this project but I can see how it could work in a more typical software project.
+
+### Introducing Claude code
+
+From now on claude code will do the heavy lifting. CLAUDE.md file has been generated.
+
+### gene_mapping_viewer.R Shiny app
+
+made a shiny app to inspect results. Worked very well.

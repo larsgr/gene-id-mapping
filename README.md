@@ -114,28 +114,31 @@ We now have full experiment notes for **Liftoff / LiftoffTools**, **GffCompare**
 
 ---
 
-## Getting Started
+### Design and development of comparison script
 
-To begin experimenting:
+Progress:
 
-1. **Clone the repository**:
+* Generated AI-augmented spec [docs/comparison-script-design.md](docs/comparison-script-design.md)
+* Initial implementation in [within_assembly_compare.py](within_assembly_compare.py)
+* [Initial testing](docs/comparison-script-experiments.md)
+* [full genome testing](docs/comparison-script-experiments.md)
 
-   ```bash
-   git clone https://github.com/larsgr/gene-id-mapping.git
-   cd gene-id-mapping
-   ```
+Remaining tasks:
 
-2. **Set up the development environment**:
+* It seems to be working, but should verify that the results are correct. Optimally implement automated tests.
+* Could improve/simplify the stats and rules
+* Have not tested 3+ annotations
+* Current script does not return two-way mapping
+* LiftoffTools variants and synteny not included yet
+* Currently only includes "gene" features
 
-   Create the conda environment from the provided file:
+It might be better to move on and get a preliminary result working in Salmobase. That way I might uncover unforseen issues with the current design.
 
-   ```bash
-   conda env create -f environment.yml
-   conda activate idmap
-   ```
+## Development Environment
 
-3. **Explore experiments**:
+```bash
+conda env create -f environment.yml
+conda activate idmap
+```
 
-   See [docs/experiments.md](docs/experiments.md)
-
----
+> Note: Some tools like ParsEval and Liftoff(Tools) is not available on osx-arm64 via conda; use Docker instead.

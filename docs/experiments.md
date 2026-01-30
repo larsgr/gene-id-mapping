@@ -636,6 +636,8 @@ Also, I do not know how liftoff scales to the full genome. This needs to be test
 
 ## Custom within-assembly comparison parser
 
+> Note: `within_assembly_compare.py` has been updated since experiment
+
 - Implemented a standalone Python script `within_assembly_compare.py` that compares two or more sorted GFF3 files without external dependencies. It walks gene intervals per scaffold, pairs overlapping genes, and reports both gene-level summaries and transcript-level stats (exon/intron counts, matching structures, total/overlapping bp, CDS overlap with codon phase agreement).
 - The script recomputes CDS phases from the ordered CDS fragments (strand-aware) instead of trusting the `phase` column, so `cds_bp_overlap_same_phase` reflects true codon-aligned agreement.
 - Usage on the toy data (Ensembl vs Liftoff on Ssal_v3.1):

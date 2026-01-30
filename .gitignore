@@ -6,3 +6,6 @@ temp/
 *.log
 .cache/
 .matplotlib-cache/
+.Rproj.user
+*.RProj
+*.Rhistory
