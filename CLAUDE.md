@@ -6,6 +6,62 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This project develops a bioinformatics workflow for mapping gene annotations across and within genome assemblies. The primary goal is to convert gene IDs from one annotation to another (e.g., from ICSASG_v2 to Ssal_v3.1) with accompanying metadata on mapping confidence and annotation similarity. The workflow will ultimately generate mapping tables for [Salmobase](https://salmobase.org).
 
+## Documentation Practices
+
+**IMPORTANT:** After completing any significant work, you must update the following documentation files:
+
+### 1. README.md
+Update when:
+- New analysis outputs are generated (e.g., comparison runs, visualizations)
+- New scripts, notebooks, or tools are created
+- Repository structure changes significantly
+- New workflows or pipelines are established
+
+Include:
+- Brief description of what was added
+- Location of outputs/files
+- Purpose and how it fits into the overall project
+
+### 2. docs/AI-usage.md
+**Always document your work** by adding an entry with:
+- **Prompt**: The user's original request (in a code block)
+- **What it did**: Summary bullet list of actions taken, including:
+  - Commands executed
+  - Files created/modified
+  - Analysis performed
+  - Any problems encountered and how they were resolved
+- **Reflection**: Your assessment of what worked well and what could be improved
+  - Note any technical challenges
+  - Document error recovery strategies
+  - Suggest improvements for future work
+  - Comment on the overall workflow effectiveness
+
+### 3. docs/comparison-script-design.md
+If you modify `within_assembly_compare.py`, **you MUST update this design document** to reflect:
+- Algorithm changes
+- New metrics or thresholds
+- Classification rule modifications
+- Performance improvements
+
+### Documentation Format Example
+```markdown
+### (Claude Code) Brief description of task (YYYY-MM-DD)
+
+**Prompt:**
+\`\`\`
+[User's original request]
+\`\`\`
+
+**What it did:**
+* Action 1
+* Action 2
+* Created file X with purpose Y
+* Encountered error Z, resolved by doing W
+
+**Reflection:**
+[Your assessment of the work, what worked well, areas for improvement]
+```
+
 ## Development Environment
 
 ```bash
@@ -30,7 +86,10 @@ The workflow follows a two-step approach:
 ### 1. Cross-Assembly Mapping (Liftoff/LiftoffTools)
 - Lifts gene annotations from source to target assembly
 - Generates variant and synteny information
-- Outputs stored in `experiments/liftoff_*/` and `experiments/liftofftools_*/` directories
+- Full liftoff outputs stored in `data/genomes/{species}/liftoff/{source_asm}_to_{target_asm}_{annotation}.gff[.gz]`
+  - Example: `data/genomes/AtlanticSalmon/liftoff/ICSASG_v2_to_Ssal_v3.1_Ens.gff3`
+  - Annotation suffix: "Ens" = Ensembl, "NCBI" = NCBI
+- Experimental/test runs stored in `experiments/liftoff_*/` and `experiments/liftofftools_*/` directories
 
 ### 2. Within-Assembly Comparison (Custom Script)
 - Compares lifted annotations with native target annotations on the same assembly
@@ -126,12 +185,14 @@ Thresholds are defined in `within_assembly_compare.py:48-66`.
 ```
 data/
 ├── genomes/          # Full genome FASTA and GFF downloads
+│   └── {species}/
+│       └── liftoff/  # Full liftoff outputs: {source_asm}_to_{target_asm}_{annotation}.gff[.gz]
 └── toy-assemblies/   # HoxC A cluster test dataset
     ├── get_gff_subset.sh          # Extract GFF regions
     └── get_all_gff_subsets.sh     # Batch extraction
 
 experiments/
-├── liftoff_*/                      # Liftoff cross-assembly results
+├── liftoff_*/                      # Liftoff test/experimental runs
 ├── liftofftools_*/                 # Variant/synteny/cluster analysis
 ├── gffcompare_*/                   # GffCompare comparison tests
 ├── parseval_*/                     # ParsEval CDS-aware comparison
@@ -175,6 +236,7 @@ See `docs/creating-toy-dataset.md` for details.
 ```bash
 # Liftoff is not in the conda environment for osx-arm64
 # Use Docker or Linux environment
+# Output should be saved to: data/genomes/{species}/liftoff/{source_asm}_to_{target_asm}_{annotation}.gff[.gz]
 ```
 
 3. **Run LiftoffTools (variant/synteny analysis):**
@@ -184,6 +246,7 @@ See `docs/creating-toy-dataset.md` for details.
 
 4. **Compare within target assembly:**
 ```bash
+# Use the liftoff output from data/genomes/{species}/liftoff/
 ./within_assembly_compare.py lifted.sorted.gff3 native.sorted.gff3 \
     -o comparison_output.tsv
 ```

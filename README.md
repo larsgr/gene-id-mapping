@@ -81,7 +81,8 @@ Initial strategies from these issues include:
 ├── gff_block_sort.py      # Helper to preserve gene blocks while sorting GFF3 input
 ├── within_assembly_compare.py  # Prototype for on-assembly GFF3 comparison metrics
 ├── notebooks/             # In-depth analysis notebooks
-│   └── ens_liftoff_vs_native.ipynb # Gene-level comparison of lifted vs native Ensembl annotation
+│   ├── ens_liftoff_vs_native.ipynb # Gene-level comparison of lifted vs native Ensembl annotation
+│   └── compare_liftoff_assemblies.Rmd # Comparative analysis of Brian v1.0 and ICSASG_v2 liftoffs
 └── workflow/              # Pipeline (e.g., Snakemake or Nextflow) for production use
 ```
 
@@ -89,6 +90,21 @@ Initial strategies from these issues include:
 ---
 
 ## Overview of results
+
+### Cross-Assembly Liftoff Comparisons
+
+Multiple Atlantic salmon assemblies have been lifted to Ssal_v3.1 and compared with the native Ensembl annotation:
+
+- **ICSASG_v2 → Ssal_v3.1**: Full comparison documented in `experiments/comparison_runs/ens_lift_vs_native.tsv`
+- **Ssal_Brian_v1.0 → Ssal_v3.1**: Comparison output in `experiments/comparison_runs/brian_lift_vs_native.tsv`
+
+A comprehensive Rmarkdown analysis comparing both liftoffs is available at `notebooks/compare_liftoff_assemblies.Rmd`, which evaluates:
+- Classification distributions (Green/Yellow/Red/NotMapped)
+- Quality metrics (CDS-phase and exon Jaccard indices)
+- Stable Ensembl ID preservation
+- Split/merge events
+
+This analysis helps determine which source assembly provides better annotation continuity for Salmobase integration.
 
 ### The toy-assembly dataset (data/toy-assemblies)
 

@@ -1,0 +1,368 @@
+---
+title: "Comparison of Liftoff Results: Brian v1.0 vs ICSASG_v2 to Ssal_v3.1"
+author: "Gene ID Mapping Project"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: flatly
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 10, fig.height = 6)
+```
+
+# Overview
+
+This analysis compares gene annotation mapping results from two different Atlantic salmon assemblies lifted to the Ssal_v3.1 assembly:
+
+1. **Ssal_Brian_v1.0** lifted to Ssal_v3.1 Ensembl
+2. **ICSASG_v2** Ensembl lifted to Ssal_v3.1 Ensembl
+
+Both liftoff outputs are compared against the native Ssal_v3.1 Ensembl annotation using `within_assembly_compare.py`. The goal is to assess which source assembly produces better annotation mapping to Ssal_v3.1.
+
+# Load Libraries and Data
+
+```{r load_libraries}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(scales)
+
+# Set color palette for classification
+class_colors <- c(
+  "Green" = "#4CAF50",
+  "Yellow" = "#FFEB3B",
+  "Red" = "#F44336",
+  "NotMapped" = "#9E9E9E"
+)
+
+class_order <- c("Green", "Yellow", "Red", "NotMapped")
+```
+
+```{r load_data}
+# Load Brian v1.0 comparison
+brian_file <- "../experiments/comparison_runs/brian_lift_vs_native.tsv"
+brian_raw <- read_tsv(brian_file, col_types = cols())
+
+# Load ICSASG_v2 comparison
+icsasg_file <- "../experiments/comparison_runs/ens_lift_vs_native.tsv"
+icsasg_raw <- read_tsv(icsasg_file, col_types = cols())
+
+# Function to parse stats column
+parse_stats <- function(df) {
+  # Filter for gene-level entries only
+  genes <- df %>% filter(feature == "gene")
+
+  # Parse the stats column
+  stats_parsed <- genes %>%
+    separate_rows(stats, sep = ";") %>%
+    filter(str_detect(stats, "=")) %>%
+    separate(stats, into = c("key", "value"), sep = "=", extra = "merge") %>%
+    pivot_wider(names_from = key, values_from = value, values_fn = first)
+
+  # Convert numeric columns
+  numeric_cols <- c("best_jaccard_exon", "best_jaccard_cds_phase",
+                    "overlap_bp", "exon_union_bp", "partner_countA",
+                    "partner_countB", "strand_match")
+
+  for (col in numeric_cols) {
+    if (col %in% names(stats_parsed)) {
+      stats_parsed[[col]] <- as.numeric(stats_parsed[[col]])
+    }
+  }
+
+  # Extract stable IDs
+  stats_parsed <- stats_parsed %>%
+    mutate(
+      stableA = str_extract(geneA, "ENSSSAG[0-9]+"),
+      stableB = str_extract(geneB, "ENSSSAG[0-9]+"),
+      stable_same = stableA == stableB,
+      class = factor(class, levels = class_order)
+    )
+
+  return(stats_parsed)
+}
+
+# Parse both datasets
+brian_genes <- parse_stats(brian_raw) %>% mutate(source = "Brian_v1.0")
+icsasg_genes <- parse_stats(icsasg_raw) %>% mutate(source = "ICSASG_v2")
+
+# Combine for comparison
+combined <- bind_rows(brian_genes, icsasg_genes)
+```
+
+# Overall Statistics
+
+```{r overall_stats}
+overall_summary <- combined %>%
+  group_by(source) %>%
+  summarise(
+    total_genes = n(),
+    .groups = "drop"
+  )
+
+kable(overall_summary,
+      caption = "Total gene pairs compared in each liftoff",
+      format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+# Classification Comparison
+
+## Classification Counts
+
+```{r class_counts}
+class_summary <- combined %>%
+  group_by(source, class) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  pivot_wider(names_from = class, values_from = count, values_fill = 0) %>%
+  mutate(Total = Green + Yellow + Red + NotMapped)
+
+kable(class_summary,
+      caption = "Gene pair classifications by source assembly",
+      format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+## Classification Percentages
+
+```{r class_percentages}
+class_pct <- combined %>%
+  group_by(source, class) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  group_by(source) %>%
+  mutate(
+    percentage = count / sum(count) * 100,
+    pct_label = sprintf("%.1f%%", percentage)
+  ) %>%
+  ungroup()
+
+kable(class_pct %>%
+        select(source, class, count, percentage) %>%
+        arrange(source, class),
+      caption = "Classification percentages by source",
+      col.names = c("Source", "Class", "Count", "Percentage"),
+      digits = 1,
+      format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+## Visualization: Classification Distribution
+
+```{r class_viz, fig.height=5}
+ggplot(class_pct, aes(x = source, y = percentage, fill = class)) +
+  geom_col(position = "dodge", color = "black", size = 0.3) +
+  geom_text(aes(label = pct_label),
+            position = position_dodge(width = 0.9),
+            vjust = -0.5, size = 3) +
+  scale_fill_manual(values = class_colors) +
+  labs(
+    title = "Gene Classification Distribution by Source Assembly",
+    subtitle = "Comparison of liftoff quality to Ssal_v3.1 Ensembl",
+    x = "Source Assembly",
+    y = "Percentage of Gene Pairs (%)",
+    fill = "Classification"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    legend.position = "right"
+  )
+```
+
+```{r class_stacked, fig.height=5}
+ggplot(class_pct, aes(x = source, y = percentage, fill = class)) +
+  geom_col(color = "black", size = 0.3) +
+  geom_text(aes(label = pct_label),
+            position = position_stack(vjust = 0.5),
+            size = 3.5, fontface = "bold") +
+  scale_fill_manual(values = class_colors) +
+  labs(
+    title = "Stacked Classification Distribution",
+    x = "Source Assembly",
+    y = "Percentage (%)",
+    fill = "Classification"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+# Quality Metrics
+
+## Jaccard Index Distributions
+
+### CDS-Phase Jaccard
+
+```{r jaccard_cds}
+ggplot(combined %>% filter(!is.na(best_jaccard_cds_phase)),
+       aes(x = best_jaccard_cds_phase, fill = source)) +
+  geom_histogram(bins = 40, alpha = 0.6, position = "identity") +
+  facet_wrap(~class, scales = "free_y") +
+  labs(
+    title = "CDS-Phase Jaccard Distribution by Classification",
+    subtitle = "Comparing Brian v1.0 and ICSASG_v2 liftoff results",
+    x = "Best CDS-Phase Jaccard Index",
+    y = "Count",
+    fill = "Source"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+### Exon Jaccard
+
+```{r jaccard_exon}
+ggplot(combined %>% filter(!is.na(best_jaccard_exon)),
+       aes(x = best_jaccard_exon, fill = source)) +
+  geom_histogram(bins = 40, alpha = 0.6, position = "identity") +
+  facet_wrap(~class, scales = "free_y") +
+  labs(
+    title = "Exon Jaccard Distribution by Classification",
+    x = "Best Exon Jaccard Index",
+    y = "Count",
+    fill = "Source"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+## Summary Statistics by Classification
+
+```{r quality_summary}
+quality_summary <- combined %>%
+  filter(!is.na(best_jaccard_cds_phase) | !is.na(best_jaccard_exon)) %>%
+  group_by(source, class) %>%
+  summarise(
+    n = n(),
+    mean_cds_jaccard = mean(best_jaccard_cds_phase, na.rm = TRUE),
+    median_cds_jaccard = median(best_jaccard_cds_phase, na.rm = TRUE),
+    mean_exon_jaccard = mean(best_jaccard_exon, na.rm = TRUE),
+    median_exon_jaccard = median(best_jaccard_exon, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+kable(quality_summary,
+      caption = "Mean and median Jaccard indices by classification",
+      digits = 3,
+      format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+# Stable ID Agreement
+
+Gene pairs where the stable Ensembl ID is preserved between source and target annotations.
+
+```{r stable_id}
+stable_summary <- combined %>%
+  group_by(source, class, stable_same) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  group_by(source, class) %>%
+  mutate(
+    percentage = count / sum(count) * 100
+  ) %>%
+  ungroup()
+
+kable(stable_summary %>% arrange(source, class, stable_same),
+      caption = "Stable ID agreement by classification",
+      col.names = c("Source", "Class", "Stable ID Same", "Count", "Percentage"),
+      digits = 1,
+      format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+```{r stable_id_viz}
+ggplot(stable_summary %>% filter(stable_same),
+       aes(x = class, y = percentage, fill = source)) +
+  geom_col(position = "dodge", color = "black", size = 0.3) +
+  geom_text(aes(label = sprintf("%.1f%%", percentage)),
+            position = position_dodge(width = 0.9),
+            vjust = -0.5, size = 3) +
+  labs(
+    title = "Stable Ensembl ID Preservation by Classification",
+    subtitle = "Percentage of gene pairs with matching stable IDs",
+    x = "Classification",
+    y = "Percentage with Same Stable ID (%)",
+    fill = "Source"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+# Split/Merge Analysis
+
+Genes that map to multiple partners (split/merge events).
+
+```{r split_merge}
+# Extract split/merge information
+split_merge <- combined %>%
+  mutate(
+    has_split_merge_A = !is.na(note_split_or_merge_A),
+    has_split_merge_B = !is.na(note_split_or_merge_B),
+    has_split_merge = has_split_merge_A | has_split_merge_B
+  )
+
+split_summary <- split_merge %>%
+  group_by(source, has_split_merge) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  group_by(source) %>%
+  mutate(percentage = count / sum(count) * 100)
+
+kable(split_summary,
+      caption = "Split/merge events by source",
+      col.names = c("Source", "Has Split/Merge", "Count", "Percentage"),
+      digits = 1,
+      format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+# Key Findings
+
+```{r key_findings}
+# Calculate key metrics for each source
+findings <- combined %>%
+  group_by(source) %>%
+  summarise(
+    total = n(),
+    green_pct = sum(class == "Green") / n() * 100,
+    yellow_pct = sum(class == "Yellow") / n() * 100,
+    red_pct = sum(class == "Red") / n() * 100,
+    notmapped_pct = sum(class == "NotMapped") / n() * 100,
+    high_confidence = sum(class == "Green") / n() * 100,
+    significant = sum(class %in% c("Green", "Yellow")) / n() * 100,
+    mean_cds = mean(best_jaccard_cds_phase, na.rm = TRUE),
+    mean_exon = mean(best_jaccard_exon, na.rm = TRUE),
+    stable_id_match = sum(stable_same, na.rm = TRUE) / sum(!is.na(stable_same)) * 100
+  )
+
+kable(findings,
+      caption = "Summary of key findings",
+      digits = 1,
+      format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+## Interpretation
+
+Based on the analysis above:
+
+1. **High Confidence (Green) Mappings**: Compare the percentage of Green classifications between Brian_v1.0 and ICSASG_v2. Higher percentages indicate better annotation preservation during liftoff.
+
+2. **Overall Mapping Quality**: The sum of Green + Yellow classifications indicates the proportion of genes with significant mapping evidence.
+
+3. **Mean Jaccard Indices**: Higher mean CDS and exon Jaccard indices suggest better structural alignment between lifted and native annotations.
+
+4. **Stable ID Preservation**: Higher percentages indicate better gene identity preservation across assemblies.
+
+5. **Split/Merge Events**: Fewer split/merge events typically indicate cleaner one-to-one gene mappings.
+
+# Conclusion
+
+This analysis provides a comprehensive comparison of how well annotations from two different Atlantic salmon assemblies (Brian_v1.0 and ICSASG_v2) transfer to the Ssal_v3.1 assembly via Liftoff. The metrics help determine which source assembly provides better annotation continuity for Salmobase integration.
+
+---
+
+**Analysis generated**: `r Sys.time()`

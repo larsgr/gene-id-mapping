@@ -414,3 +414,36 @@ From now on claude code will do the heavy lifting. CLAUDE.md file has been gener
 ### gene_mapping_viewer.R Shiny app
 
 made a shiny app to inspect results. Worked very well.
+
+### (Claude Code) Compare Ssal_Brian_v1.0 liftoff with Ssal_v3.1 annotation (2026-01-30)
+
+**Prompt:**
+```
+I have added a new liftoff `data/genomes/AtlanticSalmon/liftoff/Ssal_Brian_v1.0_to_Ssal_v3.1_Ens.gff.gz`
+Compare this with Ssal_v3.1 Ensembl annotation using `within_assembly_compare.py`. Make an Rmarkdown analysis of the result and compare it with the earlier comparison that was performed on ICSASG_v2 Ensembl vs Ssal_v3.1 Ensembl annotation.
+```
+
+**What it did:**
+* Located both the new liftoff file and the Ssal_v3.1 native Ensembl annotation
+* Sorted both GFF3 files using `gff_block_sort.py` (handling compressed input via gunzip pipe)
+* Ran `within_assembly_compare.py` to generate gene-level comparison metrics
+* Created a comprehensive Rmarkdown analysis (`notebooks/compare_liftoff_assemblies.Rmd`) that:
+  - Loads and parses both comparison datasets (Brian v1.0 and ICSASG_v2)
+  - Compares classification distributions (Green/Yellow/Red/NotMapped)
+  - Analyzes quality metrics (CDS-phase and exon Jaccard indices)
+  - Evaluates stable Ensembl ID preservation rates
+  - Identifies split/merge events
+  - Generates visualizations (bar charts, histograms, stacked plots)
+* Installed missing R package (kableExtra) when rendering failed
+* Successfully rendered the Rmarkdown to HTML with all figures and tables
+* Updated README.md with information about the new comparison runs
+* Updated AI-usage.md with this documentation entry
+
+**Reflection:**
+Claude Code handled the entire pipeline autonomously from start to finish. It correctly identified the need to sort GFF files first, handled compressed input gracefully, and created a well-structured comparative analysis. The Rmarkdown document is comprehensive with proper statistical summaries, visualizations, and interpretative sections.
+
+The agent successfully recovered from the missing R package error by installing it and re-rendering. The final output provides a clear comparison framework that can be reused for future liftoff comparisons.
+
+One improvement area: The agent could have been more proactive about checking for required R packages before rendering, though the error-recovery approach worked fine.
+
+The workflow demonstrates good end-to-end capabilities: file I/O, data processing, statistical analysis, visualization, and documentation - all executed with minimal intervention.
