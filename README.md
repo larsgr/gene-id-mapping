@@ -33,22 +33,22 @@ Initial strategies from these issues include:
 ---
 
 
-### Roadmap / Progress
+### Roadmap
 
 1.  ✅ Research candidate tools ([tool survey](docs/tool-survey.md)).
 2.  ✅ Create toy dataset for initial testing ([creating toy dataset](docs/creating-toy-dataset.md)).
 3.  ✅ Experiment with Liftoff/LiftoffTools and document findings ([experiments: Liftoff](docs/experiments.md#liftoff)).
 4.  ✅ Test GffCompare on the Liftoff results ([experiments: GffCompare](docs/experiments.md#GffCompare)).
 5.  ✅ Try ParsEval (CDS‑aware gene model comparison) on the same inputs ([experiments: ParsEval](docs/experiments.md#ParsEval)).
-6.  ✅ Experimental implemention of custom comparison script ([`within_assembly_compare.py`](within_assembly_compare.py)).
-7.  ✅ Further testing of Liftoff/LiftoffTools (variants/synteny/clusters on lifted annotations)
-8.  ⬜ Design and develop custom comparison script.
-9.  ⬜ Design table schema.
-10. ⬜ Develop and implement workflow.
-11. ⬜ Integrate with Salmobase workflow.
-12. ⬜ Implement database import, api and front-end in salmobase.
-
----
+6.  ✅ Design custom comparison script ([comparison-script-design.md](docs/comparison-script-design.md)).
+7.  ✅ Experimental implemention of custom comparison script ([`within_assembly_compare.py`](within_assembly_compare.py)).
+8.  ✅ Initial testing of comparison script ([comparison-script intital experiments](docs/comparison-script-experiments.md)).
+9.  ✅ Further testing of Liftoff/LiftoffTools (variants/synteny/clusters on lifted annotations[docs/experiments.md#LiftoffTools])
+10. 🔄 Refine and debug custom comparison script. ([refining and debugging](docs/comparison-script-refine-and-debug.md))
+11. ⬜ Design database table schema.
+12. ⬜ Develop and implement workflow.
+13. ⬜ Integrate with Salmobase workflow.
+14. ⬜ Implement database import, api and front-end in salmobase.
 
 
 ### Repository Structure
@@ -89,22 +89,7 @@ Initial strategies from these issues include:
 
 ---
 
-## Overview of results
-
-### Cross-Assembly Liftoff Comparisons
-
-Multiple Atlantic salmon assemblies have been lifted to Ssal_v3.1 and compared with the native Ensembl annotation:
-
-- **ICSASG_v2 → Ssal_v3.1**: Full comparison documented in `experiments/comparison_runs/ens_lift_vs_native.tsv`
-- **Ssal_Brian_v1.0 → Ssal_v3.1**: Comparison output in `experiments/comparison_runs/brian_lift_vs_native.tsv`
-
-A comprehensive Rmarkdown analysis comparing both liftoffs is available at `notebooks/compare_liftoff_assemblies.Rmd`, which evaluates:
-- Classification distributions (Green/Yellow/Red/NotMapped)
-- Quality metrics (CDS-phase and exon Jaccard indices)
-- Stable Ensembl ID preservation
-- Split/merge events
-
-This analysis helps determine which source assembly provides better annotation continuity for Salmobase integration.
+## Summary of results
 
 ### The toy-assembly dataset (data/toy-assemblies)
 
