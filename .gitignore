@@ -9,3 +9,8 @@ temp/
 .Rproj.user
 *.RProj
 *.Rhistory
+
+# Claude Code local files (but keep skills directory and README)
+.claude/*
+!.claude/skills/
+!.claude/README.md

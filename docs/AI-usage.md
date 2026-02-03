@@ -497,3 +497,66 @@ The comparison reveals important biological insights - only 31% perfect matches 
 One minor note: The agent could have created the `convert_seqnames.py` script in a more permanent location (like the root directory alongside other scripts), though placing it in the root was appropriate. The script is highly reusable for future assembly comparisons with different naming conventions.
 
 Overall, this demonstrates excellent capability for end-to-end bioinformatics workflows including data acquisition, format conversion, comparison analysis, and reporting.
+
+### (Claude Code) Implement Documentation Workflow Structure (2026-02-03)
+
+**Prompt:**
+```
+Implement the following plan:
+
+# Plan: Improve Documentation Workflow Structure
+
+## Overview
+Establish a structured workflow for managing AI sessions, experiments, and documentation with clear enforcement rules in CLAUDE.md and a session-end slash command.
+
+[... full plan details ...]
+```
+
+**What it did:**
+* Updated CLAUDE.md with comprehensive workflow structure sections:
+  - Added Session Start Protocol with automated git status checks and warnings for uncommitted changes
+  - Added Documentation Hierarchy explaining the 3-tier structure (README → detailed logs → experiments)
+  - Added File Organization Rules for experiments, reports, scripts, and documentation
+  - Added Session End Protocol with automatic reminders to run `/session-end`
+  - Reorganized documentation sections for clarity
+* Created `.claude/skills/session-end/SKILL.md` - a custom Claude Code skill:
+  - Implements `/session-end` command that users can invoke to document completed work
+  - Guides through: identifying Roadmap task, gathering session info, generating documentation updates, confirming changes, updating files, suggesting commit message
+  - Maintains consistency: session names match across AI-usage.md, detailed logs, and commit messages
+  - Includes comprehensive instructions, examples, special cases, and error handling
+* Created `.claude/README.md` explaining the project-specific Claude Code configuration
+* Updated `.gitignore` to:
+  - Ignore all `.claude/*` files (local configuration)
+  - Except `.claude/skills/` (custom skills tracked in git)
+  - Except `.claude/README.md` (documentation tracked in git)
+* Staged all changes and verified git tracking is correct
+
+**Reflection:**
+This implementation establishes a structured, enforceable workflow for AI-assisted development sessions. Key improvements:
+
+1. **Session boundaries are clear**: Automated checks at start (uncommitted changes warning) and end (documentation reminder) create natural session markers.
+
+2. **Documentation becomes systematic**: The 3-tier hierarchy (Roadmap → detailed logs → experiments) provides clear organization from high-level goals down to implementation details.
+
+3. **Reduced cognitive load**: The `/session-end` skill automates the tedious parts of documentation while ensuring consistency across files and commits.
+
+4. **Traceability**: Matching session names across AI-usage.md, task logs, and git commits makes it easy to track "what happened when and why."
+
+5. **Discoverability**: The skill system makes the workflow self-documenting and available through simple commands.
+
+Potential challenges:
+- The workflow adds structure but also adds steps - need to monitor whether it feels helpful or burdensome in practice
+- The skill hasn't been tested in a real session yet - may need refinement based on actual use
+- Users need to remember to invoke `/session-end` - the reminder system helps but isn't foolproof
+
+Design decisions that worked well:
+- Using warnings rather than hard blocks for uncommitted changes preserves user flexibility
+- Creating a formal skill rather than just documentation ensures the workflow is machine-readable and executable
+- Keeping .claude/skills/ in git makes the workflow portable across machines and collaborators
+
+Next steps:
+- Test the `/session-end` skill in an actual work session
+- Monitor whether the workflow improves documentation quality and consistency
+- Adjust prompts and instructions based on real-world usage patterns
+
+The implementation demonstrates Claude Code's extensibility through the skills system and shows how project-specific workflows can be codified and automated while remaining flexible.

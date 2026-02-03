@@ -6,6 +6,86 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This project develops a bioinformatics workflow for mapping gene annotations across and within genome assemblies. The primary goal is to convert gene IDs from one annotation to another (e.g., from ICSASG_v2 to Ssal_v3.1) with accompanying metadata on mapping confidence and annotation similarity. The workflow will ultimately generate mapping tables for [Salmobase](https://salmobase.org).
 
+## Workflow Structure
+
+### Session Start Protocol
+**IMPORTANT:** At the start of each session, automatically check git status:
+- Run `git status` to check for uncommitted changes
+- If uncommitted changes exist, display them and warn the user:
+  ```
+  ⚠️ Uncommitted changes detected:
+  [show git status output]
+
+  Manual edits should be committed before starting AI work.
+  Would you like to commit these changes first? [Yes/No]
+  ```
+- If Yes: Guide user through creating a commit
+- If No: Acknowledge and proceed with the session
+- User should commit manual edits from previous sessions before starting new AI work
+
+### Documentation Hierarchy
+All work follows this three-tier structure:
+
+1. **README.md → Roadmap Section**
+   - High-level tasks using emoji status:
+     - ✅ Completed
+     - 🔄 In progress (may span multiple sessions/commits)
+     - ⬜ Not started
+   - Each task links to a detailed log file in docs/
+
+2. **docs/[task-name].md → Detailed Task Log**
+   - One log file per Roadmap task
+   - Each AI session adds a new dated section with:
+     - What was done (commands, files created/modified, analysis performed)
+     - Key findings and conclusions
+     - Problems encountered and solutions
+   - Session section names should match:
+     - The entry in docs/AI-usage.md
+     - The git commit message for that session
+
+3. **experiments/[experiment-name]/ → Experiment Scripts and Data**
+   - Single-use analysis/experiment scripts stored in subdirectories
+   - Each subdirectory contains:
+     - Analysis scripts (Python, R, bash, etc.)
+     - Output data (with .gitignore for files >1MB)
+     - Brief README.md if complex
+   - Referenced from the detailed task log
+
+### Session End Protocol
+**IMPORTANT:** When work appears complete, automatically remind the user to document:
+- Detect potential session end (e.g., user says "thanks", "that's all", work is complete)
+- Prompt: "This session's work should be documented. Would you like to run /session-end now?"
+- The `/session-end` skill will:
+  - Gather session summary information via prompts
+  - Update docs/AI-usage.md with new entry
+  - Update or create detailed task log in docs/
+  - Suggest commit message matching session name
+  - Verify all documentation is complete
+- **Do not consider a session complete until documentation is updated**
+
+## File Organization Rules
+
+### Experiment Data
+- Single-use experiments: `experiments/[descriptive-name]/`
+- Always create .gitignore for generated files >1MB
+- Include script used to generate outputs for reproducibility
+
+### Analysis Reports
+- **Rmarkdown reports**: Store in `notebooks/` directory
+- Render as both .md (commit) and .html (add to .gitignore)
+- Final polished reports can be moved to `docs/` if needed
+- Initial/exploratory analyses stay in `notebooks/`
+
+### Tool Scripts
+- Reusable tools go in repo root (e.g., `gff_block_sort.py`, `within_assembly_compare.py`)
+- Scripts that are part of the final workflow, not one-off analyses
+- Should be documented in CLAUDE.md under "Key Scripts" section
+
+### Documentation Files
+- `docs/AI-usage.md`: Log of all AI sessions (prompt + summary + reflection)
+- `docs/[task-name].md`: Detailed logs per Roadmap task
+- `docs/[topic].md`: Design documents, guides, surveys (e.g., tool-survey.md)
+
 ## Documentation Practices
 
 **IMPORTANT:** After completing any significant work, you must update the following documentation files:
@@ -42,6 +122,17 @@ If you modify `within_assembly_compare.py`, **you MUST update this design docume
 - New metrics or thresholds
 - Classification rule modifications
 - Performance improvements
+
+### 4. Session-End Workflow
+
+**MANDATORY:** At the end of each session, run `/session-end` slash command which will:
+1. Prompt for session summary information
+2. Update docs/AI-usage.md with new entry
+3. Update relevant detailed log under docs/
+4. Suggest commit message matching session name
+5. Verify all documentation is complete
+
+**Do not complete a session without running `/session-end`.**
 
 ### Documentation Format Example
 ```markdown
