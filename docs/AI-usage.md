@@ -447,3 +447,53 @@ The agent successfully recovered from the missing R package error by installing 
 One improvement area: The agent could have been more proactive about checking for required R packages before rendering, though the error-recovery approach worked fine.
 
 The workflow demonstrates good end-to-end capabilities: file I/O, data processing, statistical analysis, visualization, and documentation - all executed with minimal intervention.
+
+### (Claude Code) NCBI vs Ensembl Annotation Comparison for Ssal_v3.1 (2026-01-30)
+
+**Prompt:**
+```
+I want to compare the NCBI annotations with the Ensembl annotations (for Ssal_v3.1 assembly). Note that even though they are the same assembly they are using different names for the sequences, use
+https://salmobase.org/datafiles/TSV/chromosomes/AtlanticSalmon/Ssal_v3.1/chromosomes.tsv for converting. Run the comparison script and make an Rmarkdown report.
+```
+
+**What it did:**
+* Downloaded NCBI annotation from NCBI FTP (`GCF_905237065.1_Ssal_v3.1_genomic.gff.gz`)
+* Downloaded chromosome name mapping table from Salmobase
+* Examined both GFF files to understand sequence naming conventions:
+  - NCBI uses RefSeq accessions (e.g., "NC_059442.1")
+  - Ensembl uses simple numeric names (e.g., "1", "2")
+* Created `convert_seqnames.py` script to convert sequence names between naming conventions:
+  - Loads TSV mapping file with configurable column names
+  - Handles both plain and gzipped GFF input
+  - Reports conversion statistics and unmapped sequences
+* Converted NCBI GFF to use Ensembl chromosome names (2,939,849 lines converted successfully)
+* Sorted both GFF files using `gff_block_sort.py`
+* Ran `within_assembly_compare.py` with `--include-transcripts` flag
+  - Generated 528,682 comparison rows (gene and transcript level)
+* Created comprehensive Rmarkdown report (`experiments/comparison_runs/ncbi_vs_ensembl_Ssal_v3.1/comparison_report.Rmd`) with:
+  - Summary statistics (42,041 NCBI genes vs 40,589 Ensembl genes)
+  - Classification distributions with percentages
+  - Quality metric visualizations (Jaccard scores, junction F1)
+  - Split/merge analysis showing genes with multiple partners
+  - Transcript-level analysis by type (coding vs non-coding)
+  - Strand agreement and monoexonic analysis
+  - Example tables of high-quality, problematic, and split/merge cases
+  - Key findings and Salmobase integration recommendations
+* Successfully rendered to HTML with all visualizations
+* Updated README.md with summary of findings (31.2% Green, 37.9% Yellow, 7.6% Red, 23.1% NotMapped)
+* Updated this AI-usage.md documentation
+
+**Reflection:**
+Claude Code executed a complex multi-step workflow autonomously with no errors. Key strengths demonstrated:
+
+1. **Problem decomposition**: Correctly identified the sequence naming issue and created a reusable conversion script rather than a one-off solution
+2. **Tool creation**: The `convert_seqnames.py` script is well-designed with proper argument parsing, error handling, and progress reporting
+3. **Data validation**: Checked GFF structure before and after conversion to ensure correctness
+4. **Analysis depth**: Created a thorough Rmarkdown report with appropriate visualizations for both gene and transcript levels
+5. **Documentation**: Properly updated all required documentation files per CLAUDE.md instructions
+
+The comparison reveals important biological insights - only 31% perfect matches between NCBI and Ensembl suggests substantial differences in annotation approaches or gene model definitions. The split/merge analysis is particularly valuable for Salmobase integration planning.
+
+One minor note: The agent could have created the `convert_seqnames.py` script in a more permanent location (like the root directory alongside other scripts), though placing it in the root was appropriate. The script is highly reusable for future assembly comparisons with different naming conventions.
+
+Overall, this demonstrates excellent capability for end-to-end bioinformatics workflows including data acquisition, format conversion, comparison analysis, and reporting.
