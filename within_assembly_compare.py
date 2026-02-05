@@ -38,6 +38,15 @@ TRANSCRIPT_TYPES = {
     "pseudogenic_transcript",
 }
 
+GENE_TYPES = {
+    "gene",              # Standard gene feature (NCBI & Ensembl protein-coding + some non-coding)
+    "ncRNA_gene",        # Ensembl non-coding RNA genes (lncRNA, rRNA, snRNA, snoRNA, miRNA, etc.)
+    "pseudogene",        # Pseudogenes (both NCBI & Ensembl)
+    "V_gene_segment",    # Immunoglobulin/T-cell receptor V segments
+    "D_gene_segment",    # Immunoglobulin/T-cell receptor D segments
+    "J_gene_segment",    # Immunoglobulin/T-cell receptor J segments
+}
+
 SEVERITY_ORDER = {
     "NotMapped": 0,
     "Red": 1,
@@ -401,12 +410,12 @@ def stream_genes(path: str) -> Iterator[Gene]:
             parents_raw = attrs.get("Parent")
             parents = parents_raw.split(",") if parents_raw else []
 
-            if feature_type == "gene" and feature_id:
+            if feature_type in GENE_TYPES and feature_id:
                 if last_gene_key is not None:
                     last_seqid, last_start = last_gene_key
                     if (seqid < last_seqid) or (seqid == last_seqid and start < last_start):
                         raise GFFSortError(
-                            f"GFF not sorted: gene {feature_id} at {seqid}:{start} precedes {last_seqid}:{last_start}"
+                            f"GFF not sorted: {feature_type} {feature_id} at {seqid}:{start} precedes {last_seqid}:{last_start}"
                         )
                 last_gene_key = (seqid, start)
                 gene_done = finalize_current_gene()
@@ -417,7 +426,7 @@ def stream_genes(path: str) -> Iterator[Gene]:
                 continue
 
             if current_gene is None:
-                # Ignore features before the first gene declaration
+                # Ignore features before the first gene-like feature declaration
                 continue
 
             if feature_type in TRANSCRIPT_TYPES and feature_id:

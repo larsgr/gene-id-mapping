@@ -560,3 +560,33 @@ Next steps:
 - Adjust prompts and instructions based on real-world usage patterns
 
 The implementation demonstrates Claude Code's extensibility through the skills system and shows how project-specific workflows can be codified and automated while remaining flexible.
+
+### (Claude Code) Fix comparison script to handle all gene-like features (2026-02-03)
+
+**Prompt:**
+```
+Implement the plan to fix comparison script
+```
+
+**What it did:**
+* Added GENE_TYPES constant to both `within_assembly_compare.py` (line 41-47) and `gff_block_sort.py` (line 31-37) containing: `gene`, `ncRNA_gene`, `pseudogene`, `V_gene_segment`, `D_gene_segment`, `J_gene_segment`
+* Updated gene detection logic from `if feature_type == "gene"` to `if feature_type in GENE_TYPES` in both scripts
+* Updated error messages to include the actual feature type instead of hardcoded "gene"
+* Updated comment in `within_assembly_compare.py` from "first gene declaration" to "first gene-like feature declaration"
+* Re-sorted both GFF files (`Ssal_v3.1_NCBI.sorted.gff3` and `Ssal_v3.1_Ens.sorted.gff3`) with updated `gff_block_sort.py`
+* Re-ran comparison with updated `within_assembly_compare.py` generating `experiments/comparison_runs/ncbi_vs_ensembl_Ssal_v3.1/comparison_v2.tsv`
+* Re-rendered the R markdown comparison report: `experiments/comparison_runs/ncbi_vs_ensembl_Ssal_v3.1/comparison_report.html`
+
+**Reflection:**
+This was a straightforward implementation of a well-defined plan. The fix addressed a significant limitation where the comparison scripts only recognized `feature_type == "gene"`, missing Ensembl's 21,576 `ncRNA_gene` features, 608 `pseudogene` features, and immunoglobulin/TCR gene segments.
+
+The verification results clearly demonstrate the fix is working:
+- Gene counts increased dramatically (NCBI: 54,016 from ~42k; Ensembl: 54,268 from ~40k)
+- A new "Both non-coding" category appeared with 15,170 transcript pairs, which was entirely missing before
+- The comparison now processes 67,546 gene pairs instead of the previous ~40k
+
+The implementation was clean and consistent across both scripts, maintaining the existing architecture while simply expanding the set of recognized gene-like features. The use of a constant set (`GENE_TYPES`) rather than hardcoding makes the code more maintainable and self-documenting.
+
+One observation: The plan was already detailed and specific, which made implementation straightforward. The success demonstrates the value of thorough planning before execution, especially when refactoring critical parsing logic.
+
+The comparison is now complete and fair, giving equal treatment to all gene-like annotations from both NCBI and Ensembl.

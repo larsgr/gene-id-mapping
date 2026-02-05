@@ -34,3 +34,34 @@ A direct comparison of NCBI and Ensembl annotations for the Ssal_v3.1 assembly h
 
 This comparison required converting NCBI RefSeq chromosome names to Ensembl format using the Salmobase chromosome mapping table. The analysis includes detailed metrics on CDS overlap, junction agreement, and split/merge events, providing valuable insights for cross-annotation linking in Salmobase.
 
+## Fix comparison script to handle all gene-like features (2026-02-03)
+
+**What was done:**
+* Added `GENE_TYPES` constant to `within_assembly_compare.py` and `gff_block_sort.py`
+  - Includes: `gene`, `ncRNA_gene`, `pseudogene`, `V_gene_segment`, `D_gene_segment`, `J_gene_segment`
+* Updated gene detection logic from `if feature_type == "gene"` to `if feature_type in GENE_TYPES`
+* Modified error messages to include actual feature type
+* Re-sorted NCBI and Ensembl GFF files: `Ssal_v3.1_NCBI.sorted.gff3` and `Ssal_v3.1_Ens.sorted.gff3`
+* Re-ran comparison generating `experiments/comparison_runs/ncbi_vs_ensembl_Ssal_v3.1/comparison_v2.tsv`
+* Re-rendered comparison report: `experiments/comparison_runs/ncbi_vs_ensembl_Ssal_v3.1/comparison_report.html`
+
+**Findings:**
+The fix dramatically expanded the scope of the comparison:
+- **NCBI genes compared**: 54,016 (previously ~42k)
+- **Ensembl genes compared**: 54,268 (previously ~40k)
+- **Total comparison rows**: 67,546
+
+**Coding status distribution** (transcript-level):
+- Both coding: 452,094
+- **Both non-coding: 15,170** (NEW - was entirely missing before!)
+- NCBI coding, Ensembl non-coding: 10,220
+- NCBI non-coding, Ensembl coding: 28,912
+
+**Source GFF files contain**:
+- NCBI: 65,475 gene-like features
+- Ensembl: 69,551 gene-like features
+  - Including 21,576 `ncRNA_gene` features (lncRNAs, rRNAs, snRNAs, etc.)
+  - Including 608 `pseudogene` features
+
+The comparison now properly processes all gene-like features from both annotations, providing a complete and fair comparison. The appearance of the "Both non-coding" category with over 15,000 entries confirms that the script was previously missing a substantial portion of the annotations.
+

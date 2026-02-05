@@ -27,6 +27,15 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 GFF_COLUMNS = 9
 
+GENE_TYPES = {
+    "gene",              # Standard gene feature (NCBI & Ensembl protein-coding + some non-coding)
+    "ncRNA_gene",        # Ensembl non-coding RNA genes (lncRNA, rRNA, snRNA, snoRNA, miRNA, etc.)
+    "pseudogene",        # Pseudogenes (both NCBI & Ensembl)
+    "V_gene_segment",    # Immunoglobulin/T-cell receptor V segments
+    "D_gene_segment",    # Immunoglobulin/T-cell receptor D segments
+    "J_gene_segment",    # Immunoglobulin/T-cell receptor J segments
+}
+
 
 @dataclass
 class GeneBlock:
@@ -116,11 +125,11 @@ def sort_gff_blocks(input_path: str) -> Tuple[List[str], List[GeneBlock], List[s
             feature_id = attrs.get("ID")
             parents = attrs.get("Parent", "").split(",") if attrs.get("Parent") else []
 
-            if feature_type == "gene" and feature_id:
+            if feature_type in GENE_TYPES and feature_id:
                 try:
                     start = int(start_s)
                 except ValueError as exc:
-                    raise BlockSorterError(f"Invalid start coordinate for gene {feature_id}: {start_s}") from exc
+                    raise BlockSorterError(f"Invalid start coordinate for {feature_type} {feature_id}: {start_s}") from exc
 
                 block = GeneBlock(gene_id=feature_id, seqid=seqid, start=start, order=order_counter)
                 block.add_line(line)
