@@ -568,6 +568,8 @@ The implementation demonstrates Claude Code's extensibility through the skills s
 Implement the plan to fix comparison script
 ```
 
+> (My note): This was following a planning session of interactively exploring the gene annotations where the issue was discovered. Claude code saves the plan and clears the context so it "forgot" what the original prompt was. The plan is stored user directory `~/.claude/plans/hidden-imagining-widget.md` and could have been copied into the repo for full transparency.
+
 **What it did:**
 * Added GENE_TYPES constant to both `within_assembly_compare.py` (line 41-47) and `gff_block_sort.py` (line 31-37) containing: `gene`, `ncRNA_gene`, `pseudogene`, `V_gene_segment`, `D_gene_segment`, `J_gene_segment`
 * Updated gene detection logic from `if feature_type == "gene"` to `if feature_type in GENE_TYPES` in both scripts
@@ -590,3 +592,11 @@ The implementation was clean and consistent across both scripts, maintaining the
 One observation: The plan was already detailed and specific, which made implementation straightforward. The success demonstrates the value of thorough planning before execution, especially when refactoring critical parsing logic.
 
 The comparison is now complete and fair, giving equal treatment to all gene-like annotations from both NCBI and Ensembl.
+
+### (Claude Code) Fix the issue with reverse transcript overlap counting against merge/splits
+
+**Prompt:**
+
+```
+Fix the issue with reverse transcript overlap counting against merge/splits
+```
