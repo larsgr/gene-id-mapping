@@ -781,8 +781,11 @@ class RecordBuffer:
     def add_record(self, record: GenePairRecord) -> None:
         self.records_by_gene_a.setdefault(record.gene_a.id, []).append(record)
         self.records_by_gene_b.setdefault(record.gene_b.id, []).append(record)
-        self.partner_sets_a.setdefault(record.gene_a.id, set()).add(record.gene_b.id)
-        self.partner_sets_b.setdefault(record.gene_b.id, set()).add(record.gene_a.id)
+        # Exclude antisense conflicts from partner counting so they don't
+        # trigger false split/merge downgrades on legitimate same-strand pairs.
+        if "antisense_conflict" not in record.notes:
+            self.partner_sets_a.setdefault(record.gene_a.id, set()).add(record.gene_b.id)
+            self.partner_sets_b.setdefault(record.gene_b.id, set()).add(record.gene_a.id)
 
     def finalize_gene(self, side: str, gene_id: str) -> None:
         if side == "A":

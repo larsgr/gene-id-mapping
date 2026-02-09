@@ -131,6 +131,8 @@ trigger in the notes and demote the gene summary:
 
 - **Split / Merge detection**: overlaps with ≥ 2 distinct partners (currently
   triggers an automatic downgrade to Yellow and records `note_split_or_merge_*`).
+  Antisense overlaps are excluded from partner counting — only same-strand
+  partners contribute to split/merge detection.
 - **Competing partner within Δ**: another partner whose key metric is within the
   delta tolerance (e.g. `ΔJaccard_CDS_phase ≤ 0.02`).
 - **Frame inconsistency**: mixed in-phase and out-of-phase transcript pairs.

@@ -1,0 +1,8 @@
+##gff-version 3
+# Annotation A: One gene on + strand spanning 1000-5000
+chr1	test	gene	1000	5000	.	+	.	ID=gene:GENEA1;biotype=protein_coding
+chr1	test	mRNA	1000	5000	.	+	.	ID=transcript:TXA1;Parent=gene:GENEA1;biotype=protein_coding
+chr1	test	exon	1000	2000	.	+	.	Parent=transcript:TXA1
+chr1	test	exon	3000	5000	.	+	.	Parent=transcript:TXA1
+chr1	test	CDS	1000	2000	.	+	0	Parent=transcript:TXA1
+chr1	test	CDS	3000	5000	.	+	0	Parent=transcript:TXA1

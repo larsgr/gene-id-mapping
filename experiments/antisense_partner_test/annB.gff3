@@ -1,0 +1,16 @@
+##gff-version 3
+# Annotation B:
+# Gene B1 on - strand overlapping Gene A1 (antisense) at 1500-3500
+# Gene B2 on + strand overlapping Gene A1 (same-strand) at 2500-6000
+chr1	test	gene	1500	3500	.	-	.	ID=gene:GENEB1;biotype=protein_coding
+chr1	test	mRNA	1500	3500	.	-	.	ID=transcript:TXB1;Parent=gene:GENEB1;biotype=protein_coding
+chr1	test	exon	1500	2500	.	-	.	Parent=transcript:TXB1
+chr1	test	exon	3000	3500	.	-	.	Parent=transcript:TXB1
+chr1	test	CDS	1500	2500	.	-	0	Parent=transcript:TXB1
+chr1	test	CDS	3000	3500	.	-	0	Parent=transcript:TXB1
+chr1	test	gene	2500	6000	.	+	.	ID=gene:GENEB2;biotype=protein_coding
+chr1	test	mRNA	2500	6000	.	+	.	ID=transcript:TXB2;Parent=gene:GENEB2;biotype=protein_coding
+chr1	test	exon	2500	4000	.	+	.	Parent=transcript:TXB2
+chr1	test	exon	4500	6000	.	+	.	Parent=transcript:TXB2
+chr1	test	CDS	2500	4000	.	+	0	Parent=transcript:TXB2
+chr1	test	CDS	4500	6000	.	+	0	Parent=transcript:TXB2

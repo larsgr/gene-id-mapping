@@ -65,3 +65,26 @@ The fix dramatically expanded the scope of the comparison:
 
 The comparison now properly processes all gene-like features from both annotations, providing a complete and fair comparison. The appearance of the "Both non-coding" category with over 15,000 entries confirms that the script was previously missing a substantial portion of the annotations.
 
+## Fix antisense overlaps inflating merge/split partner counts (2026-02-09)
+
+**What was done:**
+* Modified `RecordBuffer.add_record` in `within_assembly_compare.py` (line 781-787):
+  - Added conditional `if "antisense_conflict" not in record.notes` before adding to partner sets
+  - Antisense records are still stored in `records_by_gene_a/b` for output, just excluded from partner counting
+* Updated `docs/comparison-script-design.md` "Split / Merge detection" section to document the exclusion
+* Created `experiments/antisense_partner_test/` with toy GFF3 files testing the exact scenario
+* Re-ran full NCBI vs Ensembl Ssal_v3.1 comparison → `comparison_v3.tsv`
+
+**Findings:**
+The fix had a large impact on the NCBI vs Ensembl comparison:
+
+| Metric | v2 (before) | v3 (after) | Change |
+|--------|------------|------------|--------|
+| Green | 24,078 (35.6%) | 30,511 (45.2%) | +6,433 |
+| Yellow | 21,304 (31.5%) | 14,871 (22.0%) | -6,433 |
+| Red | 4,537 (6.7%) | 4,537 (6.7%) | unchanged |
+| NotMapped | 17,627 (26.1%) | 17,627 (26.1%) | unchanged |
+| Split/merge flags | 34,794 | 17,109 | -17,685 |
+
+The 6,433 gene pairs promoted from Yellow to Green were cases where an antisense overlap inflated the partner count to ≥2, triggering a false split/merge downgrade. With the fix, only same-strand partners contribute to split/merge detection.
+

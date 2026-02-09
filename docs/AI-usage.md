@@ -593,10 +593,25 @@ One observation: The plan was already detailed and specific, which made implemen
 
 The comparison is now complete and fair, giving equal treatment to all gene-like annotations from both NCBI and Ensembl.
 
-### (Claude Code) Fix the issue with reverse transcript overlap counting against merge/splits
+### (Claude Code) Fix antisense overlaps inflating merge/split partner counts (2026-02-09)
 
 **Prompt:**
-
 ```
 Fix the issue with reverse transcript overlap counting against merge/splits
 ```
+
+**What it did:**
+* Fixed `RecordBuffer.add_record` in `within_assembly_compare.py` to exclude antisense conflicts from `partner_sets`, preventing false split/merge downgrades
+* Updated `docs/comparison-script-design.md` to document that antisense overlaps are excluded from partner counting
+* Created toy test case in `experiments/antisense_partner_test/` verifying the fix works correctly
+* Re-ran NCBI vs Ensembl comparison for Ssal_v3.1, generating `comparison_v3.tsv`
+* Compared v2 vs v3 results showing significant improvement:
+  - Split/merge flags dropped from 34,794 → 17,109 (-17,685)
+  - Green classifications increased from 24,078 (35.6%) → 30,511 (45.2%) (+6,433)
+  - Yellow decreased from 21,304 (31.5%) → 14,871 (22.0%) (-6,433)
+  - Red and NotMapped unchanged
+
+**Reflection:**
+The fix was straightforward (2-line conditional in `add_record`) but had a large impact on real data. Nearly half the split/merge flags were false positives caused by antisense overlaps being counted as partners. The plan-first approach worked well — the plan file clearly identified the problem, proposed a minimal fix, and specified verification criteria. All three verification steps passed on the first attempt.
+
+The toy test case design was effective: creating a minimal GFF3 pair with exactly the problematic scenario (one gene overlapping both a same-strand and opposite-strand gene) made it easy to confirm the fix. The real data comparison then validated the magnitude of the improvement.
