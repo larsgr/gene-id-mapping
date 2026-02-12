@@ -615,3 +615,23 @@ Fix the issue with reverse transcript overlap counting against merge/splits
 The fix was straightforward (2-line conditional in `add_record`) but had a large impact on real data. Nearly half the split/merge flags were false positives caused by antisense overlaps being counted as partners. The plan-first approach worked well — the plan file clearly identified the problem, proposed a minimal fix, and specified verification criteria. All three verification steps passed on the first attempt.
 
 The toy test case design was effective: creating a minimal GFF3 pair with exactly the problematic scenario (one gene overlapping both a same-strand and opposite-strand gene) made it easy to confirm the fix. The real data comparison then validated the magnitude of the improvement.
+
+### (Claude Code) Analyze NCBI vs Ensembl gene names and human orthologs (2026-02-12)
+
+**Prompt:**
+```
+Implement plan: "NCBI vs Ensembl Gene Names & Human Orthologs Report" — create preprocessing script to extract gene metadata from GFF files, ortholog download script, and Rmarkdown report analyzing gene name coverage differences.
+```
+
+**What it did:**
+* Created `notebooks/extract_gene_metadata.py` — extracts gene-level metadata from Ensembl (69,389 genes) and NCBI (61,027 genes) GFF3 files into compact TSVs
+* Created `notebooks/download_orthologs.R` — downloads human ortholog data from Ensembl BioMart (35,947 pairs) and NCBI gene_orthologs (5,012 pairs)
+* Created `notebooks/ncbi_vs_ens_gene_names.Rmd` — 8-section report covering annotation overview, name coverage comparison, naming asymmetry analysis, name concordance, human orthologs, and Ensembl name sources
+* Created `notebooks/.gitignore` for generated TSV and HTML files
+* Fixed two bugs during development:
+  - NCBI gene_orthologs stores pairs directionally (human→salmon), not salmon→human
+  - `str_detect` NA pattern error in the Rmd when comparing descriptions
+* Saved GFF3 structure knowledge to memory for future sessions
+
+**Reflection:**
+The plan was detailed enough that implementation was mostly straightforward. The two bugs encountered were both data format issues: the NCBI gene_orthologs file stores pairs directionally with the "reference" organism first, and some genes lack descriptions causing NA patterns. Both were caught during testing and fixed quickly. The preprocessing step (Python TSV extraction) proved valuable — it reduces 700+ MB GFF files to small TSVs, making the R analysis fast and reproducible without re-parsing GFFs.

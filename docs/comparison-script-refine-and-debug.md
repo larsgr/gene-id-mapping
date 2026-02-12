@@ -88,3 +88,22 @@ The fix had a large impact on the NCBI vs Ensembl comparison:
 
 The 6,433 gene pairs promoted from Yellow to Green were cases where an antisense overlap inflated the partner count to ≥2, triggering a false split/merge downgrade. With the fix, only same-strand partners contribute to split/merge detection.
 
+### Analyze NCBI vs Ensembl gene names and human orthologs (2026-02-12)
+
+**What was done:**
+* Created `notebooks/extract_gene_metadata.py` to extract gene metadata (ID, biotype, name, description, source) from both GFF3 files into TSVs
+* Created `notebooks/download_orthologs.R` to download human ortholog data from Ensembl BioMart and NCBI gene_orthologs
+* Created `notebooks/ncbi_vs_ens_gene_names.Rmd` — comprehensive report analyzing:
+  - Gene counts and naming rates by biotype for both annotations
+  - Cross-annotation name coverage using comparison_v3.tsv gene mappings
+  - Reasons for naming asymmetry (biotype differences, source coverage)
+  - Gene name concordance among paired genes
+  - Human ortholog correlation with gene naming
+  - Ensembl description source breakdown (ZFIN, RFAM, HGNC, etc.)
+* Added `notebooks/.gitignore` for generated files
+
+**Findings:**
+* Ensembl: 30,378/69,389 (44%) genes named; NCBI: 16,790/61,027 (28%) with real symbols
+* NCBI has far fewer curated human orthologs (5,012) vs Ensembl BioMart (35,947)
+* Report renders successfully and joins gene metadata with comparison data for cross-annotation analysis
+
