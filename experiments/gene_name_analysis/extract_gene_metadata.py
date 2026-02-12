@@ -5,11 +5,11 @@ Extract gene-level metadata from Ensembl and NCBI GFF3 files into compact TSVs.
 Avoids loading 700-800MB GFFs in R by pre-extracting relevant fields.
 
 Usage:
-    python3 notebooks/extract_gene_metadata.py
+    python3 experiments/gene_name_analysis/extract_gene_metadata.py
 
 Outputs:
-    notebooks/ens_gene_metadata.tsv
-    notebooks/ncbi_gene_metadata.tsv
+    experiments/gene_name_analysis/ens_gene_metadata.tsv
+    experiments/gene_name_analysis/ncbi_gene_metadata.tsv
 """
 
 import os
@@ -19,7 +19,7 @@ from urllib.parse import unquote
 
 # Paths (relative to repo root)
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.dirname(SCRIPT_DIR)
+REPO_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
 
 ENS_GFF = os.path.join(REPO_ROOT, "data/genomes/AtlanticSalmon/Ssal_v3.1_Ens.gff3")
 NCBI_GFF = os.path.join(REPO_ROOT, "data/genomes/AtlanticSalmon/Ssal_v3.1_NCBI.gff3")

@@ -40,8 +40,9 @@ class_colors <- c(
 
 ```{r load_metadata}
 # Gene metadata from preprocessing script
-ens_meta <- read_tsv("ens_gene_metadata.tsv", show_col_types = FALSE)
-ncbi_meta <- read_tsv("ncbi_gene_metadata.tsv", show_col_types = FALSE)
+data_dir <- "../experiments/gene_name_analysis"
+ens_meta <- read_tsv(file.path(data_dir, "ens_gene_metadata.tsv"), show_col_types = FALSE)
+ncbi_meta <- read_tsv(file.path(data_dir, "ncbi_gene_metadata.tsv"), show_col_types = FALSE)
 
 # Define "named" flags
 ens_meta <- ens_meta %>%
@@ -83,8 +84,8 @@ genes_comp <- genes_comp %>%
 
 ```{r load_orthologs}
 # Human orthologs
-ens_ortho <- read_tsv("ens_human_orthologs.tsv", show_col_types = FALSE)
-ncbi_ortho <- read_tsv("ncbi_human_orthologs.tsv", show_col_types = FALSE)
+ens_ortho <- read_tsv(file.path(data_dir, "ens_human_orthologs.tsv"), show_col_types = FALSE)
+ncbi_ortho <- read_tsv(file.path(data_dir, "ncbi_human_orthologs.tsv"), show_col_types = FALSE)
 
 # Summarise to one row per salmon gene (may have multiple human orthologs)
 ens_ortho_summary <- ens_ortho %>%

@@ -630,17 +630,20 @@ Implement plan: "NCBI vs Ensembl Gene Names & Human Orthologs Report" — create
 ```
 
 **What it did:**
-* Created `notebooks/extract_gene_metadata.py` — extracts gene-level metadata from Ensembl (69,389 genes) and NCBI (61,027 genes) GFF3 files into compact TSVs
-* Created `notebooks/download_orthologs.R` — downloads human ortholog data from Ensembl BioMart (35,947 pairs) and NCBI gene_orthologs (5,012 pairs)
+* Created `experiments/gene_name_analysis/extract_gene_metadata.py` — extracts gene-level metadata from Ensembl (69,389 genes) and NCBI (61,027 genes) GFF3 files into compact TSVs
+* Created `experiments/gene_name_analysis/download_orthologs.R` — downloads human ortholog data from Ensembl BioMart (35,947 pairs) and NCBI gene_orthologs (5,012 pairs)
 * Created `notebooks/ncbi_vs_ens_gene_names.Rmd` — 8-section report covering annotation overview, name coverage comparison, naming asymmetry analysis, name concordance, human orthologs, and Ensembl name sources
-* Created `notebooks/.gitignore` for generated TSV and HTML files
+* Created `experiments/gene_name_analysis/.gitignore` for generated TSV files, `notebooks/.gitignore` for HTML output
 * Fixed two bugs during development:
   - NCBI gene_orthologs stores pairs directionally (human→salmon), not salmon→human
   - `str_detect` NA pattern error in the Rmd when comparing descriptions
-* Saved GFF3 structure knowledge to memory for future sessions
+* Created `.claude/skills/gff-structure/SKILL.md` — reusable reference for Ensembl/NCBI GFF3 attribute formats
+* Reorganized files after review: moved scripts and generated data from `notebooks/` to `experiments/gene_name_analysis/`, keeping only the Rmd report in `notebooks/`
 
 **Reflection:**
 The plan was detailed enough that implementation was mostly straightforward. The two bugs encountered were both data format issues: the NCBI gene_orthologs file stores pairs directionally with the "reference" organism first, and some genes lack descriptions causing NA patterns. Both were caught during testing and fixed quickly. The preprocessing step (Python TSV extraction) proved valuable — it reduces 700+ MB GFF files to small TSVs, making the R analysis fast and reproducible without re-parsing GFFs.
+
+Initially placed all files in `notebooks/`, which mixed scripts and data with reports. After user feedback, reorganized to follow the project convention: scripts and generated data in `experiments/gene_name_analysis/`, report in `notebooks/`. Also corrected saving GFF knowledge as a skill (`.claude/skills/`) rather than a memory file.
 
 
 **My reflection:**

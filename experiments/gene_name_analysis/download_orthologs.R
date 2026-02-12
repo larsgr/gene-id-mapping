@@ -2,11 +2,11 @@
 # Download human ortholog data from Ensembl BioMart and NCBI.
 #
 # Outputs:
-#   notebooks/ens_human_orthologs.tsv   - Ensembl BioMart orthologs
-#   notebooks/ncbi_human_orthologs.tsv  - NCBI gene_orthologs (salmon-human)
+#   experiments/gene_name_analysis/ens_human_orthologs.tsv   - Ensembl BioMart orthologs
+#   experiments/gene_name_analysis/ncbi_human_orthologs.tsv  - NCBI gene_orthologs (salmon-human)
 #
 # Usage:
-#   Rscript notebooks/download_orthologs.R
+#   Rscript experiments/gene_name_analysis/download_orthologs.R
 
 library(biomaRt)
 library(readr)

@@ -1,0 +1,7 @@
+# Generated TSV files from extract_gene_metadata.py
+ens_gene_metadata.tsv
+ncbi_gene_metadata.tsv
+
+# Ortholog data downloads
+ens_human_orthologs.tsv
+ncbi_human_orthologs.tsv
