@@ -618,6 +618,12 @@ The toy test case design was effective: creating a minimal GFF3 pair with exactl
 
 ### (Claude Code) Analyze NCBI vs Ensembl gene names and human orthologs (2026-02-12)
 
+**Original prompt:**
+```
+Produce a detailed Rmarkdown report on NCBI vs Ensembl annotations in Ssal_v3.1 with focus on gene names and human orthologs. I want to know:
+How many named NCBI/Ensembl genes are not named in the other and why?
+```
+
 **Prompt:**
 ```
 Implement plan: "NCBI vs Ensembl Gene Names & Human Orthologs Report" — create preprocessing script to extract gene metadata from GFF files, ortholog download script, and Rmarkdown report analyzing gene name coverage differences.
@@ -635,3 +641,11 @@ Implement plan: "NCBI vs Ensembl Gene Names & Human Orthologs Report" — create
 
 **Reflection:**
 The plan was detailed enough that implementation was mostly straightforward. The two bugs encountered were both data format issues: the NCBI gene_orthologs file stores pairs directionally with the "reference" organism first, and some genes lack descriptions causing NA patterns. Both were caught during testing and fixed quickly. The preprocessing step (Python TSV extraction) proved valuable — it reduces 700+ MB GFF files to small TSVs, making the R analysis fast and reproducible without re-parsing GFFs.
+
+
+**My reflection:**
+I gave the above prompt in plan mode but it started doing all sorts of analysis of the gff files with bash commands and single-use python scripts. I guess my error was not specifying that I wanted the analysis to be performed in the Rmarkdown. 
+
+When implementing the plan it would again run a lot of commands to understand the gff format. 
+
+I asked it to save what it had learned about gff format as a skill and it saved it as a memory instead!.. The memory is stored in the ~/.claude/projects/PROJECTNAME/memory directory. The memory contained a lot of project specific information (such as file names and ortholog info)
